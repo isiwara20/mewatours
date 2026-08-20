@@ -384,3 +384,75 @@
         align-items: stretch;
     }
 }
+
+/* =========================================================================
+   EXPERIENCES PAGE RESPONSIVE OVERRIDES
+   ========================================================================= */
+@media (max-width: 992px) {
+    .experiences-hero-title {
+        font-size: 3.4rem;
+    }
+    .exp-cat-masonry-grid,
+    .experiences-collection-grid,
+    .local-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .exp-cat-large {
+        grid-column: span 2;
+    }
+    .featured-exp-grid {
+        grid-template-columns: 1fr;
+    }
+    .featured-exp-media {
+        min-height: 340px;
+    }
+}
+
+@media (max-width: 768px) {
+    .experiences-hero-section {
+        min-height: 70vh;
+        height: auto;
+        padding-top: 120px;
+        padding-bottom: 60px;
+    }
+    .experiences-hero-title {
+        font-size: 2.6rem;
+    }
+    .experiences-hero-description {
+        font-size: 1.05rem;
+    }
+    .experiences-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .exp-filter-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .exp-cat-masonry-grid,
+    .experiences-collection-grid,
+    .local-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    .exp-cat-large {
+        grid-column: span 1;
+        height: 320px;
+    }
+    .featured-exp-highlights {
+        grid-template-columns: 1fr;
+    }
+    .featured-exp-content {
+        padding: 30px 20px;
+    }
+    .featured-exp-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .custom-exp-title {
+        font-size: 2.2rem;
+    }
+    .custom-exp-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

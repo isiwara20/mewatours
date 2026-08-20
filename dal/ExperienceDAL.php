@@ -29,9 +29,17 @@ class ExperienceDAL
         return $stmt->fetchAll();
     }
 
+    public function getCategories(): array
+    {
+        $sql = "SELECT * FROM experience_categories ORDER BY id ASC";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function getFeaturedExperiences(int $limit = 6): array
     {
-        $sql = "SELECT e.*, c.name AS category_name 
+        $sql = "SELECT e.*, c.name AS category_name, c.slug AS category_slug 
                 FROM experiences e 
                 LEFT JOIN experience_categories c ON e.category_id = c.id 
                 WHERE e.status = 'ACTIVE' AND e.is_featured = 1 
@@ -42,6 +50,20 @@ class ExperienceDAL
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll();
+    }
+
+    public function getSingleFeaturedExperience(): ?array
+    {
+        $sql = "SELECT e.*, c.name AS category_name, c.slug AS category_slug 
+                FROM experiences e 
+                LEFT JOIN experience_categories c ON e.category_id = c.id 
+                WHERE e.status = 'ACTIVE' AND e.is_featured = 1 
+                LIMIT 1";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $record = $stmt->fetch();
+        return $record ?: null;
     }
 
     public function findBySlug(string $slug): ?array

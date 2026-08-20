@@ -16,10 +16,14 @@ class ExperienceController
     public function index(): void
     {
         $experiences = $this->experienceBLL->getActiveExperiences();
+        $categories = $this->experienceBLL->getCategories();
+        $featuredExperience = $this->experienceBLL->getSingleFeaturedExperience();
 
         render_view('client/experiences', [
-            'page_title' => 'Sri Lankan Travel Experiences & Activities - Mewa Tours',
-            'experiences' => $experiences
+            'page_title' => 'Authentic Sri Lankan Travel Experiences & Activities | Mewa Tours',
+            'experiences' => $experiences,
+            'categories' => $categories,
+            'featured_experience' => $featuredExperience
         ]);
     }
 
