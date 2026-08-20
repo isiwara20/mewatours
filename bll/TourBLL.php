@@ -17,7 +17,35 @@ class TourBLL
 
     public function getActiveTours(): array
     {
-        return $this->tourDAL->getAllTours(true);
+        $tours = $this->tourDAL->getAllTours(true);
+        foreach ($tours as &$tour) {
+            $tour['formatted_duration'] = format_duration((int)$tour['duration_days'], (int)$tour['duration_nights']);
+            $waMessage = $this->whatsAppService->buildTourInquiryMessage(
+                $tour['title'],
+                $tour['formatted_duration']
+            );
+            $tour['whatsapp_url'] = $this->whatsAppService->generateInquiryLink($waMessage);
+        }
+        return $tours;
+    }
+
+    public function getCategories(): array
+    {
+        return $this->tourDAL->getCategories();
+    }
+
+    public function getSingleFeaturedTour(): ?array
+    {
+        $tour = $this->tourDAL->getSingleFeaturedTour();
+        if ($tour) {
+            $tour['formatted_duration'] = format_duration((int)$tour['duration_days'], (int)$tour['duration_nights']);
+            $waMessage = $this->whatsAppService->buildTourInquiryMessage(
+                $tour['title'],
+                $tour['formatted_duration']
+            );
+            $tour['whatsapp_url'] = $this->whatsAppService->generateInquiryLink($waMessage);
+        }
+        return $tour;
     }
 
     public function getFeaturedTours(int $limit = 6): array

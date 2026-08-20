@@ -39,6 +39,9 @@ $isContact = ($routePath === '/contact' || $routePath === '/contact.php');
     <link rel="stylesheet" href="<?= asset_url('css/global.css') ?>">
     <link rel="stylesheet" href="<?= asset_url('css/components.css') ?>">
     <link rel="stylesheet" href="<?= asset_url('css/home.css') ?>">
+    <?php if (!empty($isTours)): ?>
+        <link rel="stylesheet" href="<?= asset_url('css/tours.css') ?>">
+    <?php endif; ?>
     <link rel="stylesheet" href="<?= asset_url('css/responsive.css') ?>">
 </head>
 <body>

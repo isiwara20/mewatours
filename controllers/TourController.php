@@ -19,10 +19,14 @@ class TourController
     public function index(): void
     {
         $tours = $this->tourBLL->getActiveTours();
+        $categories = $this->tourBLL->getCategories();
+        $featuredTour = $this->tourBLL->getSingleFeaturedTour();
 
         render_view('client/tours', [
-            'page_title' => 'Tour Packages - Mewa Tours Sri Lanka',
-            'tours' => $tours
+            'page_title' => 'Curated Sri Lanka Tours & Tailor-Made Packages | Mewa Tours',
+            'tours' => $tours,
+            'categories' => $categories,
+            'featured_tour' => $featuredTour
         ]);
     }
 

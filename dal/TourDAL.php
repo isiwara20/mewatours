@@ -34,6 +34,35 @@ class TourDAL
     }
 
     /**
+     * Get all tour categories
+     */
+    public function getCategories(): array
+    {
+        $sql = "SELECT * FROM tour_categories ORDER BY id ASC";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    /**
+     * Get single featured tour for signature highlight
+     */
+    public function getSingleFeaturedTour(): ?array
+    {
+        $sql = "SELECT t.*, c.name AS category_name, c.slug AS category_slug 
+                FROM tours t 
+                LEFT JOIN tour_categories c ON t.category_id = c.id 
+                WHERE t.status = 'ACTIVE' AND t.is_featured = 1 
+                ORDER BY t.display_order ASC, t.created_at DESC 
+                LIMIT 1";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $record = $stmt->fetch();
+        return $record ?: null;
+    }
+
+    /**
      * Get featured tours for public landing page
      */
     public function getFeaturedTours(int $limit = 6): array
