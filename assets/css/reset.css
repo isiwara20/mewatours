@@ -1,4 +1,4 @@
-/* Mewa Tours CSS Reset */
+/* Mewa Tours - Reset & Base Styles */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -8,19 +8,34 @@
 html {
     font-size: 16px;
     scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
     font-family: var(--font-sans);
-    color: var(--text-primary);
-    background-color: var(--bg-light);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+    color: var(--text-secondary);
+    background-color: var(--bg-white);
+    line-height: 1.65;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--text-heading);
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+p {
+    color: var(--text-secondary);
 }
 
 img, picture, video, canvas, svg {
     display: block;
     max-width: 100%;
+    height: auto;
 }
 
 input, button, textarea, select {
@@ -28,8 +43,13 @@ input, button, textarea, select {
 }
 
 a {
-    color: inherit;
+    color: var(--brand-blue);
     text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--brand-blue-hover);
 }
 
 ul, ol {

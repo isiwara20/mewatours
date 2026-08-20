@@ -28,7 +28,7 @@ $pageTitle = $page_title ?? 'Admin Sign In - Mewa Tours';
 
     <div class="auth-card">
         <div class="auth-header text-center">
-            <img src="<?= asset_url('images/branding/mewa-tours-logo.jpeg') ?>" alt="Mewa Tours" class="auth-logo" onerror="this.src='https://placehold.co/180x60/ffffff/004080?text=MEWA+TOURS'">
+            <img src="<?= asset_url('images/branding/logo.png') ?>" alt="Mewa Tours" class="auth-logo" onerror="this.src='https://placehold.co/180x60/ffffff/004080?text=MEWA+TOURS'">
             <h1 class="auth-title">Admin Portal Login</h1>
             <p class="auth-subtitle">Restricted Administrative Access</p>
         </div>

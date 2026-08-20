@@ -24,7 +24,9 @@
 }
 
 .admin-brand-logo {
-    max-height: 45px;
+    max-height: 65px;
+    height: auto;
+    width: auto;
 }
 
 .sidebar-menu ul {

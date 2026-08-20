@@ -7,7 +7,7 @@ $currentUri = current_url();
 <aside class="admin-sidebar" id="adminSidebar">
     <div class="sidebar-brand">
         <a href="<?= base_url('admin/dashboard') ?>">
-            <img src="<?= asset_url('images/branding/mewa-tours-logo.jpeg') ?>" alt="Mewa Tours Admin" class="admin-brand-logo" onerror="this.src='https://placehold.co/150x45/ffffff/004080?text=MEWA+ADMIN'">
+            <img src="<?= asset_url('images/branding/logo.png') ?>" alt="Mewa Tours Admin" class="admin-brand-logo" onerror="this.src='https://placehold.co/150x45/ffffff/004080?text=MEWA+ADMIN'">
         </a>
     </div>
 

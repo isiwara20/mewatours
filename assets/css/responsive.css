@@ -1,38 +1,249 @@
-/* Responsive Layout Breakpoints */
-@media (max-width: 992px) {
+/* =========================================================================
+   MEWA TOURS — RESPONSIVE BREAKPOINTS (DESKTOP, TABLET, MOBILE)
+   ========================================================================= */
+
+@media (max-width: 1200px) {
+    .hero-title {
+        font-size: 4.2rem;
+    }
+
+    .tours-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .footer-container {
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 992px) {
+    .section-padding {
+        padding: 85px 0;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+    }
+
+    .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .experiences-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .destinations-masonry {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dest-card-featured {
+        grid-column: span 2;
+        height: 380px;
+    }
+
+    .dest-card-featured .dest-content h3 {
+        font-size: 1.8rem;
+    }
+
+    .story-grid {
         grid-template-columns: 1fr;
     }
 
-    .contact-options {
-        grid-template-columns: 1fr !important;
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-strip-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+}
+
+@media (max-width: 900px) {
+    .public-nav,
+    .btn-header-cta {
+        display: none;
+    }
+
+    .mobile-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        background: var(--brand-blue-soft);
+        color: var(--brand-blue);
+        border: none;
+        border-radius: var(--radius-sm);
+        font-size: 1.3rem;
+        cursor: pointer;
     }
 }
 
 @media (max-width: 768px) {
-    .mobile-toggle-btn {
-        display: block;
+    .section-title {
+        font-size: 2.2rem;
     }
 
-    .public-nav {
-        display: none;
-        position: absolute;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        background: #ffffff;
-        border-bottom: 1px solid var(--border-color);
-        padding: 20px;
-        box-shadow: var(--shadow-lg);
+    .hero-section {
+        min-height: 88vh;
+        height: auto;
+        padding-top: 110px;
+        padding-bottom: 60px;
     }
 
-    .public-nav.active {
-        display: block;
+    .hero-title {
+        font-size: 2.8rem;
     }
 
-    .public-nav .nav-list {
+    .hero-description {
+        font-size: 1.05rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-trust-bar {
         flex-direction: column;
         align-items: flex-start;
-        gap: 15px;
+        gap: 12px;
     }
+
+    .feature-grid,
+    .experiences-grid,
+    .tours-grid,
+    .destinations-masonry {
+        grid-template-columns: 1fr;
+    }
+
+    .dest-card-featured {
+        grid-column: span 1;
+        height: 300px;
+    }
+
+    .gallery-strip-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .banner-title {
+        font-size: 2.3rem;
+    }
+
+    .banner-actions {
+        flex-direction: column;
+    }
+
+    .final-cta-title {
+        font-size: 2.2rem;
+    }
+
+    .final-cta-buttons {
+        flex-direction: column;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-bottom-content {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   MOBILE DRAWER NAVIGATION MODAL STYLES
+   ------------------------------------------------------------------------- */
+.mobile-drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(14, 27, 61, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.mobile-drawer-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-drawer-menu {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 300px;
+    height: 100%;
+    background: #ffffff;
+    z-index: 1002;
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+    transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-drawer-menu.active {
+    right: 0;
+}
+
+.drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-light);
+    margin-bottom: 25px;
+}
+
+.drawer-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-heading);
+    cursor: pointer;
+}
+
+.drawer-nav-list li {
+    margin-bottom: 16px;
+}
+
+.drawer-nav-link {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-heading);
+}
+
+.drawer-nav-link:hover {
+    color: var(--brand-blue);
+}
+
+.drawer-cta-wrapper {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-light);
+}
+
+.btn-block {
+    width: 100%;
+    text-align: center;
 }
