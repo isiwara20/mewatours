@@ -13,12 +13,13 @@
 }
 
 .btn-primary {
-    background-color: var(--primary-blue);
-    color: #ffffff;
+    background-color: var(--brand-blue);
+    color: #ffffff !important;
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-blue-dark);
+    background-color: var(--brand-blue-hover);
+    color: #ffffff !important;
 }
 
 .alert {

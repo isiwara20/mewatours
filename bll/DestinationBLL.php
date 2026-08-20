@@ -15,12 +15,29 @@ class DestinationBLL
 
     public function getActiveDestinations(): array
     {
-        return $this->destinationDAL->getAllDestinations(true);
+        $destinations = $this->destinationDAL->getAllDestinations(true);
+        $wa = new WhatsAppService();
+        foreach ($destinations as &$dest) {
+            $msg = "Hello Mewa Tours,\n\nI am interested in exploring " . $dest['name'] . ".\nDestination: " . $dest['name'] . "\n\nPlease send me details and tour recommendations including this destination. Thank you!";
+            $dest['whatsapp_url'] = $wa->generateInquiryLink($msg);
+        }
+        return $destinations;
     }
 
     public function getFeaturedDestinations(int $limit = 6): array
     {
         return $this->destinationDAL->getFeaturedDestinations($limit);
+    }
+
+    public function getSingleFeaturedDestination(): ?array
+    {
+        $dest = $this->destinationDAL->getSingleFeaturedDestination();
+        if ($dest) {
+            $wa = new WhatsAppService();
+            $msg = "Hello Mewa Tours,\n\nI am interested in exploring " . $dest['name'] . ".\nDestination: " . $dest['name'] . "\n\nPlease send me details and tour recommendations including this destination. Thank you!";
+            $dest['whatsapp_url'] = $wa->generateInquiryLink($msg);
+        }
+        return $dest;
     }
 
     public function getDestinationDetailsBySlug(string $slug): ?array

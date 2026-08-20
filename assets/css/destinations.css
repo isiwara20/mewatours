@@ -1,0 +1,667 @@
+/* =========================================================================
+   MEWA TOURS — DESTINATIONS PAGE PRODUCTION STYLESHEET
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   01. DESTINATIONS HERO SECTION
+   ------------------------------------------------------------------------- */
+.destinations-hero-section {
+    position: relative;
+    min-height: 75vh;
+    height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 104px;
+    overflow: hidden;
+    background-color: var(--deep-navy);
+}
+
+.destinations-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.destinations-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.02);
+    transition: transform 8s ease-out;
+}
+
+.destinations-hero-section:hover .destinations-hero-img {
+    transform: scale(1);
+}
+
+.destinations-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(14, 27, 61, 0.35) 0%, rgba(14, 27, 61, 0.75) 100%);
+    z-index: 2;
+}
+
+.destinations-hero-container {
+    position: relative;
+    z-index: 3;
+    color: #ffffff;
+}
+
+.destinations-hero-content {
+    max-width: 780px;
+}
+
+.destinations-hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.destinations-hero-title {
+    font-size: 4.4rem;
+    font-family: var(--font-heading);
+    color: #ffffff;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.destinations-hero-description {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.7;
+    margin-bottom: 32px;
+    max-width: 680px;
+}
+
+.destinations-hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.destinations-location-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+}
+
+.destinations-location-tag i {
+    color: #818cf8;
+}
+
+/* -------------------------------------------------------------------------
+   02. INTRO SECTION
+   ------------------------------------------------------------------------- */
+.destinations-intro-section {
+    padding: 80px 0 50px;
+}
+
+.destinations-intro-lead {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 780px;
+    margin: 16px auto 0;
+    line-height: 1.7;
+}
+
+/* -------------------------------------------------------------------------
+   03. REGION DISCOVERY CARDS GRID
+   ------------------------------------------------------------------------- */
+.region-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.region-card {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.region-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: #c7d2fe;
+}
+
+.region-card-media {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.region-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.region-card:hover .region-card-media img {
+    transform: scale(1.06);
+}
+
+.region-tag {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(14, 27, 61, 0.88);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.region-card-body {
+    padding: 24px;
+}
+
+.region-card-body h3 {
+    font-size: 1.35rem;
+    color: var(--text-heading);
+    margin-bottom: 8px;
+}
+
+.region-card-body p {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* -------------------------------------------------------------------------
+   04. FEATURED DESTINATION SPOTLIGHT (ELLA)
+   ------------------------------------------------------------------------- */
+.featured-dest-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.featured-dest-card:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: #c7d2fe;
+}
+
+.featured-dest-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+}
+
+.featured-dest-media {
+    position: relative;
+    min-height: 480px;
+    overflow: hidden;
+}
+
+.featured-dest-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.featured-dest-card:hover .featured-dest-img {
+    transform: scale(1.04);
+}
+
+.featured-dest-badge {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    background: var(--brand-blue);
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 6px 16px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+}
+
+.featured-dest-content {
+    padding: 45px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.featured-dest-eyebrow {
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--brand-blue);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.featured-dest-title {
+    font-size: 2.8rem;
+    color: var(--text-heading);
+    margin-bottom: 6px;
+    line-height: 1.15;
+}
+
+.featured-dest-subtitle {
+    font-size: 1.15rem;
+    color: var(--brand-blue);
+    margin-bottom: 18px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+}
+
+.featured-dest-desc {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 24px;
+}
+
+.featured-dest-highlights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.dest-highlight-item {
+    background: var(--bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    padding: 8px 14px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dest-highlight-item i {
+    color: var(--brand-blue);
+}
+
+.featured-dest-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* -------------------------------------------------------------------------
+   05. MAIN DESTINATIONS COLLECTION & FILTERING
+   ------------------------------------------------------------------------- */
+.dest-filter-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 45px;
+    background: #ffffff;
+    padding: 14px 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+}
+
+.dest-filter-tabs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+}
+
+.dest-filter-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.dest-filter-btn {
+    background: transparent;
+    border: 1px solid var(--border-light);
+    color: var(--text-secondary);
+    padding: 8px 18px;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--transition);
+}
+
+.dest-filter-btn:hover,
+.dest-filter-btn.active {
+    background: var(--brand-blue);
+    color: #ffffff;
+    border-color: var(--brand-blue);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+.dest-count-badge {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.dest-count-badge strong {
+    color: var(--brand-blue);
+}
+
+.destinations-collection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.dest-collection-card {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.dest-collection-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: #c7d2fe;
+}
+
+.dest-card-image-wrap {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+}
+
+.dest-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.dest-collection-card:hover .dest-card-img {
+    transform: scale(1.06);
+}
+
+.dest-card-tag {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: rgba(14, 27, 61, 0.88);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 50px;
+}
+
+.dest-card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.dest-card-title {
+    font-size: 1.5rem;
+    color: var(--text-heading);
+    margin-bottom: 10px;
+}
+
+.dest-card-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 22px;
+    flex-grow: 1;
+}
+
+.dest-card-action-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border-light);
+    padding-top: 16px;
+}
+
+.link-explore-dest {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--brand-blue);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition);
+}
+
+.dest-collection-card:hover .link-explore-dest {
+    color: var(--brand-blue-hover);
+    transform: translateX(4px);
+}
+
+/* Empty Filter State */
+.empty-dest-filter-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    margin-top: 30px;
+}
+
+/* -------------------------------------------------------------------------
+   06. STORYTELLING BANNER
+   ------------------------------------------------------------------------- */
+.story-banner-section {
+    position: relative;
+    padding: 120px 0;
+    overflow: hidden;
+    background-color: var(--deep-navy);
+}
+
+.story-banner-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.story-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.story-banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(14, 27, 61, 0.9) 0%, rgba(79, 70, 229, 0.8) 100%);
+}
+
+.story-banner-container {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+    max-width: 760px;
+}
+
+.story-banner-eyebrow {
+    color: #a5b4fc;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+.story-banner-title {
+    font-size: 3.4rem;
+    color: #ffffff;
+    font-family: var(--font-heading);
+    margin-bottom: 18px;
+    line-height: 1.15;
+}
+
+.story-banner-text {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 36px;
+    line-height: 1.7;
+}
+
+/* -------------------------------------------------------------------------
+   07. EXPERIENCE BY PLACE SECTION
+   ------------------------------------------------------------------------- */
+.exp-by-place-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+}
+
+.exp-place-card {
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 32px 24px;
+    transition: var(--transition);
+}
+
+.exp-place-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: #c7d2fe;
+}
+
+.exp-place-icon {
+    width: 54px;
+    height: 54px;
+    background: var(--brand-blue-soft);
+    color: var(--brand-blue);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.exp-place-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+    color: var(--text-heading);
+}
+
+.exp-place-list {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--brand-blue);
+    margin-bottom: 12px;
+}
+
+.exp-place-desc {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* -------------------------------------------------------------------------
+   08. CUSTOM DESTINATION CTA
+   ------------------------------------------------------------------------- */
+.custom-dest-cta-section {
+    padding: 90px 0;
+}
+
+.custom-dest-eyebrow {
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--brand-blue);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.custom-dest-title {
+    font-size: 2.8rem;
+    color: var(--text-heading);
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.custom-dest-text {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 650px;
+    margin: 0 auto 32px;
+    line-height: 1.65;
+}
+
+.custom-dest-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.custom-dest-buttons .btn-primary {
+    background-color: var(--brand-blue);
+    color: #ffffff !important;
+    padding: 14px 32px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+    transition: var(--transition);
+}
+
+.custom-dest-buttons .btn-primary:hover {
+    background-color: var(--brand-blue-hover);
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(79, 70, 229, 0.4);
+}

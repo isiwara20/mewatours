@@ -5,7 +5,7 @@
 
 USE `mewa_tours`;
 
--- Initial Administrator Account (Password pre-hashed using password_hash('Admin@Mewa2026!', PASSWORD_BCRYPT))
+-- Initial Administrator Account
 INSERT INTO `admins` (`name`, `email`, `password_hash`, `status`, `created_at`, `updated_at`) VALUES
 ('Mewa Administrator', 'admin@mewatours.com', '$2y$10$xG0PZ8e1eUuV9w8Q9yM0e.E5o0z.XyKzY1V2W3X4Y5Z6A7B8C9D0E', 'ACTIVE', NOW(), NOW())
 ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
@@ -31,12 +31,21 @@ INSERT INTO `tours` (`id`, `category_id`, `title`, `slug`, `short_description`, 
 (7, 1, 'The Essence of Sri Lanka', 'the-essence-of-sri-lanka', 'A beautifully balanced signature journey through Sri Lanka\'s cultural heart, misty highlands, wild landscapes and southern coast.', 'Our premier 10-day signature itinerary encompassing ancient UNESCO heritage, tea estate mountain railways, Yala leopard safari, and colonial Galle Fort.', 10, 9, 'Kandy • Nuwara Eliya • Ella • Yala • Galle', 'home/hero-dalada-maligawa.jpg', 'ACTIVE', 1, 0)
 ON DUPLICATE KEY UPDATE `title` = VALUES(`title`), `description` = VALUES(`description`), `short_description` = VALUES(`short_description`), `featured_image` = VALUES(`featured_image`), `is_featured` = VALUES(`is_featured`);
 
--- Sample Destinations
-INSERT INTO `destinations` (`id`, `name`, `slug`, `short_description`, `description`, `status`, `is_featured`, `display_order`) VALUES
-(1, 'Kandy & Temple of Tooth', 'kandy', 'The sacred hill capital of Sri Lanka, home to Sri Dalada Maligawa.', 'Kandy is Sri Lanka’s cultural heartland surrounded by misty mountain ranges, lush tea gardens, and the sacred Temple of the Sacred Tooth Relic.', 'ACTIVE', 1, 1),
-(2, 'Sigiriya Rock Fortress', 'sigiriya', 'The majestic 5th-century ancient sky fortress of King Kashyapa.', 'Rising 200 meters above tropical jungle plains, Sigiriya is an ancient palace complex renowned for water gardens, mirror walls, and frescoes.', 'ACTIVE', 1, 2),
-(3, 'Ella Hill Country', 'ella', 'Scenic mountain village famed for Nine Arch Bridge and Ella Gap.', 'A paradise for hikers and tea lovers, offering dramatic vistas and iconic train rides through central highlands.', 'ACTIVE', 1, 3)
-ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
+-- Full Collection of 12 Iconic Destinations
+INSERT INTO `destinations` (`id`, `name`, `slug`, `short_description`, `description`, `featured_image`, `status`, `is_featured`, `display_order`) VALUES
+(1, 'Kandy', 'kandy', 'Cultural Heart', 'Sacred heritage, traditional culture, and the peaceful beauty of Sri Lanka\'s central hill capital.', 'home/hero-dalada-maligawa.jpg', 'ACTIVE', 1, 1),
+(2, 'Sigiriya', 'sigiriya', 'Ancient Wonder', 'Climb King Kashyapa\'s majestic 5th-century ancient rock fortress above a vast tropical forest.', 'home/sigiriya-fortress.jpg', 'ACTIVE', 1, 2),
+(3, 'Ella', 'ella', 'Hill Country', 'Misty tea-covered mountains, Nine Arch Bridge, cascading waterfalls, and legendary train rides.', 'experiences/ella-train.jpg', 'ACTIVE', 1, 3),
+(4, 'Nuwara Eliya', 'nuwara-eliya', 'Tea Country', 'Cool mountain air, rolling tea estates, colonial architecture, and timeless highland charm.', 'tours/hero-tours-ella.jpg', 'ACTIVE', 0, 4),
+(5, 'Yala National Park', 'yala', 'Wildlife & Safaris', 'Explore wild scrub jungles famous for dense leopard populations, wild elephants, and sloth bears.', 'https://images.unsplash.com/photo-1544979590-37e9b47eb705?auto=format&fit=crop&w=800&q=80', 'ACTIVE', 1, 5),
+(6, 'Galle Fort', 'galle', 'Southern Heritage', 'Historic Dutch colonial cobblestone streets, ramparts, ocean bastions, and boutique cafes.', 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=800&q=80', 'ACTIVE', 1, 6),
+(7, 'Mirissa', 'mirissa', 'Beach & Whales', 'Golden tropical palm beaches, ocean blue whale watching, and relaxed coastal living.', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80', 'ACTIVE', 0, 7),
+(8, 'Bentota', 'bentota', 'Coastal Retreat', 'A peaceful combination of golden beaches, river bentota safaris, and luxury tropical relaxation.', 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80', 'ACTIVE', 0, 8),
+(9, 'Arugam Bay', 'arugam-bay', 'Surf & Adventure', 'A laid-back east-coast haven world-famous for point-break surfing, lagoons, and outdoor adventures.', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80', 'ACTIVE', 0, 9),
+(10, 'Trincomalee', 'trincomalee', 'East Coast', 'Turquoise natural harbors, Pigeon Island snorkeling, quiet beaches, and ancient Koneswaram Kovil.', 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80', 'ACTIVE', 0, 10),
+(11, 'Anuradhapura', 'anuradhapura', 'Ancient City', 'Gigantic ancient stupas, sacred Jaya Sri Maha Bodhi tree, and centuries of Buddhist heritage.', 'home/sigiriya-fortress.jpg', 'ACTIVE', 0, 11),
+(12, 'Polonnaruwa', 'polonnaruwa', 'Ancient Kingdom', 'Explore royal palace ruins, stone Gal Vihara Buddhas, and medieval hydraulic engineering marvels.', 'home/sigiriya-fortress.jpg', 'ACTIVE', 0, 12)
+ON DUPLICATE KEY UPDATE `name` = VALUES(`name`), `short_description` = VALUES(`short_description`), `description` = VALUES(`description`), `featured_image` = VALUES(`featured_image`);
 
 -- Sample Site Settings
 INSERT INTO `site_settings` (`setting_key`, `setting_value`) VALUES

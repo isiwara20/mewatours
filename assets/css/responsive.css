@@ -316,3 +316,71 @@
         align-items: stretch;
     }
 }
+
+/* =========================================================================
+   DESTINATIONS PAGE RESPONSIVE OVERRIDES
+   ========================================================================= */
+@media (max-width: 992px) {
+    .destinations-hero-title {
+        font-size: 3.4rem;
+    }
+    .region-cards-grid,
+    .destinations-collection-grid,
+    .exp-by-place-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .featured-dest-grid {
+        grid-template-columns: 1fr;
+    }
+    .featured-dest-media {
+        min-height: 340px;
+    }
+}
+
+@media (max-width: 768px) {
+    .destinations-hero-section {
+        min-height: 70vh;
+        height: auto;
+        padding-top: 120px;
+        padding-bottom: 60px;
+    }
+    .destinations-hero-title {
+        font-size: 2.6rem;
+    }
+    .destinations-hero-description {
+        font-size: 1.05rem;
+    }
+    .destinations-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .dest-filter-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .region-cards-grid,
+    .destinations-collection-grid,
+    .exp-by-place-grid {
+        grid-template-columns: 1fr;
+    }
+    .featured-dest-highlights {
+        grid-template-columns: 1fr;
+    }
+    .featured-dest-content {
+        padding: 30px 20px;
+    }
+    .featured-dest-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .story-banner-title {
+        font-size: 2.3rem;
+    }
+    .custom-dest-title {
+        font-size: 2.2rem;
+    }
+    .custom-dest-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
