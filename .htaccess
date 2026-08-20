@@ -12,10 +12,18 @@ Options -Indexes
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteRule ^ - [L]
 
+    # Admin Tours sub-routes
+    RewriteRule ^admin/tours/create$ admin/tours.php?action=create [L,QSA]
+    RewriteRule ^admin/tours/edit/([0-9]+)$ admin/tours.php?action=edit&id=$1 [L,QSA]
+    RewriteRule ^admin/tours/delete/([0-9]+)$ admin/tours.php?action=delete&id=$1 [L,QSA]
+
     # Admin clean URLs mapping (e.g. /admin/dashboard -> /admin/dashboard.php)
     RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.php -f [OR]
     RewriteCond %{REQUEST_FILENAME}.php -f
     RewriteRule ^admin/([a-zA-Z0-9_-]+)$ admin/$1.php [L,QSA]
+
+    # Public Tour Details clean URLs (e.g. /tours/heritage-scenic-explorer -> tour-details.php?slug=heritage-scenic-explorer)
+    RewriteRule ^tours/([a-zA-Z0-9_-]+)$ tour-details.php?slug=$1 [L,QSA]
 
     # Public clean URLs mapping (e.g. /login -> login.php, /tours -> tours.php)
     RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.php -f [OR]

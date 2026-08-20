@@ -7,10 +7,12 @@ declare(strict_types=1);
 class ContactController
 {
     private InquiryBLL $inquiryBLL;
+    private TourBLL $tourBLL;
 
     public function __construct()
     {
         $this->inquiryBLL = new InquiryBLL();
+        $this->tourBLL = new TourBLL();
     }
 
     /**
@@ -18,8 +20,15 @@ class ContactController
      */
     public function index(): void
     {
+        $tourSlug = sanitize_string($_GET['tour'] ?? '');
+        $selectedTour = null;
+        if (!empty($tourSlug)) {
+            $selectedTour = $this->tourBLL->getTourDetailsBySlug($tourSlug);
+        }
+
         render_view('client/contact', [
-            'page_title' => 'Contact Us & Plan Your Trip - Mewa Tours'
+            'page_title' => $selectedTour ? ('Book ' . $selectedTour['title'] . ' - Mewa Tours') : 'Contact Us & Plan Your Trip - Mewa Tours',
+            'selected_tour' => $selectedTour
         ]);
     }
 

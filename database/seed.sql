@@ -69,3 +69,51 @@ INSERT INTO `site_settings` (`setting_key`, `setting_value`) VALUES
 ('company_phone', '+94 77 123 4567'),
 ('company_address', 'Kandy, Sri Lanka')
 ON DUPLICATE KEY UPDATE `setting_value` = VALUES(`setting_value`);
+
+-- Sample Tours
+INSERT INTO `tours` (`id`, `category_id`, `title`, `slug`, `short_description`, `description`, `tour_type`, `route`, `duration_days`, `duration_nights`, `locations`, `featured_image`, `status`, `is_featured`, `display_order`) VALUES
+(1, 1, 'Sri Lanka Cultural & Beach Escape', 'sri-lanka-cultural-beach-escape', 'Ideal for first-time visitors wanting a perfect balance of heritage, scenic hill country, wildlife, and pristine southern beaches.', 'Experience the very best of Sri Lanka on this comprehensive 7-day journey across UNESCO ancient cities, mist-draped tea country, wild safaris, and tropical golden coasts.', 'Cultural + Beach', 'Colombo → Sigiriya → Kandy → Nuwara Eliya → Ella → Yala → Galle → Colombo', 7, 6, 'Sigiriya, Kandy, Ella, Yala, Galle', 'tours/hero-tours-ella.jpg', 'ACTIVE', 1, 1),
+(2, 2, 'Wild Sri Lanka & Highland Adventure', 'wild-sri-lanka-highland-adventure', 'An exhilarating wildlife and mountain expedition through ancient national parks, misty peak hikes, and scenic highland rail paths.', 'Immerse yourself in Sri Lanka\'s natural wilderness with safari game drives in Yala and Wilpattu, combined with breathtaking mountain treks in Ella and Kandy.', 'Wildlife + Adventure', 'Colombo → Wilpattu → Kandy → Ella → Yala → Colombo', 5, 4, 'Wilpattu, Kandy, Ella, Yala', 'https://images.unsplash.com/photo-1544979590-37e9b47eb705?auto=format&fit=crop&w=800&q=80', 'ACTIVE', 0, 2),
+(3, 4, 'Southern Coastal & Beach Bliss', 'southern-coastal-beach-bliss', 'A tranquil tropical luxury getaway exploring golden coconut palm beaches, colonial ocean forts, and blue whale safaris.', 'Relax along Sri Lanka\'s sun-drenched southern coastline with boutique stays, fresh ocean dining, and memorable marine encounters.', 'Beach + Relaxation', 'Colombo → Galle → Unawatuna → Mirissa → Bentota → Colombo', 6, 5, 'Galle, Unawatuna, Mirissa, Bentota', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80', 'ACTIVE', 0, 3)
+ON DUPLICATE KEY UPDATE `title` = VALUES(`title`), `short_description` = VALUES(`short_description`), `tour_type` = VALUES(`tour_type`), `route` = VALUES(`route`);
+
+-- Sample Tour Inclusions
+INSERT INTO `tour_inclusions` (`id`, `tour_id`, `inclusion`, `display_order`) VALUES
+(1, 1, 'Food', 1),
+(2, 1, 'Accommodation', 2),
+(3, 1, 'Transportation', 3),
+(4, 1, 'All Entry Tickets', 4),
+(5, 2, 'Safari 4x4 Jeep Charges', 1),
+(6, 2, 'Hotel Accommodation', 2),
+(7, 2, 'Daily Breakfast & Dinner', 3),
+(8, 2, 'English Speaking Driver & Guide', 4),
+(9, 3, 'Boutique Beach Resort Stays', 1),
+(10, 3, 'Daily Gourmet Breakfast', 2),
+(11, 3, 'Private AC Vehicle & Chauffeur', 3),
+(12, 3, 'Madu River Safari & Water Sports', 4)
+ON DUPLICATE KEY UPDATE `inclusion` = VALUES(`inclusion`);
+
+-- Sample Tour Highlights
+INSERT INTO `tour_highlights` (`id`, `tour_id`, `highlight`, `display_order`) VALUES
+(1, 1, 'Sigiriya', 1),
+(2, 1, 'Dambulla', 2),
+(3, 1, 'Minneriya Safari', 3),
+(4, 1, 'Temple of the Tooth', 4),
+(5, 1, 'Horton Plains', 5),
+(6, 1, 'Nine Arch Bridge', 6),
+(7, 1, 'Little Adam\'s Peak', 7),
+(8, 1, 'Yala Safari', 8),
+(9, 1, 'Galle Fort', 9),
+(10, 1, 'Unawatuna Beach', 10),
+(11, 2, 'Wilpattu Leopard Safari', 1),
+(12, 2, 'Temple of the Sacred Tooth', 2),
+(13, 2, 'Nine Arch Bridge Train Ride', 3),
+(14, 2, 'Ella Rock Sunrise Trek', 4),
+(15, 2, 'Yala Elephant Tracking', 5),
+(16, 3, 'Historic Galle Dutch Fort', 1),
+(17, 3, 'Mirissa Whale Watching Cruise', 2),
+(18, 3, 'Coconut Tree Hill Sunset Point', 3),
+(19, 3, 'Madu River Mangrove Safari', 4),
+(20, 3, 'Bentota Sea Turtle Conservation', 5)
+ON DUPLICATE KEY UPDATE `highlight` = VALUES(`highlight`);
+

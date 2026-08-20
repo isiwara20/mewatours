@@ -137,32 +137,96 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
         <div class="main-tours-grid" id="mainToursGrid">
             <?php if (!empty($tours)): ?>
                 <?php foreach ($tours as $tour): 
-                    // Skip if featured tour is rendered above separately, or show all
                     $catCategorySlug = generate_slug($tour['category_name'] ?? 'general');
                 ?>
                     <article class="tour-collection-card" data-category="<?= e($catCategorySlug) ?>" data-reveal>
                         <div class="tour-card-image-wrap">
                             <?php 
-                                $imgSrc = (strpos($tour['featured_image'], 'http') === 0) 
-                                    ? $tour['featured_image'] 
-                                    : asset_url('images/' . e($tour['featured_image']));
+                                $imgSrc = !empty($tour['featured_image']) 
+                                    ? ((strpos($tour['featured_image'], 'http') === 0) ? $tour['featured_image'] : asset_url('images/' . e($tour['featured_image'])))
+                                    : asset_url('images/tours/hero-tours-ella.jpg');
                             ?>
                             <img src="<?= e($imgSrc) ?>" alt="<?= e($tour['title']) ?>" class="tour-card-img" onerror="this.src='https://images.unsplash.com/photo-1544979590-37e9b47eb705?auto=format&fit=crop&w=800&q=80'">
-                            <span class="card-duration-tag"><i class="fa-solid fa-clock"></i> <?= e($tour['formatted_duration']) ?></span>
+                            
+                            <div class="card-badges-top">
+                                <span class="card-badge-duration"><i class="fa-solid fa-clock"></i> <?= e($tour['formatted_duration']) ?></span>
+                                <?php if (!empty($tour['tour_type'])): ?>
+                                    <span class="card-badge-type"><?= e(strtoupper($tour['tour_type'])) ?></span>
+                                <?php endif; ?>
+                            </div>
                         </div>
 
                         <div class="tour-card-body">
                             <span class="card-cat-label"><?= e($tour['category_name'] ?? 'Tour Package') ?></span>
                             <h3 class="card-tour-title"><?= e($tour['title']) ?></h3>
-                            <p class="card-locations"><i class="fa-solid fa-location-dot"></i> <?= e($tour['locations'] ?? 'Sri Lanka') ?></p>
-                            <p class="card-tour-desc"><?= e($tour['short_description'] ?? '') ?></p>
+
+                            <!-- Route Display -->
+                            <?php if (!empty($tour['route'])): ?>
+                                <div class="card-route-box" title="<?= e($tour['route']) ?>">
+                                    <i class="fa-solid fa-route route-icon"></i>
+                                    <span class="route-text"><?= e($tour['route']) ?></span>
+                                </div>
+                            <?php elseif (!empty($tour['locations'])): ?>
+                                <div class="card-route-box">
+                                    <i class="fa-solid fa-location-dot route-icon"></i>
+                                    <span class="route-text"><?= e($tour['locations']) ?></span>
+                                </div>
+                            <?php endif; ?>
+
+                            <!-- Inclusions Section (Display up to 4 items + counter) -->
+                            <?php if (!empty($tour['inclusions'])): ?>
+                                <div class="card-inclusions-section">
+                                    <span class="section-micro-label"><i class="fa-solid fa-circle-check"></i> Included</span>
+                                    <ul class="inclusions-grid">
+                                        <?php 
+                                            $incList = $tour['inclusions'];
+                                            $incDisplay = array_slice($incList, 0, 4);
+                                            $incRemaining = count($incList) - 4;
+                                            foreach ($incDisplay as $inc):
+                                                $incText = is_array($inc) ? ($inc['inclusion'] ?? '') : $inc;
+                                        ?>
+                                            <li><i class="fa-solid fa-check inc-check"></i> <?= e($incText) ?></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                    <?php if ($incRemaining > 0): ?>
+                                        <span class="more-items-tag">+<?= $incRemaining ?> more included</span>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <!-- Highlights Section (Display up to 4 items + counter) -->
+                            <?php if (!empty($tour['highlights'])): ?>
+                                <div class="card-highlights-section">
+                                    <span class="section-micro-label"><i class="fa-solid fa-star"></i> Key Highlights</span>
+                                    <div class="highlights-chips">
+                                        <?php 
+                                            $hlList = $tour['highlights'];
+                                            $hlDisplay = array_slice($hlList, 0, 4);
+                                            $hlRemaining = count($hlList) - 4;
+                                            foreach ($hlDisplay as $hl):
+                                                $hlText = is_array($hl) ? ($hl['highlight'] ?? '') : $hl;
+                                        ?>
+                                            <span class="hl-chip"><?= e($hlText) ?></span>
+                                        <?php endforeach; ?>
+                                        <?php if ($hlRemaining > 0): ?>
+                                            <span class="more-chips-tag">+<?= $hlRemaining ?> more</span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
+                            <!-- Short Description -->
+                            <?php if (!empty($tour['short_description'])): ?>
+                                <p class="card-tour-desc"><?= e($tour['short_description']) ?></p>
+                            <?php endif; ?>
                             
+                            <!-- Action Bar -->
                             <div class="card-action-bar">
-                                <a href="<?= base_url('tours/' . e($tour['slug'])) ?>" class="link-view-journey">
+                                <a href="<?= base_url('tours/' . e($tour['slug'])) ?>" class="btn btn-card-primary">
                                     View Journey <i class="fa-solid fa-arrow-right"></i>
                                 </a>
-                                <a href="<?= e($tour['whatsapp_url'] ?? $generalWaUrl) ?>" target="_blank" rel="noopener noreferrer" class="link-wa-icon" title="Inquire via WhatsApp">
-                                    <i class="fa-brands fa-whatsapp"></i>
+                                <a href="<?= e($tour['whatsapp_url'] ?? $generalWaUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-card-whatsapp" title="Inquire via WhatsApp">
+                                    <i class="fa-brands fa-whatsapp"></i> Enquire Now
                                 </a>
                             </div>
                         </div>

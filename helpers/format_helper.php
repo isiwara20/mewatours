@@ -17,10 +17,13 @@ if (!function_exists('format_date')) {
 }
 
 if (!function_exists('format_duration')) {
-    function format_duration(int $days, int $nights): string
+    function format_duration(int $days, int $nights = 0): string
     {
         if ($days <= 0) {
             return 'Day Tour';
+        }
+        if ($nights <= 0) {
+            return sprintf('%d %s', $days, $days === 1 ? 'Day' : 'Days');
         }
         return sprintf('%d %s / %d %s', 
             $days, 

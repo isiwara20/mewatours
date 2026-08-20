@@ -28,8 +28,17 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
         <div class="inquiry-form-card" style="background: #ffffff; border: 1px solid #e2e8f0; padding: 30px; border-radius: 12px;">
             <h3><i class="fa-solid fa-paper-plane"></i> Send Email Inquiry</h3>
             
+            <?php if (!empty($selected_tour)): ?>
+                <div class="selected-tour-notice" style="background: #eef2ff; border: 1px solid #c7d2fe; padding: 12px 16px; border-radius: 8px; margin: 15px 0; font-size: 0.92rem; color: #3730a3;">
+                    <i class="fa-solid fa-route"></i> <strong>Selected Tour Package:</strong> <?= e($selected_tour['title']) ?> (<?= e($selected_tour['formatted_duration']) ?>)
+                </div>
+            <?php endif; ?>
+
             <form action="<?= base_url('contact') ?>" method="POST" style="margin-top: 20px;">
                 <?= CsrfService::inputField() ?>
+                <?php if (!empty($selected_tour)): ?>
+                    <input type="hidden" name="tour_id" value="<?= (int)$selected_tour['id'] ?>">
+                <?php endif; ?>
 
                 <div style="margin-bottom: 15px;">
                     <label for="name" style="display: block; margin-bottom: 5px; font-weight: 500;">Your Name *</label>
@@ -59,7 +68,10 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
 
                 <div style="margin-bottom: 15px;">
                     <label for="message" style="display: block; margin-bottom: 5px; font-weight: 500;">Inquiry Details *</label>
-                    <textarea id="message" name="message" rows="4" required class="form-control" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;"><?= old('message') ?></textarea>
+                    <?php 
+                        $defaultMsg = !empty($selected_tour) ? ("Hello Mewa Tours,\n\nI would like to inquire about availability and pricing for the " . $selected_tour['title'] . " (" . $selected_tour['formatted_duration'] . "). Please let me know the details.") : '';
+                    ?>
+                    <textarea id="message" name="message" rows="4" required class="form-control" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;"><?= old('message', $defaultMsg) ?></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; background: #004080; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">

@@ -346,10 +346,13 @@
 /* -------------------------------------------------------------------------
    05. MAIN TOURS COLLECTION GRID
    ------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------
+   05. MAIN TOURS COLLECTION GRID
+   ------------------------------------------------------------------------- */
 .main-tours-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px;
 }
 
 .tour-collection-card {
@@ -371,7 +374,7 @@
 
 .tour-card-image-wrap {
     position: relative;
-    height: 250px;
+    height: 260px;
     overflow: hidden;
 }
 
@@ -386,28 +389,51 @@
     transform: scale(1.06);
 }
 
-.card-duration-tag {
+.card-badges-top {
     position: absolute;
-    bottom: 15px;
-    right: 15px;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    z-index: 2;
+}
+
+.card-badge-duration {
     background: rgba(14, 27, 61, 0.88);
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(6px);
     color: #ffffff;
     font-size: 0.8rem;
     font-weight: 700;
-    padding: 5px 12px;
+    padding: 6px 14px;
     border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-badge-type {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(6px);
+    color: var(--brand-blue);
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 6px 14px;
+    border-radius: 50px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .tour-card-body {
-    padding: 26px;
+    padding: 28px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 
 .card-cat-label {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 800;
     color: var(--brand-blue);
     text-transform: uppercase;
@@ -416,68 +442,181 @@
 }
 
 .card-tour-title {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: var(--text-heading);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    line-height: 1.3;
 }
 
-.card-locations {
+/* Route Display Box */
+.card-route-box {
+    background: var(--bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
     font-size: 0.88rem;
-    color: var(--text-muted);
-    margin-bottom: 14px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 18px;
 }
 
-.card-locations i {
+.route-icon {
     color: var(--brand-blue);
+    font-size: 0.95rem;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.route-text {
+    line-height: 1.45;
+    font-weight: 600;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Inclusions & Highlights Sections */
+.section-micro-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.section-micro-label i {
+    color: var(--brand-blue);
+}
+
+.card-inclusions-section {
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed var(--border-light);
+}
+
+.inclusions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 8px 0;
+}
+
+.inclusions-grid li {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.inc-check {
+    color: #16a34a;
+    font-size: 0.85rem;
+}
+
+.more-items-tag,
+.more-chips-tag {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--brand-blue);
+    margin-top: 4px;
+}
+
+.card-highlights-section {
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed var(--border-light);
+}
+
+.highlights-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.hl-chip {
+    background: var(--brand-blue-soft);
+    color: var(--brand-blue);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    display: inline-block;
 }
 
 .card-tour-desc {
-    font-size: 0.95rem;
+    font-size: 0.94rem;
     color: var(--text-secondary);
     line-height: 1.6;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
     flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
+/* Action Bar */
 .card-action-bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 12px;
     border-top: 1px solid var(--border-light);
-    padding-top: 16px;
+    padding-top: 18px;
+    margin-top: auto;
 }
 
-.link-view-journey {
-    font-size: 0.92rem;
+.btn-card-primary {
+    flex: 1;
+    background: var(--brand-blue);
+    color: #ffffff !important;
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
     font-weight: 700;
-    color: var(--brand-blue);
-    display: inline-flex;
+    font-size: 0.88rem;
+    text-align: center;
+    display: flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
     transition: var(--transition);
 }
 
-.tour-collection-card:hover .link-view-journey {
-    color: var(--brand-blue-hover);
-    transform: translateX(4px);
+.btn-card-primary:hover {
+    background: var(--brand-blue-hover);
+    transform: translateY(-1px);
 }
 
-.link-wa-icon {
-    width: 36px;
-    height: 36px;
-    background: #dcfce7;
-    color: #166534;
-    border-radius: 50%;
+.btn-card-whatsapp {
+    flex: 1;
+    background: #25d366;
+    color: #ffffff !important;
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
+    gap: 6px;
     transition: var(--transition);
 }
 
-.link-wa-icon:hover {
-    background: #25d366;
-    color: #ffffff;
+.btn-card-whatsapp:hover {
+    background: #1eb954;
+    transform: translateY(-1px);
 }
 
 /* Empty Filter State */
