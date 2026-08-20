@@ -1,0 +1,97 @@
+/* Admin Portal Layout & Typography */
+.admin-body {
+    background-color: #f1f5f9;
+    font-family: var(--font-admin);
+}
+
+.admin-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    width: 260px;
+    background-color: #0f172a;
+    color: #ffffff;
+    flex-shrink: 0;
+    transition: margin-left 0.3s ease;
+}
+
+.sidebar-brand {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-brand-logo {
+    max-height: 45px;
+}
+
+.sidebar-menu ul {
+    padding: 15px 0;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    color: #94a3b8;
+    font-size: 0.95rem;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+    background-color: #1e293b;
+    color: #38bdf8;
+    border-left: 4px solid #38bdf8;
+}
+
+.admin-main-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-topbar {
+    height: 70px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+}
+
+.sidebar-toggle-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #475569;
+    cursor: pointer;
+}
+
+.portal-badge {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: 15px;
+}
+
+.admin-content-body {
+    flex-grow: 1;
+    padding: 30px;
+}
+
+.admin-footer {
+    padding: 15px 30px;
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    font-size: 0.85rem;
+    color: #64748b;
+    text-align: center;
+}

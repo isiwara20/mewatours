@@ -1,0 +1,35 @@
+# Mewa Tours Root .htaccess
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block direct web access to sensitive core directories
+    RewriteRule ^(config|database|storage|bll|dal|controllers|services|views)(/|$) - [F,L]
+
+    # Allow access to actual existing files or directories (assets, images, css, js)
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Admin clean URLs mapping (e.g. /admin/dashboard -> /admin/dashboard.php)
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.php -f [OR]
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^admin/([a-zA-Z0-9_-]+)$ admin/$1.php [L,QSA]
+
+    # Public clean URLs mapping (e.g. /login -> login.php, /tours -> tours.php)
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.php -f [OR]
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L,QSA]
+</IfModule>
+
+# Block access to hidden files (.env, .gitignore, .git, etc.)
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>

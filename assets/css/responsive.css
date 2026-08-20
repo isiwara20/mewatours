@@ -1,0 +1,38 @@
+/* Responsive Layout Breakpoints */
+@media (max-width: 992px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-options {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-toggle-btn {
+        display: block;
+    }
+
+    .public-nav {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: #ffffff;
+        border-bottom: 1px solid var(--border-color);
+        padding: 20px;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .public-nav.active {
+        display: block;
+    }
+
+    .public-nav .nav-list {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}
