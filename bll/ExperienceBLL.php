@@ -45,6 +45,16 @@ class ExperienceBLL
         return $this->experienceDAL->getFeaturedExperiences($limit);
     }
 
+    public function getAdminExperiences(): array
+    {
+        return $this->experienceDAL->getAllExperiences(false);
+    }
+
+    public function getExperienceById(int $id): ?array
+    {
+        return $this->experienceDAL->findById($id);
+    }
+
     public function getExperienceDetailsBySlug(string $slug): ?array
     {
         return $this->experienceDAL->findBySlug($slug);
@@ -67,7 +77,7 @@ class ExperienceBLL
             'description' => $input['description'] ?? '',
             'featured_image' => $input['featured_image'] ?? null,
             'status' => in_array($input['status'] ?? '', ['ACTIVE', 'INACTIVE'], true) ? $input['status'] : 'ACTIVE',
-            'is_featured' => isset($input['is_featured']) ? 1 : 0,
+            'is_featured' => isset($input['is_featured']) && ($input['is_featured'] == '1' || $input['is_featured'] == 'on') ? 1 : 0,
             'display_order' => (int)($input['display_order'] ?? 0)
         ];
 
@@ -75,8 +85,29 @@ class ExperienceBLL
             $newId = $this->experienceDAL->createExperience($data);
             return ['success' => true, 'id' => $newId, 'message' => 'Experience created successfully.'];
         } else {
+            // Keep old image if new one not provided
+            if (empty($data['featured_image'])) {
+                $existing = $this->getExperienceById($id);
+                if ($existing) {
+                    $data['featured_image'] = $existing['featured_image'];
+                }
+            }
             $updated = $this->experienceDAL->updateExperience($id, $data);
             return ['success' => $updated, 'message' => $updated ? 'Experience updated successfully.' : 'Failed to update experience.'];
         }
     }
+
+    public function deleteExperience(int $id): array
+    {
+        if ($id <= 0) {
+            return ['success' => false, 'message' => 'Invalid experience ID.'];
+        }
+
+        $deleted = $this->experienceDAL->deleteExperience($id);
+        return [
+            'success' => $deleted,
+            'message' => $deleted ? 'Experience deleted successfully.' : 'Failed to delete experience.'
+        ];
+    }
 }
+

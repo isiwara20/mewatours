@@ -40,6 +40,16 @@ class DestinationBLL
         return $dest;
     }
 
+    public function getAdminDestinations(): array
+    {
+        return $this->destinationDAL->getAllDestinations(false);
+    }
+
+    public function getDestinationById(int $id): ?array
+    {
+        return $this->destinationDAL->findById($id);
+    }
+
     public function getDestinationDetailsBySlug(string $slug): ?array
     {
         return $this->destinationDAL->findBySlug($slug);
@@ -61,7 +71,7 @@ class DestinationBLL
             'description' => $input['description'] ?? '',
             'featured_image' => $input['featured_image'] ?? null,
             'status' => in_array($input['status'] ?? '', ['ACTIVE', 'INACTIVE'], true) ? $input['status'] : 'ACTIVE',
-            'is_featured' => isset($input['is_featured']) ? 1 : 0,
+            'is_featured' => isset($input['is_featured']) && ($input['is_featured'] == '1' || $input['is_featured'] == 'on') ? 1 : 0,
             'display_order' => (int)($input['display_order'] ?? 0)
         ];
 
@@ -69,8 +79,29 @@ class DestinationBLL
             $newId = $this->destinationDAL->createDestination($data);
             return ['success' => true, 'id' => $newId, 'message' => 'Destination created successfully.'];
         } else {
+            // Keep old featured_image if no new one provided
+            if (empty($data['featured_image'])) {
+                $existing = $this->getDestinationById($id);
+                if ($existing) {
+                    $data['featured_image'] = $existing['featured_image'];
+                }
+            }
             $updated = $this->destinationDAL->updateDestination($id, $data);
             return ['success' => $updated, 'message' => $updated ? 'Destination updated successfully.' : 'Failed to update destination.'];
         }
     }
+
+    public function deleteDestination(int $id): array
+    {
+        if ($id <= 0) {
+            return ['success' => false, 'message' => 'Invalid destination ID.'];
+        }
+
+        $deleted = $this->destinationDAL->deleteDestination($id);
+        return [
+            'success' => $deleted,
+            'message' => $deleted ? 'Destination deleted successfully.' : 'Failed to delete destination.'
+        ];
+    }
 }
+

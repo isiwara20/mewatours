@@ -100,6 +100,11 @@ class GalleryBLL
         ];
     }
 
+    public function getAdminGalleryItems(): array
+    {
+        return $this->galleryDAL->getAllItems(false);
+    }
+
     public function saveGalleryItem(array $input): array
     {
         if (empty($input['image'])) {
@@ -118,4 +123,18 @@ class GalleryBLL
         $id = $this->galleryDAL->createItem($data);
         return ['success' => true, 'id' => $id, 'message' => 'Gallery item added successfully.'];
     }
+
+    public function deleteGalleryItem(int $id): array
+    {
+        if ($id <= 0) {
+            return ['success' => false, 'message' => 'Invalid gallery item ID.'];
+        }
+
+        $deleted = $this->galleryDAL->deleteItem($id);
+        return [
+            'success' => $deleted,
+            'message' => $deleted ? 'Gallery item deleted successfully.' : 'Failed to delete gallery item.'
+        ];
+    }
 }
+

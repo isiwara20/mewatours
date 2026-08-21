@@ -55,4 +55,67 @@ class AdminAuthBLL
     {
         $this->authService->logout();
     }
+
+    /**
+     * Update administrator profile (Name and Email)
+     */
+    public function updateProfile(int $id, string $name, string $email): array
+    {
+        $name = sanitize_string($name);
+        $email = trim($email);
+
+        if (empty($name)) {
+            return ['success' => false, 'message' => 'Name cannot be empty.'];
+        }
+        if (empty($email) || !validate_email($email)) {
+            return ['success' => false, 'message' => 'Please enter a valid email address.'];
+        }
+
+        $existing = $this->adminDAL->findByEmail($email);
+        if ($existing && (int)$existing['id'] !== $id) {
+            return ['success' => false, 'message' => 'This email address is already in use by another account.'];
+        }
+
+        $updated = $this->adminDAL->updateProfile($id, $name, $email);
+        if ($updated) {
+            if (isset($_SESSION['admin'])) {
+                $_SESSION['admin']['name'] = $name;
+                $_SESSION['admin']['email'] = $email;
+            }
+            $_SESSION['admin_name'] = $name;
+            $_SESSION['admin_email'] = $email;
+            return ['success' => true, 'message' => 'Admin profile updated successfully.'];
+        }
+
+        return ['success' => false, 'message' => 'Failed to update admin profile.'];
+    }
+
+    /**
+     * Update administrator password
+     */
+    public function updatePassword(int $id, string $currentPassword, string $newPassword, string $confirmPassword): array
+    {
+        if (empty($currentPassword) || empty($newPassword)) {
+            return ['success' => false, 'message' => 'Please provide both current and new password.'];
+        }
+        if ($newPassword !== $confirmPassword) {
+            return ['success' => false, 'message' => 'New password and confirmation do not match.'];
+        }
+        if (strlen($newPassword) < 6) {
+            return ['success' => false, 'message' => 'New password must be at least 6 characters long.'];
+        }
+
+        $currentHash = $this->adminDAL->getPasswordHash($id);
+        if (!$currentHash || !password_verify($currentPassword, $currentHash)) {
+            return ['success' => false, 'message' => 'Current password is incorrect.'];
+        }
+
+        $newHash = password_hash($newPassword, PASSWORD_DEFAULT);
+        $updated = $this->adminDAL->updatePassword($id, $newHash);
+        return [
+            'success' => $updated,
+            'message' => $updated ? 'Password changed successfully.' : 'Failed to change password.'
+        ];
+    }
 }
+
