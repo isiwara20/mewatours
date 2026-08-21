@@ -60,11 +60,12 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
 
         <div class="footer-bottom">
             <div class="container footer-bottom-content">
-                <p>&copy; 2026 Mewa Tours. All Rights Reserved.</p>
+                <p>&copy; 2026 Mewa Tours. Developed by <span style="color: #FFD700; font-weight: 700;">CHANDILA</span></p>
                 <p class="inquiry-notice">Inquiry-Based Tour Reservations • No Online Booking Required</p>
                 <a href="#siteHeader" class="back-to-top-btn" id="backToTopBtn">Back to Top <i class="fa-solid fa-arrow-up"></i></a>
             </div>
         </div>
+
     </footer>
 
     <!-- JavaScript Assets -->

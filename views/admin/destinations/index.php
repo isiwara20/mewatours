@@ -39,11 +39,13 @@
                             <td style="padding: 12px 10px; font-weight: 600; color: #475569;">#<?= $dest['id'] ?></td>
                             <td style="padding: 12px 10px;">
                                 <?php if (!empty($dest['featured_image'])): ?>
-                                    <img src="<?= asset_url($dest['featured_image']) ?>" alt="<?= e($dest['name']) ?>" style="width: 50px; height: 35px; object-fit: cover; border-radius: 4px;" onerror="this.src='https://placehold.co/100x70?text=No+Img'">
+                                    <?php $imgSrc = (strpos($dest['featured_image'], 'http') === 0) ? $dest['featured_image'] : asset_url($dest['featured_image']); ?>
+                                    <img src="<?= e($imgSrc) ?>" alt="<?= e($dest['name']) ?>" style="width: 50px; height: 35px; object-fit: cover; border-radius: 4px;" onerror="this.src='https://placehold.co/100x70?text=No+Img'">
                                 <?php else: ?>
                                     <div style="width: 50px; height: 35px; background: #e2e8f0; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #64748b;">No Image</div>
                                 <?php endif; ?>
                             </td>
+
                             <td style="padding: 12px 10px;">
                                 <strong style="color: #0f172a; display: block;"><?= e($dest['name']) ?></strong>
                                 <span style="font-size: 0.8rem; color: #64748b;"><?= e(truncate_text($dest['short_description'] ?? '', 60)) ?></span>

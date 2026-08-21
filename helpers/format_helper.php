@@ -43,3 +43,18 @@ if (!function_exists('format_price')) {
         return sprintf('%s %.2f', $currency, $amount);
     }
 }
+
+if (!function_exists('truncate_text')) {
+    function truncate_text(?string $text, int $limit = 100, string $end = '...'): string
+    {
+        if ($text === null || $text === '') {
+            return '';
+        }
+        $clean = strip_tags($text);
+        if (mb_strlen($clean) <= $limit) {
+            return $clean;
+        }
+        return mb_substr($clean, 0, $limit) . $end;
+    }
+}
+

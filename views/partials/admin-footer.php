@@ -7,8 +7,9 @@
             </main>
 
             <footer class="admin-footer">
-                <p>&copy; <?= date('Y') ?> Mewa Tours Administration Control Panel. Authorized Personnel Only.</p>
+                <p>&copy; 2026 Mewa Tours. Developed by <span style="color: #FFD700; font-weight: 700;">CHANDILA</span></p>
             </footer>
+
         </div> <!-- .admin-main-wrapper -->
     </div> <!-- .admin-wrapper -->
 
