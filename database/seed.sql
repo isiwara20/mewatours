@@ -64,9 +64,9 @@ ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
 
 -- Sample Site Settings
 INSERT INTO `site_settings` (`setting_key`, `setting_value`) VALUES
-('whatsapp_number', '94771234567'),
+('whatsapp_number', '94769695024'),
 ('company_email', 'info@mewatours.com'),
-('company_phone', '+94 77 123 4567'),
+('company_phone', '+94 76 969 5024'),
 ('company_address', 'Kandy, Sri Lanka')
 ON DUPLICATE KEY UPDATE `setting_value` = VALUES(`setting_value`);
 
@@ -116,4 +116,17 @@ INSERT INTO `tour_highlights` (`id`, `tour_id`, `highlight`, `display_order`) VA
 (19, 3, 'Madu River Mangrove Safari', 4),
 (20, 3, 'Bentota Sea Turtle Conservation', 5)
 ON DUPLICATE KEY UPDATE `highlight` = VALUES(`highlight`);
+
+-- Sample Gallery Items
+INSERT INTO `gallery_items` (`id`, `title`, `image`, `category`, `alt_text`, `status`, `display_order`, `created_at`) VALUES
+(1, 'Guided Wild Elephant Safari', 'Gallery/WhatsApp Image 2026-08-18 at 09.19.55.jpeg', 'wildlife', 'Expert Mewa Tours guide spotting wild elephants on a 4x4 safari.', 'ACTIVE', 1, NOW()),
+(2, 'Pidurangala Rock Summit Hike', 'Gallery/WhatsApp Image 2026-08-18 at 09.20.58.jpeg', 'highlands', 'Reaching the top of Pidurangala Rock with panoramic views of Sigiriya Fortress.', 'ACTIVE', 2, NOW()),
+(3, 'Galle Dutch Fort Heritage Tour', 'Gallery/WhatsApp Image 2026-08-18 at 09.20.33.jpeg', 'culture', 'Happy family exploring the ancient stone ramparts of Galle Dutch Fort.', 'ACTIVE', 3, NOW()),
+(4, 'Traditional Village Cooking Experience', 'Gallery/1.jpeg', 'culinary', 'Guests participating in hands-on Sri Lankan clay-pot cooking in a local village.', 'ACTIVE', 4, NOW()),
+(5, 'Authentic Sri Lankan Claypot Feast', 'Gallery/WhatsApp Image 2026-08-18 at 09.20.59.jpeg', 'culinary', 'Enjoying a traditional Sri Lankan rice and curry feast served in clay pots.', 'ACTIVE', 5, NOW()),
+(6, 'Wild Elephant Gathering at Minneriya', 'Gallery/WhatsApp Image 2026-08-18 at 09.23.1.jpeg', 'wildlife', 'A massive wild elephant herd gathering near the reservoir lakes.', 'ACTIVE', 6, NOW()),
+(7, 'Traditional Lotus Lake Boat Safari', 'Gallery/WhatsApp Image 2026-08-18 at 09.23.10.jpeg', 'experiences', 'Scenic catamaran boat ride on a lily-draped lake wearing lotus leaf sun hats.', 'ACTIVE', 7, NOW()),
+(8, 'Fun Island Tuk-Tuk Experience', 'Gallery/WhatsApp Image 2026-08-18 at 09.23.11.jpeg', 'experiences', 'Trying out the driver seat of a Sri Lankan three-wheeler tuk-tuk.', 'ACTIVE', 8, NOW()),
+(9, 'Up-Close Safari Encounter', 'Gallery/WhatsApp Image 2026-08-18 at 09.23.12.jpeg', 'wildlife', 'Close-up safari experience with wild elephants in their natural habitat.', 'ACTIVE', 9, NOW())
+ON DUPLICATE KEY UPDATE `title` = VALUES(`title`), `image` = VALUES(`image`), `category` = VALUES(`category`);
 

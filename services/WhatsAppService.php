@@ -17,7 +17,7 @@ class WhatsAppService
             $this->phoneNumber = $this->normalizePhoneNumber($customNumber);
         } else {
             $config = require ROOT_PATH . '/config/app.php';
-            $this->phoneNumber = $this->normalizePhoneNumber($config['whatsapp']['number'] ?? '94771234567');
+            $this->phoneNumber = $this->normalizePhoneNumber($config['whatsapp']['number'] ?? '94769695024');
         }
     }
 

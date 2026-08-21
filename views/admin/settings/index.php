@@ -10,7 +10,7 @@
     <form style="margin-top: 20px;">
         <div style="margin-bottom: 15px;">
             <label style="display: block; margin-bottom: 5px; font-weight: 500;">WhatsApp Business Number</label>
-            <input type="text" value="94771234567" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+            <input type="text" value="94769695024" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
         </div>
 
         <div style="margin-bottom: 15px;">

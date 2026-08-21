@@ -48,6 +48,9 @@ $isContact = ($routePath === '/contact' || $routePath === '/contact.php');
     <?php if (!empty($isExperiences)): ?>
         <link rel="stylesheet" href="<?= asset_url('css/experiences.css') ?>">
     <?php endif; ?>
+    <?php if (!empty($isGallery)): ?>
+        <link rel="stylesheet" href="<?= asset_url('css/gallery.css') ?>">
+    <?php endif; ?>
     <link rel="stylesheet" href="<?= asset_url('css/responsive.css') ?>">
 </head>
 <body>
