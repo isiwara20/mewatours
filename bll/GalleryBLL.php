@@ -105,23 +105,42 @@ class GalleryBLL
         return $this->galleryDAL->getAllItems(false);
     }
 
-    public function saveGalleryItem(array $input): array
+    public function getGalleryItemById(int $id): ?array
     {
-        if (empty($input['image'])) {
-            return ['success' => false, 'message' => 'Image path is required for gallery item.'];
+        return $this->galleryDAL->getItemById($id);
+    }
+
+    public function saveGalleryItem(array $input, ?int $id = null): array
+    {
+        if ($id !== null) {
+            $existing = $this->galleryDAL->getItemById($id);
+            if (!$existing) {
+                return ['success' => false, 'message' => 'Gallery photo item not found.'];
+            }
+            $imagePath = !empty($input['image']) ? $input['image'] : $existing['image'];
+        } else {
+            if (empty($input['image'])) {
+                return ['success' => false, 'message' => 'Image path or upload file is required for gallery photo.'];
+            }
+            $imagePath = $input['image'];
         }
 
         $data = [
             'title' => sanitize_string($input['title'] ?? ''),
-            'image' => $input['image'],
+            'image' => $imagePath,
             'category' => sanitize_string($input['category'] ?? 'general'),
             'alt_text' => sanitize_string($input['alt_text'] ?? $input['title'] ?? ''),
-            'status' => 'ACTIVE',
+            'status' => in_array($input['status'] ?? '', ['ACTIVE', 'INACTIVE'], true) ? $input['status'] : 'ACTIVE',
             'display_order' => (int)($input['display_order'] ?? 0)
         ];
 
-        $id = $this->galleryDAL->createItem($data);
-        return ['success' => true, 'id' => $id, 'message' => 'Gallery item added successfully.'];
+        if ($id === null) {
+            $newId = $this->galleryDAL->createItem($data);
+            return ['success' => true, 'id' => $newId, 'message' => 'Gallery photo added successfully.'];
+        } else {
+            $updated = $this->galleryDAL->updateItem($id, $data);
+            return ['success' => $updated, 'id' => $id, 'message' => $updated ? 'Gallery photo updated successfully.' : 'Failed to update gallery photo.'];
+        }
     }
 
     public function deleteGalleryItem(int $id): array

@@ -443,6 +443,31 @@ class AdminController
         redirect('admin/gallery');
     }
 
+    public function galleryUpdate(int $id): void
+    {
+        if (!CsrfService::validateToken($_POST['csrf_token'] ?? null)) {
+            set_flash('error', 'Invalid security token.', 'danger');
+            redirect('admin/gallery');
+        }
+
+        $input = $_POST;
+        if (isset($_FILES['gallery_image']) && $_FILES['gallery_image']['error'] === UPLOAD_ERR_OK) {
+            $uploadResult = $this->fileUploadService->uploadImage($_FILES['gallery_image'], 'gallery');
+            if ($uploadResult['success']) {
+                $input['image'] = 'uploads/' . $uploadResult['relative_path'];
+            } else {
+                set_flash('error', 'Image Upload Error: ' . $uploadResult['error'], 'danger');
+                redirect('admin/gallery');
+            }
+        } elseif (!empty($_POST['image_url'])) {
+            $input['image'] = sanitize_string($_POST['image_url']);
+        }
+
+        $result = $this->galleryBLL->saveGalleryItem($input, $id);
+        set_flash($result['success'] ? 'success' : 'error', $result['message'], $result['success'] ? 'success' : 'danger');
+        redirect('admin/gallery');
+    }
+
     public function galleryDelete(int $id): void
     {
         if (!CsrfService::validateToken($_POST['csrf_token'] ?? null)) {

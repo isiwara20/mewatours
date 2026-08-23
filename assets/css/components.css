@@ -52,3 +52,101 @@
     color: #075985;
     border: 1px solid #bae6fd;
 }
+
+/* -------------------------------------------------------------------------
+   STORYTELLING BANNER COMPONENT
+   ------------------------------------------------------------------------- */
+.story-banner-section {
+    position: relative;
+    padding: 120px 0;
+    overflow: hidden;
+    background-color: var(--deep-navy, #0e1b3d);
+    text-align: center;
+}
+
+.story-banner-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.story-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.story-banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(14, 27, 61, 0.88) 0%, rgba(79, 70, 229, 0.78) 100%);
+    z-index: 2;
+}
+
+.story-banner-container {
+    position: relative;
+    z-index: 3;
+    color: #ffffff;
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.story-banner-eyebrow {
+    color: #a5b4fc;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+.story-banner-title {
+    font-size: 3.2rem;
+    color: #ffffff;
+    font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
+    margin-bottom: 18px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.story-banner-text {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.92);
+    margin-bottom: 36px;
+    line-height: 1.7;
+    max-width: 680px;
+}
+
+.btn-cta-white {
+    background: #ffffff !important;
+    color: var(--deep-navy, #0e1b3d) !important;
+    padding: 14px 28px;
+    border-radius: var(--radius-sm, 8px);
+    font-weight: 700;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-cta-white:hover {
+    background: var(--brand-blue, #4f46e5) !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+}

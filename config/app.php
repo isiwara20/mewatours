@@ -24,10 +24,10 @@ return [
     ],
 
     'upload' => [
-        'max_size' => 5 * 1024 * 1024, // 5MB
+        'max_size' => 10 * 1024 * 1024, // 10MB
         'allowed_mimes' => ['image/jpeg', 'image/png', 'image/webp'],
         'allowed_extensions' => ['jpg', 'jpeg', 'png', 'webp'],
-        'path' => __DIR__ . '/../storage/uploads/'
+        'path' => __DIR__ . '/../assets/images/uploads/'
     ],
 
     'session' => [

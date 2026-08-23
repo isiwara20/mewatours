@@ -45,8 +45,13 @@ render_partial('admin-header', ['page_title' => $pageTitle]);
         <div style="margin-bottom: 20px;">
             <label style="display: block; font-weight: 600; color: #1e293b; margin-bottom: 6px;">Featured Cover Image</label>
             <?php if ($isEdit && !empty($destination['featured_image'])): ?>
+                <?php 
+                    $imgSrc = (strpos($destination['featured_image'], 'http') === 0) 
+                        ? $destination['featured_image'] 
+                        : asset_url('images/' . e(ltrim($destination['featured_image'], '/'))); 
+                ?>
                 <div style="margin-bottom: 10px; display: flex; align-items: center; gap: 15px;">
-                    <img src="<?= asset_url($destination['featured_image']) ?>" alt="Current Image" style="width: 100px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1;">
+                    <img src="<?= $imgSrc ?>" alt="Current Image" style="width: 100px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1;">
                     <span style="font-size: 0.85rem; color: #64748b;">Current Image Path: <code><?= e($destination['featured_image']) ?></code></span>
                 </div>
             <?php endif; ?>

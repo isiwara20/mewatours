@@ -39,8 +39,8 @@
                             <td style="padding: 12px 10px; font-weight: 600; color: #475569;">#<?= $exp['id'] ?></td>
                             <td style="padding: 12px 10px;">
                                 <?php if (!empty($exp['featured_image'])): ?>
-                                    <?php $imgSrc = (strpos($exp['featured_image'], 'http') === 0) ? $exp['featured_image'] : asset_url($exp['featured_image']); ?>
-                                    <img src="<?= e($imgSrc) ?>" alt="<?= e($exp['name']) ?>" style="width: 50px; height: 35px; object-fit: cover; border-radius: 4px;" onerror="this.src='https://placehold.co/100x70?text=No+Img'">
+                                    <?php $imgSrc = (strpos($exp['featured_image'], 'http') === 0) ? $exp['featured_image'] : asset_url('images/' . e(ltrim($exp['featured_image'], '/'))); ?>
+                                    <img src="<?= $imgSrc ?>" alt="<?= e($exp['name']) ?>" style="width: 50px; height: 35px; object-fit: cover; border-radius: 4px;" onerror="this.src='https://placehold.co/100x70?text=No+Img'">
                                 <?php else: ?>
                                     <div style="width: 50px; height: 35px; background: #e2e8f0; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #64748b;">No Image</div>
                                 <?php endif; ?>

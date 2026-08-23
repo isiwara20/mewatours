@@ -11,12 +11,20 @@ $action = $_GET['action'] ?? 'index';
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 if ($method === 'POST') {
+    $id = (int)($_POST['id'] ?? $_GET['id'] ?? 0);
     if ($action === 'create' || $action === 'store') {
-        $controller->galleryStore();
+        if ($id > 0) {
+            $controller->galleryUpdate($id);
+        } else {
+            $controller->galleryStore();
+        }
+        exit;
+    }
+    if ($action === 'update' || $action === 'edit') {
+        $controller->galleryUpdate($id);
         exit;
     }
     if ($action === 'delete') {
-        $id = (int)($_POST['id'] ?? $_GET['id'] ?? 0);
         $controller->galleryDelete($id);
         exit;
     }

@@ -57,8 +57,13 @@ render_partial('admin-header', ['page_title' => $pageTitle]);
         <div style="margin-bottom: 20px;">
             <label style="display: block; font-weight: 600; color: #1e293b; margin-bottom: 6px;">Featured Image</label>
             <?php if ($isEdit && !empty($experience['featured_image'])): ?>
+                <?php 
+                    $imgSrc = (strpos($experience['featured_image'], 'http') === 0) 
+                        ? $experience['featured_image'] 
+                        : asset_url('images/' . e(ltrim($experience['featured_image'], '/'))); 
+                ?>
                 <div style="margin-bottom: 10px; display: flex; align-items: center; gap: 15px;">
-                    <img src="<?= asset_url($experience['featured_image']) ?>" alt="Current Image" style="width: 100px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1;">
+                    <img src="<?= $imgSrc ?>" alt="Current Image" style="width: 100px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1;">
                     <span style="font-size: 0.85rem; color: #64748b;">Current Image Path: <code><?= e($experience['featured_image']) ?></code></span>
                 </div>
             <?php endif; ?>
