@@ -28,10 +28,14 @@ Options -Indexes
     RewriteRule ^admin/experiences/delete/([0-9]+)$ admin/experiences.php?action=delete&id=$1 [L,QSA]
 
     # Admin Gallery sub-routes
+    RewriteRule ^admin/gallery/create$ admin/gallery.php?action=create [L,QSA]
+    RewriteRule ^admin/gallery/edit/([0-9]+)$ admin/gallery.php?action=edit&id=$1 [L,QSA]
+    RewriteRule ^admin/gallery/update/([0-9]+)$ admin/gallery.php?action=update&id=$1 [L,QSA]
     RewriteRule ^admin/gallery/delete/([0-9]+)$ admin/gallery.php?action=delete&id=$1 [L,QSA]
 
     # Admin Inquiries sub-routes
     RewriteRule ^admin/inquiries/show/([0-9]+)$ admin/inquiries.php?action=show&id=$1 [L,QSA]
+    RewriteRule ^admin/inquiries/update_status/([0-9]+)$ admin/inquiries.php?action=update_status&id=$1 [L,QSA]
     RewriteRule ^admin/inquiries/delete/([0-9]+)$ admin/inquiries.php?action=delete&id=$1 [L,QSA]
 
     # Admin clean URLs mapping (e.g. /admin/dashboard -> /admin/dashboard.php)

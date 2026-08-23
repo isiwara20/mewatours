@@ -17,7 +17,7 @@ return [
 
     'company' => [
         'name' => 'Mewa Tours Sri Lanka',
-        'email' => 'info@mewatours.com',
+        'email' => 'mewatours83@gmail.com',
         'phone' => '+94 76 969 5024',
         'address' => 'Kandy, Sri Lanka',
         'operating_hours' => '8:00 AM - 8:00 PM (IST)'

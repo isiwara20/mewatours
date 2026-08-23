@@ -1,13 +1,13 @@
 -- =============================================================================
 -- MEWA TOURS - SEED DATA FOR DEMO & TESTING
--- Default Admin Account: admin@mewatours.com / Admin@Mewa2026!
+-- Default Admin Account: mewatours83@gmail.com / Admin@Mewa2026!
 -- =============================================================================
 
 USE `mewa_tours`;
 
 -- Initial Administrator Account
 INSERT INTO `admins` (`name`, `email`, `password_hash`, `status`, `created_at`, `updated_at`) VALUES
-('Mewa Administrator', 'admin@mewatours.com', '$2y$10$OwZyGC43QAU2KWebphJAceGrFOvDusTflqtkWBMmaQ3nB6.DzwXX6', 'ACTIVE', NOW(), NOW())
+('Mewa Administrator', 'mewatours83@gmail.com', '$2y$10$OwZyGC43QAU2KWebphJAceGrFOvDusTflqtkWBMmaQ3nB6.DzwXX6', 'ACTIVE', NOW(), NOW())
 ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
 
 -- Sample Tour Categories
@@ -65,7 +65,7 @@ ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
 -- Sample Site Settings
 INSERT INTO `site_settings` (`setting_key`, `setting_value`) VALUES
 ('whatsapp_number', '94769695024'),
-('company_email', 'info@mewatours.com'),
+('company_email', 'mewatours83@gmail.com'),
 ('company_phone', '+94 76 969 5024'),
 ('company_address', 'Kandy, Sri Lanka')
 ON DUPLICATE KEY UPDATE `setting_value` = VALUES(`setting_value`);

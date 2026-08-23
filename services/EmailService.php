@@ -20,7 +20,7 @@ class EmailService
      */
     public function sendHtmlEmail(string $toEmail, string $subject, string $htmlBody, ?string $replyTo = null): bool
     {
-        $fromEmail = $this->config['from_email'] ?? 'noreply@mewatours.com';
+        $fromEmail = $this->config['from_email'] ?? 'mewatours83@gmail.com';
         $fromName  = $this->config['from_name'] ?? 'Mewa Tours Sri Lanka';
         $prefix    = $this->config['subject_prefix'] ?? '';
 
@@ -60,7 +60,7 @@ class EmailService
      */
     public function sendInquiryNotification(array $inquiryData): bool
     {
-        $adminEmail = $this->config['admin_email'] ?? 'admin@mewatours.com';
+        $adminEmail = $this->config['admin_email'] ?? 'mewatours83@gmail.com';
         $subject = 'New Web Inquiry Received from ' . ($inquiryData['name'] ?? 'Visitor');
 
         $body = sprintf("
