@@ -1,13 +1,13 @@
 -- =============================================================================
--- MEWA TOURS - SEED DATA FOR DEMO & TESTING
--- Default Admin Account: mewatours83@gmail.com / Admin@Mewa2026!
+-- MEWA TOURS - INITIAL SEED DATA
+-- Default Admin Account: mewatours83@gmail.com / Mewa@123
 -- =============================================================================
 
 USE `mewa_tours`;
 
 -- Initial Administrator Account
 INSERT INTO `admins` (`name`, `email`, `password_hash`, `status`, `created_at`, `updated_at`) VALUES
-('Mewa Administrator', 'mewatours83@gmail.com', '$2y$10$OwZyGC43QAU2KWebphJAceGrFOvDusTflqtkWBMmaQ3nB6.DzwXX6', 'ACTIVE', NOW(), NOW())
+('Mewa Administrator', 'mewatours83@gmail.com', '$2y$10$CjrJysPKPpiR.T21JD4e9.v3Wp0zK1eBVs02jx1aatSua2pOWVZCK', 'ACTIVE', NOW(), NOW())
 ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
 
 -- Sample Tour Categories
