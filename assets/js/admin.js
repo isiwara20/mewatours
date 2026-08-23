@@ -7,8 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.getElementById('adminSidebar');
 
     if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener('click', () => {
+        sidebarToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sidebar.classList.toggle('active');
             sidebar.classList.toggle('collapsed');
+        });
+
+        // Close mobile sidebar when clicking outside on small screens
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992 && sidebar.classList.contains('active')) {
+                if (!sidebar.contains(e.target) && e.target !== sidebarToggle && !sidebarToggle.contains(e.target)) {
+                    sidebar.classList.remove('active');
+                }
+            }
         });
     }
 

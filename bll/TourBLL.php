@@ -210,6 +210,10 @@ class TourBLL
             return ['success' => false, 'message' => 'Tour title is required.'];
         }
 
+        if (empty($input['category_id'])) {
+            return ['success' => false, 'message' => 'Please select a valid Tour Category for this package.'];
+        }
+
         $slug = !empty($input['slug']) ? generate_slug($input['slug']) : generate_slug($title);
         $durationDays = max(1, (int)($input['duration_days'] ?? 1));
         $durationNights = max(0, (int)($input['duration_nights'] ?? 0));

@@ -36,23 +36,47 @@ $formAction = $isEdit ? base_url('admin/tours/edit/' . $tour['id']) : base_url('
                 <small class="form-hint">A clear, inviting name for this travel package.</small>
             </div>
 
-            <div class="form-group">
-                <label for="slug" class="form-label">URL Slug</label>
-                <input type="text" id="slug" name="slug" class="form-control" placeholder="e.g. sri-lanka-cultural-beach-escape" value="<?= old('slug', $tour['slug'] ?? '') ?>">
-                <small class="form-hint">Leave blank to automatically generate from title.</small>
-            </div>
+            <!-- Tour Category Selection Group -->
+            <div class="form-group col-span-2">
+                <label class="form-label required"><i class="fa-solid fa-tags" style="color: var(--brand-blue);"></i> Tour Category Selection</label>
+                <p class="form-hint" style="margin-bottom: 8px;">Click a category badge below or choose from the dropdown menu:</p>
+                <div class="category-pills-selector" id="categoryPillsWrapper" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;">
+                    <?php if (!empty($categories)): ?>
+                        <?php 
+                            $currentCatId = old('category_id', $tour['category_id'] ?? '');
+                        ?>
+                        <?php foreach ($categories as $cat): ?>
+                            <?php $isSelected = ((string)$currentCatId === (string)$cat['id']); ?>
+                            <button type="button" 
+                                    class="category-pill-btn <?= $isSelected ? 'active' : '' ?>" 
+                                    data-cat-id="<?= $cat['id'] ?>"
+                                    onclick="selectCategoryPill(this, <?= $cat['id'] ?>)"
+                                    style="padding: 8px 16px; border-radius: 30px; border: 1px solid <?= $isSelected ? '#004080' : '#cbd5e1' ?>; background: <?= $isSelected ? '#004080' : '#f8fafc' ?>; color: <?= $isSelected ? '#ffffff' : '#334155' ?>; font-weight: 600; font-size: 0.88rem; cursor: pointer; transition: all 0.2s ease;">
+                                <i class="fa-solid fa-tag" style="margin-right: 5px;"></i> <?= e($cat['name']) ?>
+                            </button>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
 
-            <div class="form-group">
-                <label for="category_id" class="form-label">Tour Category</label>
-                <select id="category_id" name="category_id" class="form-select">
-                    <option value="">-- Select Category --</option>
+                <select id="category_id" name="category_id" class="form-select" required>
+                    <option value="">-- Select Tour Category --</option>
                     <?php if (!empty($categories)): ?>
                         <?php foreach ($categories as $cat): ?>
-                            <?php $selected = ($isEdit && $tour['category_id'] == $cat['id']) ? 'selected' : ''; ?>
+                            <?php 
+                                $selectedCatId = old('category_id', $tour['category_id'] ?? '');
+                                $selected = ((string)$selectedCatId === (string)$cat['id']) ? 'selected' : ''; 
+                            ?>
                             <option value="<?= $cat['id'] ?>" <?= $selected ?>><?= e($cat['name']) ?></option>
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </select>
+                <small class="form-hint">Categorizes package under public filter tabs (e.g. Heritage &amp; Culture, Wildlife &amp; Nature, Hill Country, Coastal &amp; Beach).</small>
+            </div>
+
+            <div class="form-group">
+                <label for="slug" class="form-label">URL Slug</label>
+                <input type="text" id="slug" name="slug" class="form-control" placeholder="e.g. sri-lanka-cultural-beach-escape" value="<?= old('slug', $tour['slug'] ?? '') ?>">
+                <small class="form-hint">Leave blank to automatically generate from title.</small>
             </div>
 
             <div class="form-group">
@@ -315,5 +339,47 @@ $formAction = $isEdit ? base_url('admin/tours/edit/' . $tour['id']) : base_url('
         <a href="<?= base_url('admin/tours') ?>" class="btn btn-admin-secondary btn-lg">Cancel</a>
     </div>
 </form>
+
+<script>
+function selectCategoryPill(btn, catId) {
+    const select = document.getElementById('category_id');
+    if (select) {
+        select.value = catId;
+    }
+    const wrapper = document.getElementById('categoryPillsWrapper');
+    if (wrapper) {
+        wrapper.querySelectorAll('.category-pill-btn').forEach(pill => {
+            pill.classList.remove('active');
+            pill.style.background = '#f8fafc';
+            pill.style.color = '#334155';
+            pill.style.borderColor = '#cbd5e1';
+        });
+    }
+    btn.classList.add('active');
+    btn.style.background = '#004080';
+    btn.style.color = '#ffffff';
+    btn.style.borderColor = '#004080';
+}
+
+document.getElementById('category_id')?.addEventListener('change', function() {
+    const val = this.value;
+    const wrapper = document.getElementById('categoryPillsWrapper');
+    if (wrapper) {
+        wrapper.querySelectorAll('.category-pill-btn').forEach(pill => {
+            if (pill.getAttribute('data-cat-id') == val) {
+                pill.classList.add('active');
+                pill.style.background = '#004080';
+                pill.style.color = '#ffffff';
+                pill.style.borderColor = '#004080';
+            } else {
+                pill.classList.remove('active');
+                pill.style.background = '#f8fafc';
+                pill.style.color = '#334155';
+                pill.style.borderColor = '#cbd5e1';
+            }
+        });
+    }
+});
+</script>
 
 <?php render_partial('admin-footer'); ?>

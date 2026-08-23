@@ -7,7 +7,7 @@ USE `mewa_tours`;
 
 -- Initial Administrator Account
 INSERT INTO `admins` (`name`, `email`, `password_hash`, `status`, `created_at`, `updated_at`) VALUES
-('Mewa Administrator', 'admin@mewatours.com', '$2y$10$xG0PZ8e1eUuV9w8Q9yM0e.E5o0z.XyKzY1V2W3X4Y5Z6A7B8C9D0E', 'ACTIVE', NOW(), NOW())
+('Mewa Administrator', 'admin@mewatours.com', '$2y$10$OwZyGC43QAU2KWebphJAceGrFOvDusTflqtkWBMmaQ3nB6.DzwXX6', 'ACTIVE', NOW(), NOW())
 ON DUPLICATE KEY UPDATE `name` = VALUES(`name`);
 
 -- Sample Tour Categories

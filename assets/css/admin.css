@@ -631,3 +631,242 @@
     padding-top: 20px;
     border-top: 2px solid var(--border-light);
 }
+
+/* Desktop Collapsed Sidebar State */
+@media (min-width: 993px) {
+    .admin-sidebar.collapsed {
+        margin-left: -260px;
+    }
+}
+
+/* =========================================================================
+   ADMIN PORTAL MOBILE RESPONSIVE MEDIA QUERIES
+   ========================================================================= */
+
+/* Tablet & Mobile Screens (<= 992px) */
+@media (max-width: 992px) {
+    .admin-wrapper {
+        position: relative;
+    }
+
+    .admin-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 270px;
+        z-index: 10050;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+        box-shadow: none;
+    }
+
+    .admin-sidebar.active {
+        transform: translateX(0);
+        box-shadow: 10px 0 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .admin-main-wrapper {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .admin-topbar {
+        padding: 0 16px;
+        height: 64px;
+    }
+
+    .portal-badge {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+        margin-left: 8px;
+    }
+
+    .admin-content-body {
+        padding: 20px 16px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+        gap: 14px !important;
+    }
+
+    .form-grid,
+    .gap-2,
+    .gap-3 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+}
+
+/* Mobile Screens (<= 768px) */
+@media (max-width: 768px) {
+    .admin-topbar {
+        height: 60px;
+        padding: 0 12px;
+    }
+
+    .portal-badge {
+        display: none;
+    }
+
+    .sidebar-toggle-btn {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f1f5f9;
+        border-radius: 8px;
+        font-size: 1.1rem;
+    }
+
+    .admin-user-name {
+        font-size: 0.85rem;
+        max-width: 140px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+    }
+
+    .admin-logout-link {
+        font-size: 0.85rem;
+        padding: 4px 8px;
+    }
+
+    .admin-content-body {
+        padding: 16px 12px;
+    }
+
+    .admin-page-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+
+    .admin-page-header h2 {
+        font-size: 1.35rem;
+    }
+
+    .admin-page-header .text-muted {
+        font-size: 0.85rem;
+    }
+
+    .admin-page-header .btn-admin-primary,
+    .admin-page-header .btn-admin-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+    }
+
+    .stat-card {
+        padding: 14px !important;
+    }
+
+    .stat-value {
+        font-size: 1.5rem !important;
+    }
+
+    .stat-title {
+        font-size: 0.725rem !important;
+    }
+
+    .admin-table-card {
+        padding: 14px;
+        border-radius: var(--radius-sm);
+    }
+
+    .table-responsive {
+        margin: 0 -14px;
+        padding: 0 14px;
+        width: calc(100% + 28px);
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .admin-data-table th,
+    .admin-data-table td {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+
+    .form-section-card {
+        padding: 18px 14px;
+        margin-bottom: 20px;
+    }
+
+    .form-grid,
+    .gap-2,
+    .gap-3 {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+    }
+
+    .col-span-2 {
+        grid-column: span 1 !important;
+    }
+
+    .dynamic-input-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .btn-remove-row {
+        align-self: flex-end;
+        width: auto;
+    }
+
+    .itinerary-day-card {
+        padding: 14px;
+    }
+
+    .itinerary-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .itinerary-card-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .form-actions-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .form-actions-bar .btn-admin-primary,
+    .form-actions-bar .btn-admin-secondary {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+    }
+}
+
+/* Extra Small Phones (<= 480px) */
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .admin-brand-logo {
+        max-height: 50px;
+    }
+
+    .topbar-right {
+        gap: 8px;
+    }
+
+    .admin-user-name {
+        max-width: 100px;
+    }
+}
