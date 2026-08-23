@@ -25,6 +25,11 @@ $isContact = ($routePath === '/contact' || $routePath === '/contact.php');
     <title><?= e($pageTitle) ?></title>
     <meta name="description" content="Experience authentic Sri Lankan luxury travel, tailor-made tour itineraries, cultural heritage, and wildlife safaris with Mewa Tours.">
     
+    <!-- Favicon / Title Logo (Browser Search Bar / Tab Icon with White Background) -->
+    <link rel="icon" type="image/png" href="<?= asset_url('images/branding/favicon.png') ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= asset_url('images/branding/favicon.ico') ?>">
+    <link rel="apple-touch-icon" href="<?= asset_url('images/branding/favicon.png') ?>">
+    
     <!-- Google Fonts: Playfair Display & Plus Jakarta Sans / Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

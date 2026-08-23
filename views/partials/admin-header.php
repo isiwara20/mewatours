@@ -12,6 +12,11 @@ $currentAdmin = $_SESSION['admin'] ?? ['name' => 'Administrator'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($pageTitle) ?></title>
     
+    <!-- Favicon / Title Logo (Browser Search Bar / Tab Icon with White Background) -->
+    <link rel="icon" type="image/png" href="<?= asset_url('images/branding/favicon.png') ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= asset_url('images/branding/favicon.ico') ?>">
+    <link rel="apple-touch-icon" href="<?= asset_url('images/branding/favicon.png') ?>">
+    
     <!-- Google Fonts for Admin -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

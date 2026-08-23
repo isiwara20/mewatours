@@ -5,9 +5,10 @@ $whatsapp = new WhatsAppService();
 $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMessage());
 ?>
 
-<section class="contact-section" style="padding: 40px 0;">
-    <h2>Contact Mewa Tours</h2>
-    <p>Plan your custom itinerary with our local Sri Lankan travel experts.</p>
+<div class="container">
+    <section class="contact-section" style="padding: 140px 0 60px 0;">
+        <h2 style="font-family: var(--font-heading, 'Playfair Display', Georgia, serif); font-size: 2.5rem; color: #0f172a; margin-bottom: 8px;">Contact Mewa Tours</h2>
+        <p style="font-size: 1.1rem; color: #64748b;">Plan your custom itinerary with our local Sri Lankan travel experts.</p>
 
     <div class="contact-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px;">
         <!-- Left Col: Direct WhatsApp Action -->
@@ -81,5 +82,6 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
         </div>
     </div>
 </section>
+</div>
 
 <?php render_partial('footer'); ?>
