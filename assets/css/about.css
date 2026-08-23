@@ -1,0 +1,318 @@
+/* =========================================================================
+   MEWA TOURS - ABOUT US STYLESHEET
+   ========================================================================= */
+
+/* Hero Section */
+.about-hero {
+    position: relative;
+    padding: 180px 0 100px 0;
+    background: var(--deep-navy, #0e1b3d);
+    color: #ffffff;
+    text-align: center;
+    overflow: hidden;
+}
+
+.about-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.about-hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(14, 27, 61, 0.92) 0%, rgba(79, 70, 229, 0.82) 100%);
+    z-index: 2;
+}
+
+.about-hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-eyebrow {
+    display: inline-block;
+    color: #a5b4fc;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 6px 16px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.about-hero-title {
+    font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
+    font-size: 3.4rem;
+    color: #ffffff;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.about-hero-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+/* Founder Section */
+.founder-section {
+    padding: 100px 0;
+    background-color: #ffffff;
+}
+
+.founder-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.founder-image-wrapper {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+}
+
+.founder-img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    display: block;
+    border-radius: 16px;
+    transition: transform 0.5s ease;
+}
+
+.founder-image-wrapper:hover .founder-img {
+    transform: scale(1.03);
+}
+
+.founder-badge {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    right: 25px;
+    background: rgba(15, 23, 42, 0.88);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.founder-badge i {
+    font-size: 1.8rem;
+    color: #f59e0b;
+}
+
+.founder-badge-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #ffffff;
+    display: block;
+}
+
+.founder-badge-sub {
+    font-size: 0.825rem;
+    color: #cbd5e1;
+    display: block;
+}
+
+.founder-content .section-eyebrow {
+    color: #0284c7;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.founder-name {
+    font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
+    font-size: 2.6rem;
+    color: #0f172a;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.founder-role {
+    font-size: 1.05rem;
+    color: #0284c7;
+    font-weight: 600;
+    margin-bottom: 24px;
+    display: block;
+}
+
+.founder-quote {
+    background: #f8fafc;
+    border-left: 4px solid #0284c7;
+    padding: 20px 24px;
+    border-radius: 0 10px 10px 0;
+    margin-bottom: 24px;
+    font-style: italic;
+    color: #334155;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.founder-text {
+    font-size: 1.05rem;
+    color: #475569;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* Values Section */
+.values-section {
+    padding: 90px 0;
+    background-color: #f8fafc;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-top: 50px;
+}
+
+.value-card {
+    background: #ffffff;
+    padding: 35px 25px;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.value-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(2, 132, 199, 0.12);
+    border-color: #cbd5e1;
+}
+
+.value-icon {
+    width: 70px;
+    height: 70px;
+    background: #e0f2fe;
+    color: #0284c7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin: 0 auto 20px auto;
+    transition: all 0.3s ease;
+}
+
+.value-card:hover .value-icon {
+    background: #0284c7;
+    color: #ffffff;
+}
+
+.value-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 12px;
+}
+
+.value-desc {
+    font-size: 0.95rem;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* Stats Counter Section */
+.stats-section {
+    padding: 80px 0;
+    background: var(--deep-navy, #0e1b3d);
+    color: #ffffff;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    text-align: center;
+}
+
+.stat-box {
+    padding: 20px;
+}
+
+.stat-number {
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: #f59e0b;
+    font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 1.05rem;
+    color: #e2e8f0;
+    font-weight: 600;
+}
+
+/* Responsive Rules */
+@media (max-width: 992px) {
+    .founder-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .founder-img {
+        height: 400px;
+    }
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero {
+        padding: 140px 0 70px 0;
+    }
+    .about-hero-title {
+        font-size: 2.3rem;
+    }
+    .founder-name {
+        font-size: 2.1rem;
+    }
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}

@@ -12,13 +12,18 @@ $currentAdmin = $_SESSION['admin'] ?? ['name' => 'Administrator'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($pageTitle) ?></title>
     
+    <!-- Favicon / Title Logo (Browser Search Bar / Tab Icon with White Background) -->
+    <link rel="icon" type="image/png" href="<?= asset_url('images/branding/favicon.png') ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= asset_url('images/branding/favicon.ico') ?>">
+    <link rel="apple-touch-icon" href="<?= asset_url('images/branding/favicon.png') ?>">
+    
     <!-- Google Fonts for Admin -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome 6.4.0 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
     
     <!-- Admin CSS -->
     <link rel="stylesheet" href="<?= asset_url('css/variables.css') ?>">

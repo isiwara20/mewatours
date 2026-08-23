@@ -25,11 +25,17 @@ if (!function_exists('base_url')) {
 
 if (!function_exists('asset_url')) {
     /**
-     * Get public asset URL for CSS, JS, Images, Icons
+     * Get public asset URL for CSS, JS, Images, Icons with automatic cache-busting
      */
     function asset_url(string $path = ''): string
     {
-        return base_url('assets/' . ltrim($path, '/'));
+        $cleanPath = ltrim($path, '/');
+        $url = base_url('assets/' . $cleanPath);
+        $filePath = ROOT_PATH . '/assets/' . $cleanPath;
+        if (file_exists($filePath)) {
+            $url .= '?v=' . filemtime($filePath);
+        }
+        return $url;
     }
 }
 

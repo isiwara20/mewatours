@@ -12,10 +12,40 @@ Options -Indexes
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteRule ^ - [L]
 
+    # Admin Tours sub-routes
+    RewriteRule ^admin/tours/create$ admin/tours.php?action=create [L,QSA]
+    RewriteRule ^admin/tours/edit/([0-9]+)$ admin/tours.php?action=edit&id=$1 [L,QSA]
+    RewriteRule ^admin/tours/delete/([0-9]+)$ admin/tours.php?action=delete&id=$1 [L,QSA]
+
+    # Admin Destinations sub-routes
+    RewriteRule ^admin/destinations/create$ admin/destinations.php?action=create [L,QSA]
+    RewriteRule ^admin/destinations/edit/([0-9]+)$ admin/destinations.php?action=edit&id=$1 [L,QSA]
+    RewriteRule ^admin/destinations/delete/([0-9]+)$ admin/destinations.php?action=delete&id=$1 [L,QSA]
+
+    # Admin Experiences sub-routes
+    RewriteRule ^admin/experiences/create$ admin/experiences.php?action=create [L,QSA]
+    RewriteRule ^admin/experiences/edit/([0-9]+)$ admin/experiences.php?action=edit&id=$1 [L,QSA]
+    RewriteRule ^admin/experiences/delete/([0-9]+)$ admin/experiences.php?action=delete&id=$1 [L,QSA]
+
+    # Admin Gallery sub-routes
+    RewriteRule ^admin/gallery/create$ admin/gallery.php?action=create [L,QSA]
+    RewriteRule ^admin/gallery/edit/([0-9]+)$ admin/gallery.php?action=edit&id=$1 [L,QSA]
+    RewriteRule ^admin/gallery/update/([0-9]+)$ admin/gallery.php?action=update&id=$1 [L,QSA]
+    RewriteRule ^admin/gallery/delete/([0-9]+)$ admin/gallery.php?action=delete&id=$1 [L,QSA]
+
+    # Admin Inquiries sub-routes
+    RewriteRule ^admin/inquiries/show/([0-9]+)$ admin/inquiries.php?action=show&id=$1 [L,QSA]
+    RewriteRule ^admin/inquiries/update_status/([0-9]+)$ admin/inquiries.php?action=update_status&id=$1 [L,QSA]
+    RewriteRule ^admin/inquiries/delete/([0-9]+)$ admin/inquiries.php?action=delete&id=$1 [L,QSA]
+
     # Admin clean URLs mapping (e.g. /admin/dashboard -> /admin/dashboard.php)
     RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.php -f [OR]
     RewriteCond %{REQUEST_FILENAME}.php -f
     RewriteRule ^admin/([a-zA-Z0-9_-]+)$ admin/$1.php [L,QSA]
+
+
+    # Public Tour Details clean URLs (e.g. /tours/heritage-scenic-explorer -> tour-details.php?slug=heritage-scenic-explorer)
+    RewriteRule ^tours/([a-zA-Z0-9_-]+)$ tour-details.php?slug=$1 [L,QSA]
 
     # Public clean URLs mapping (e.g. /login -> login.php, /tours -> tours.php)
     RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.php -f [OR]

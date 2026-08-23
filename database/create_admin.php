@@ -8,8 +8,8 @@ require_once __DIR__ . '/../config/init.php';
 
 echo "<h3>Mewa Tours - Administrator Setup Utility</h3>";
 
-$email = 'admin@mewatours.com';
-$password = 'Admin@Mewa2026!';
+$email = 'mewatours83@gmail.com';
+$password = 'Mewa@123';
 $name = 'Mewa Administrator';
 
 $adminDAL = new AdminDAL();

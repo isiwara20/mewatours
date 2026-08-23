@@ -17,10 +17,13 @@ if (!function_exists('format_date')) {
 }
 
 if (!function_exists('format_duration')) {
-    function format_duration(int $days, int $nights): string
+    function format_duration(int $days, int $nights = 0): string
     {
         if ($days <= 0) {
             return 'Day Tour';
+        }
+        if ($nights <= 0) {
+            return sprintf('%d %s', $days, $days === 1 ? 'Day' : 'Days');
         }
         return sprintf('%d %s / %d %s', 
             $days, 
@@ -40,3 +43,18 @@ if (!function_exists('format_price')) {
         return sprintf('%s %.2f', $currency, $amount);
     }
 }
+
+if (!function_exists('truncate_text')) {
+    function truncate_text(?string $text, int $limit = 100, string $end = '...'): string
+    {
+        if ($text === null || $text === '') {
+            return '';
+        }
+        $clean = strip_tags($text);
+        if (mb_strlen($clean) <= $limit) {
+            return $clean;
+        }
+        return mb_substr($clean, 0, $limit) . $end;
+    }
+}
+

@@ -34,6 +34,15 @@ class GalleryDAL
         return $stmt->fetchAll();
     }
 
+    public function getItemById(int $id): ?array
+    {
+        $sql = "SELECT * FROM gallery_items WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        $record = $stmt->fetch();
+        return $record ?: null;
+    }
+
     public function createItem(array $data): int
     {
         $sql = "INSERT INTO gallery_items (title, image, category, alt_text, status, display_order, created_at) 
@@ -50,6 +59,29 @@ class GalleryDAL
         ]);
 
         return (int) $this->db->lastInsertId();
+    }
+
+    public function updateItem(int $id, array $data): bool
+    {
+        $sql = "UPDATE gallery_items 
+                SET title = :title,
+                    image = :image,
+                    category = :category,
+                    alt_text = :alt_text,
+                    status = :status,
+                    display_order = :display_order
+                WHERE id = :id";
+
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            ':title' => $data['title'] ?? null,
+            ':image' => $data['image'],
+            ':category' => $data['category'] ?? 'general',
+            ':alt_text' => $data['alt_text'] ?? null,
+            ':status' => $data['status'] ?? 'ACTIVE',
+            ':display_order' => $data['display_order'] ?? 0,
+            ':id' => $id
+        ]);
     }
 
     public function deleteItem(int $id): bool

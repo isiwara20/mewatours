@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Mewa Tours - Native PHP Email Configuration
  */
 return [
-    'from_email' => 'noreply@mewatours.com',
+    'from_email' => 'mewatours83@gmail.com',
     'from_name' => 'Mewa Tours Sri Lanka',
-    'admin_email' => 'admin@mewatours.com',
+    'admin_email' => 'mewatours83@gmail.com',
     'subject_prefix' => '[Mewa Tours] ',
 
     'log_path' => __DIR__ . '/../storage/logs/mail.log',

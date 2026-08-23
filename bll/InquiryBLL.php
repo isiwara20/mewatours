@@ -78,6 +78,30 @@ class InquiryBLL
     }
 
     /**
+     * Retrieve single inquiry by ID
+     */
+    public function getInquiryById(int $id): ?array
+    {
+        return $this->inquiryDAL->findById($id);
+    }
+
+    /**
+     * Delete inquiry record
+     */
+    public function deleteInquiry(int $id): array
+    {
+        if ($id <= 0) {
+            return ['success' => false, 'message' => 'Invalid inquiry ID.'];
+        }
+
+        $deleted = $this->inquiryDAL->deleteInquiry($id);
+        return [
+            'success' => $deleted,
+            'message' => $deleted ? 'Inquiry deleted successfully.' : 'Failed to delete inquiry.'
+        ];
+    }
+
+    /**
      * Update inquiry processing status
      */
     public function updateInquiryStatus(int $id, string $status): bool
@@ -90,3 +114,4 @@ class InquiryBLL
         return $this->inquiryDAL->updateStatus($id, $status);
     }
 }
+

@@ -17,7 +17,7 @@ class WhatsAppService
             $this->phoneNumber = $this->normalizePhoneNumber($customNumber);
         } else {
             $config = require ROOT_PATH . '/config/app.php';
-            $this->phoneNumber = $this->normalizePhoneNumber($config['whatsapp']['number'] ?? '94771234567');
+            $this->phoneNumber = $this->normalizePhoneNumber($config['whatsapp']['number'] ?? '94769695024');
         }
     }
 
@@ -52,6 +52,8 @@ class WhatsAppService
     public function buildTourInquiryMessage(
         string $tourTitle,
         string $duration,
+        ?string $tourType = null,
+        ?string $route = null,
         ?string $name = null,
         ?string $travelDate = null,
         ?int $travellers = null
@@ -59,16 +61,32 @@ class WhatsAppService
         $lines = [
             "Hello Mewa Tours,",
             "",
-            "I am interested in the " . $tourTitle . ".",
-            "Tour: " . $tourTitle,
-            "Duration: " . $duration,
+            "I'm interested in the " . $tourTitle . ".",
             "",
-            "Name: " . ($name ?? ''),
-            "Travel Date: " . ($travelDate ?? ''),
-            "Number of Travellers: " . ($travellers ? (string)$travellers : ''),
-            "",
-            "Please send me more details and availability."
+            "Duration: " . $duration
         ];
+
+        if (!empty($tourType)) {
+            $lines[] = "Tour Type: " . $tourType;
+        }
+
+        if (!empty($route)) {
+            $lines[] = "";
+            $lines[] = "Route:";
+            $lines[] = $route;
+        }
+
+        if (!empty($name) || !empty($travelDate) || !empty($travellers)) {
+            $lines[] = "";
+            if (!empty($name)) $lines[] = "Name: " . $name;
+            if (!empty($travelDate)) $lines[] = "Travel Date: " . $travelDate;
+            if (!empty($travellers)) $lines[] = "Number of Travellers: " . $travellers;
+        }
+
+        $lines[] = "";
+        $lines[] = "Could you please send me more information about this tour?";
+        $lines[] = "";
+        $lines[] = "Thank you.";
 
         return implode("\n", $lines);
     }

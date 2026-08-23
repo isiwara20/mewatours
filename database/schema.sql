@@ -52,11 +52,15 @@ CREATE TABLE `tours` (
   `slug` VARCHAR(255) NOT NULL UNIQUE,
   `short_description` TEXT DEFAULT NULL,
   `description` LONGTEXT DEFAULT NULL,
+  `tour_type` VARCHAR(150) DEFAULT NULL,
+  `route` TEXT DEFAULT NULL,
+  `location_summary` VARCHAR(255) DEFAULT NULL,
   `duration_days` INT UNSIGNED NOT NULL DEFAULT 1,
   `duration_nights` INT UNSIGNED NOT NULL DEFAULT 0,
   `locations` VARCHAR(255) DEFAULT NULL,
   `featured_image` VARCHAR(255) DEFAULT NULL,
   `status` ENUM('ACTIVE', 'INACTIVE') NOT NULL DEFAULT 'ACTIVE',
+  `booking_status` ENUM('AVAILABLE', 'ON_REQUEST', 'UNAVAILABLE') NOT NULL DEFAULT 'AVAILABLE',
   `is_featured` TINYINT(1) NOT NULL DEFAULT 0,
   `display_order` INT NOT NULL DEFAULT 0,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -68,7 +72,52 @@ CREATE TABLE `tours` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- -----------------------------------------------------------------------------
--- 4. TOUR IMAGES TABLE
+-- 4. TOUR ITINERARY DAYS TABLE
+-- -----------------------------------------------------------------------------
+DROP TABLE IF EXISTS `tour_itinerary_days`;
+CREATE TABLE `tour_itinerary_days` (
+  `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `tour_id` BIGINT UNSIGNED NOT NULL,
+  `day_number` INT UNSIGNED NOT NULL,
+  `title` VARCHAR(255) NOT NULL,
+  `description` TEXT NOT NULL,
+  `display_order` INT NOT NULL DEFAULT 0,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX `idx_tour_itinerary_tour_id` (`tour_id`),
+  CONSTRAINT `fk_tour_itinerary_tour` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- -----------------------------------------------------------------------------
+-- 4. TOUR INCLUSIONS TABLE
+-- -----------------------------------------------------------------------------
+DROP TABLE IF EXISTS `tour_inclusions`;
+CREATE TABLE `tour_inclusions` (
+  `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `tour_id` BIGINT UNSIGNED NOT NULL,
+  `inclusion` VARCHAR(255) NOT NULL,
+  `display_order` INT NOT NULL DEFAULT 0,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX `idx_tour_inc_tour_id` (`tour_id`),
+  CONSTRAINT `fk_tour_inclusions_tour` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- -----------------------------------------------------------------------------
+-- 5. TOUR HIGHLIGHTS TABLE
+-- -----------------------------------------------------------------------------
+DROP TABLE IF EXISTS `tour_highlights`;
+CREATE TABLE `tour_highlights` (
+  `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `tour_id` BIGINT UNSIGNED NOT NULL,
+  `highlight` VARCHAR(255) NOT NULL,
+  `display_order` INT NOT NULL DEFAULT 0,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX `idx_tour_hl_tour_id` (`tour_id`),
+  CONSTRAINT `fk_tour_highlights_tour` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- -----------------------------------------------------------------------------
+-- 6. TOUR IMAGES TABLE
 -- -----------------------------------------------------------------------------
 DROP TABLE IF EXISTS `tour_images`;
 CREATE TABLE `tour_images` (
@@ -123,7 +172,9 @@ CREATE TABLE `experience_categories` (
   `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(100) NOT NULL,
   `slug` VARCHAR(120) NOT NULL UNIQUE,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `description` TEXT DEFAULT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- -----------------------------------------------------------------------------

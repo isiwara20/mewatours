@@ -39,6 +39,26 @@ class DestinationDAL
         return $stmt->fetchAll();
     }
 
+    public function getSingleFeaturedDestination(): ?array
+    {
+        $sql = "SELECT * FROM destinations 
+                WHERE status = 'ACTIVE' AND slug = 'ella' 
+                LIMIT 1";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $record = $stmt->fetch();
+
+        if (!$record) {
+            $sql = "SELECT * FROM destinations WHERE status = 'ACTIVE' AND is_featured = 1 LIMIT 1";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            $record = $stmt->fetch();
+        }
+
+        return $record ?: null;
+    }
+
     public function findBySlug(string $slug): ?array
     {
         $sql = "SELECT * FROM destinations WHERE slug = :slug AND status = 'ACTIVE' LIMIT 1";

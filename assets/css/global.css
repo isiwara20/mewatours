@@ -73,23 +73,31 @@
     position: fixed;
     bottom: 25px;
     right: 25px;
-    z-index: 999;
+    z-index: 9999;
     width: 60px;
     height: 60px;
-    background-color: var(--whatsapp-green);
-    color: #ffffff;
+    background-color: #25d366 !important;
+    color: #ffffff !important;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 32px;
-    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background-color 0.3s ease;
+    text-decoration: none !important;
+}
+
+.whatsapp-float-btn i {
+    color: #ffffff !important;
+    font-size: 32px;
 }
 
 .whatsapp-float-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    background-color: #128c7e !important;
+    color: #ffffff !important;
+    transform: scale(1.12);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.65);
 }
 
 /* Footer Styling */

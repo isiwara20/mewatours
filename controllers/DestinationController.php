@@ -16,10 +16,12 @@ class DestinationController
     public function index(): void
     {
         $destinations = $this->destinationBLL->getActiveDestinations();
+        $featuredDestination = $this->destinationBLL->getSingleFeaturedDestination();
 
         render_view('client/destinations', [
-            'page_title' => 'Sri Lankan Destinations - Mewa Tours',
-            'destinations' => $destinations
+            'page_title' => 'Unforgettable Sri Lanka Destinations & Places to Visit | Mewa Tours',
+            'destinations' => $destinations,
+            'featured_destination' => $featuredDestination
         ]);
     }
 

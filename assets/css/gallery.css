@@ -1,0 +1,424 @@
+/**
+ * Mewa Tours - Photo Gallery Component & Lightbox Styles
+ */
+
+/* --------------------------------------------------------------------------
+   1. HERO & HEADER SECTION
+   -------------------------------------------------------------------------- */
+.gallery-hero {
+    position: relative;
+    background: linear-gradient(135deg, #002855 0%, #004080 50%, #0f4c81 100%);
+    padding: 185px 0 70px 0;
+    color: #ffffff;
+    text-align: center;
+    overflow: hidden;
+}
+
+.gallery-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.gallery-hero-title {
+    font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
+    font-size: 2.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+}
+
+.gallery-hero-subtitle {
+    font-size: 1.15rem;
+    color: #cbd5e1;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   2. CATEGORY FILTER TABS
+   -------------------------------------------------------------------------- */
+.gallery-filter-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 35px 0 30px 0;
+}
+
+.filter-btn {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-btn i {
+    font-size: 0.85rem;
+    color: #64748b;
+    transition: color 0.25s ease;
+}
+
+.filter-btn:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+    transform: translateY(-1px);
+}
+
+.filter-btn.active {
+    background: #004080;
+    color: #ffffff;
+    border-color: #004080;
+    box-shadow: 0 4px 12px rgba(0, 64, 128, 0.25);
+}
+
+.filter-btn.active i {
+    color: #38bdf8;
+}
+
+/* --------------------------------------------------------------------------
+   3. GALLERY MASONRY GRID
+   -------------------------------------------------------------------------- */
+.gallery-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 50px;
+}
+
+.gallery-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid #f1f5f9;
+    transition: transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.35s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.gallery-card-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    background: #e2e8f0;
+}
+
+.gallery-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.gallery-card:hover .gallery-card-img {
+    transform: scale(1.08);
+}
+
+.gallery-category-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 5px 12px;
+    border-radius: 20px;
+    z-index: 2;
+}
+
+.gallery-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 32, 64, 0.8) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.gallery-card:hover .gallery-card-overlay {
+    opacity: 1;
+}
+
+.zoom-icon-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: #004080;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: scale(0.8);
+    transition: transform 0.3s ease, background 0.2s ease;
+}
+
+.gallery-card:hover .zoom-icon-btn {
+    transform: scale(1);
+}
+
+.zoom-icon-btn:hover {
+    background: #ffffff;
+    color: #25d366;
+}
+
+.gallery-card-content {
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-grow: 1;
+    background: #ffffff;
+}
+
+.gallery-card-title {
+    font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.35;
+    margin: 0;
+}
+
+.gallery-card-desc {
+    font-size: 0.88rem;
+    color: #64748b;
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   4. LIGHTBOX MODAL STYLES
+   -------------------------------------------------------------------------- */
+.lightbox-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 15, 29, 0.92);
+    backdrop-filter: blur(10px);
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.lightbox-content-box {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    background: #0f172a;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: lightboxPop 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes lightboxPop {
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.lightbox-img-container {
+    max-height: 65vh;
+    background: #020617;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 65vh;
+    object-fit: contain;
+}
+
+.lightbox-info-bar {
+    padding: 20px 24px;
+    background: #0f172a;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lightbox-text-group {
+    max-width: 600px;
+}
+
+.lightbox-title {
+    font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 4px;
+}
+
+.lightbox-caption {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    line-height: 1.4;
+}
+
+.lightbox-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.8);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.lightbox-close-btn:hover {
+    background: #ef4444;
+    transform: scale(1.1);
+}
+
+.lightbox-nav-btn {
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.75);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.lightbox-nav-btn:hover {
+    background: #004080;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev-btn {
+    left: 16px;
+}
+
+.lightbox-next-btn {
+    right: 16px;
+}
+
+.lightbox-wa-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #25d366;
+    color: #ffffff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.lightbox-wa-cta:hover {
+    background: #16a34a;
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   5. RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .gallery-hero {
+        padding: 145px 0 45px 0;
+    }
+
+    .gallery-hero-title {
+        font-size: 2rem;
+    }
+
+    .gallery-grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 16px;
+    }
+
+    .lightbox-nav-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+
+    .lightbox-prev-btn { left: 8px; }
+    .lightbox-next-btn { right: 8px; }
+}

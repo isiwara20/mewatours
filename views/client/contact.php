@@ -1,73 +1,162 @@
 <?php 
-render_partial('header', ['page_title' => 'Contact Us & Plan Your Trip - Mewa Tours']); 
+render_partial('header', [
+    'page_title' => 'Contact Us & Plan Your Trip - Mewa Tours Sri Lanka'
+]); 
 
 $whatsapp = new WhatsAppService();
 $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMessage());
 ?>
 
-<section class="contact-section" style="padding: 40px 0;">
-    <h2>Contact Mewa Tours</h2>
-    <p>Plan your custom itinerary with our local Sri Lankan travel experts.</p>
-
-    <div class="contact-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px;">
-        <!-- Left Col: Direct WhatsApp Action -->
-        <div class="whatsapp-card" style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 30px; border-radius: 12px;">
-            <h3 style="color: #166534;"><i class="fa-brands fa-whatsapp"></i> Instant WhatsApp Inquiry</h3>
-            <p style="margin: 15px 0; color: #15803d;">
-                Connect directly with our team on WhatsApp for quick tour estimates and instant travel assistance.
-            </p>
-            <a href="<?= e($generalWaUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn" style="display: inline-block; background: #25d366; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600;">
-                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp Now
-            </a>
-            <p style="font-size: 0.85rem; color: #166534; margin-top: 15px; font-style: italic;">
-                Note: Clicking opens WhatsApp with a pre-filled message. Press Send to transmit your inquiry.
+<div class="contact-page-wrapper">
+    <div class="container">
+        
+        <!-- Page Header -->
+        <div class="contact-header-block" data-reveal>
+            <span class="contact-eyebrow">PLAN YOUR SRI LANKAN ADVENTURE</span>
+            <h1 class="contact-title">Contact Mewa Tours</h1>
+            <p class="contact-subtitle">
+                Reach out directly to Founder <strong>Mewan Manju Sri Kandearachchi</strong> and our travel expert team to create your 100% customized private Sri Lanka itinerary.
             </p>
         </div>
 
-        <!-- Right Col: Email Inquiry Form -->
-        <div class="inquiry-form-card" style="background: #ffffff; border: 1px solid #e2e8f0; padding: 30px; border-radius: 12px;">
-            <h3><i class="fa-solid fa-paper-plane"></i> Send Email Inquiry</h3>
+        <?php render_partial('flash-messages'); ?>
+
+        <div class="contact-grid">
             
-            <form action="<?= base_url('contact') ?>" method="POST" style="margin-top: 20px;">
-                <?= CsrfService::inputField() ?>
-
-                <div style="margin-bottom: 15px;">
-                    <label for="name" style="display: block; margin-bottom: 5px; font-weight: 500;">Your Name *</label>
-                    <input type="text" id="name" name="name" value="<?= old('name') ?>" required class="form-control" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+            <!-- Left Column: Company Contact Details & WhatsApp Action -->
+            <div class="contact-info-column" data-reveal>
+                
+                <!-- Direct WhatsApp Card -->
+                <div class="whatsapp-action-card">
+                    <h3 class="wa-card-title">
+                        <i class="fa-brands fa-whatsapp"></i> Instant WhatsApp Chat
+                    </h3>
+                    <p class="wa-card-text">
+                        Want quick tour estimates or immediate assistance? Chat directly with our team on WhatsApp for instant private tour guidance.
+                    </p>
+                    <a href="<?= e($generalWaUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-large">
+                        <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp Now
+                    </a>
                 </div>
 
-                <div style="margin-bottom: 15px;">
-                    <label for="email" style="display: block; margin-bottom: 5px; font-weight: 500;">Email Address *</label>
-                    <input type="email" id="email" name="email" value="<?= old('email') ?>" required class="form-control" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
-                </div>
+                <!-- Company Details Card -->
+                <div class="contact-info-card">
+                    <h3 class="contact-info-title">
+                        <i class="fa-solid fa-headset" style="color: #0284c7;"></i> Direct Contact Info
+                    </h3>
 
-                <div style="margin-bottom: 15px;">
-                    <label for="phone" style="display: block; margin-bottom: 5px; font-weight: 500;">Phone / WhatsApp Number</label>
-                    <input type="text" id="phone" name="phone" value="<?= old('phone') ?>" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
-                </div>
+                    <div class="contact-info-list">
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <span class="contact-info-label">Official Email</span>
+                                <a href="mailto:mewatours83@gmail.com" class="contact-info-val">mewatours83@gmail.com</a>
+                            </div>
+                        </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
-                    <div>
-                        <label for="travel_date" style="display: block; margin-bottom: 5px; font-weight: 500;">Estimated Travel Date</label>
-                        <input type="date" id="travel_date" name="travel_date" value="<?= old('travel_date') ?>" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon" style="background: #dcfce7; color: #166534;">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <span class="contact-info-label">WhatsApp Hotline</span>
+                                <a href="https://wa.me/94769695024" target="_blank" rel="noopener noreferrer" class="contact-info-val">+94 76 969 5024 / +94 70 103 8400</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <span class="contact-info-label">Headquarters</span>
+                                <span class="contact-info-val">Kandy, Sri Lanka</span>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <span class="contact-info-label">Operating Hours</span>
+                                <span class="contact-info-val">8:00 AM – 8:00 PM (IST) Daily</span>
+                            </div>
+                        </div>
+
                     </div>
-                    <div>
-                        <label for="traveller_count" style="display: block; margin-bottom: 5px; font-weight: 500;">Travellers</label>
-                        <input type="number" id="traveller_count" name="traveller_count" value="<?= old('traveller_count', '2') ?>" min="1" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                </div>
+
+            </div>
+
+            <!-- Right Column: Email Inquiry Form -->
+            <div class="inquiry-form-card" data-reveal>
+                <h3 class="form-card-title">
+                    <i class="fa-solid fa-paper-plane" style="color: #0284c7;"></i> Send Web Booking Inquiry
+                </h3>
+                
+                <?php if (!empty($selected_tour)): ?>
+                    <div style="background: #eef2ff; border: 1px solid #c7d2fe; padding: 14px 18px; border-radius: 10px; margin-bottom: 24px; font-size: 0.95rem; color: #3730a3; display: flex; align-items: center; gap: 10px;">
+                        <i class="fa-solid fa-route" style="font-size: 1.2rem;"></i>
+                        <div>
+                            <strong>Selected Tour Package:</strong><br>
+                            <?= e($selected_tour['title']) ?> (<?= e($selected_tour['formatted_duration']) ?>)
+                        </div>
                     </div>
-                </div>
+                <?php endif; ?>
 
-                <div style="margin-bottom: 15px;">
-                    <label for="message" style="display: block; margin-bottom: 5px; font-weight: 500;">Inquiry Details *</label>
-                    <textarea id="message" name="message" rows="4" required class="form-control" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;"><?= old('message') ?></textarea>
-                </div>
+                <form action="<?= base_url('contact') ?>" method="POST">
+                    <?= CsrfService::inputField() ?>
+                    <?php if (!empty($selected_tour)): ?>
+                        <input type="hidden" name="tour_id" value="<?= (int)$selected_tour['id'] ?>">
+                    <?php endif; ?>
 
-                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; background: #004080; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">
-                    Submit Inquiry
-                </button>
-            </form>
+                    <div class="form-field">
+                        <label for="name">Your Full Name <span style="color: #ef4444;">*</span></label>
+                        <input type="text" id="name" name="name" value="<?= old('name') ?>" required placeholder="e.g. John Miller">
+                    </div>
+
+                    <div class="form-field">
+                        <label for="email">Email Address <span style="color: #ef4444;">*</span></label>
+                        <input type="email" id="email" name="email" value="<?= old('email') ?>" required placeholder="john.miller@example.com">
+                    </div>
+
+                    <div class="form-field">
+                        <label for="phone">Phone / WhatsApp Number</label>
+                        <input type="text" id="phone" name="phone" value="<?= old('phone') ?>" placeholder="+1 (555) 000-0000">
+                    </div>
+
+                    <div class="form-grid-2col">
+                        <div class="form-field">
+                            <label for="travel_date">Estimated Travel Date</label>
+                            <input type="date" id="travel_date" name="travel_date" value="<?= old('travel_date') ?>">
+                        </div>
+                        <div class="form-field">
+                            <label for="traveller_count">Number of Travelers</label>
+                            <input type="number" id="traveller_count" name="traveller_count" value="<?= old('traveller_count', '2') ?>" min="1" max="50">
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="message">Inquiry Details & Preferences <span style="color: #ef4444;">*</span></label>
+                        <?php 
+                            $defaultMsg = !empty($selected_tour) ? ("Hello Mewa Tours,\n\nI would like to inquire about availability and pricing for the " . $selected_tour['title'] . " (" . $selected_tour['formatted_duration'] . "). Please let me know the details.") : '';
+                        ?>
+                        <textarea id="message" name="message" rows="5" required placeholder="Tell us about your trip plans, preferred travel dates, places you want to visit, or special requirements..."><?= old('message', $defaultMsg) ?></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit-inquiry">
+                        <i class="fa-solid fa-paper-plane"></i> Submit Inquiry
+                    </button>
+                </form>
+            </div>
+
         </div>
+
     </div>
-</section>
+</div>
 
 <?php render_partial('footer'); ?>

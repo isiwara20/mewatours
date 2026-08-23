@@ -1,38 +1,470 @@
-/* Responsive Layout Breakpoints */
-@media (max-width: 992px) {
+/* =========================================================================
+   MEWA TOURS — RESPONSIVE BREAKPOINTS (DESKTOP, TABLET, MOBILE)
+   ========================================================================= */
+
+@media (max-width: 1200px) {
+    .hero-title {
+        font-size: 4.2rem;
+    }
+
+    .tours-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .footer-container {
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 992px) {
+    .section-padding {
+        padding: 85px 0;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+    }
+
+    .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .experiences-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .destinations-masonry {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dest-card-featured {
+        grid-column: span 2;
+        height: 380px;
+    }
+
+    .dest-card-featured .dest-content h3 {
+        font-size: 1.8rem;
+    }
+
+    .story-grid {
         grid-template-columns: 1fr;
     }
 
-    .contact-options {
-        grid-template-columns: 1fr !important;
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-strip-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+}
+
+@media (max-width: 900px) {
+    .public-nav,
+    .btn-header-cta {
+        display: none;
+    }
+
+    .mobile-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        background: var(--brand-blue-soft);
+        color: var(--brand-blue);
+        border: none;
+        border-radius: var(--radius-sm);
+        font-size: 1.3rem;
+        cursor: pointer;
     }
 }
 
 @media (max-width: 768px) {
-    .mobile-toggle-btn {
-        display: block;
+    .section-title {
+        font-size: 2.2rem;
     }
 
-    .public-nav {
-        display: none;
-        position: absolute;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        background: #ffffff;
-        border-bottom: 1px solid var(--border-color);
-        padding: 20px;
-        box-shadow: var(--shadow-lg);
+    .hero-section {
+        min-height: 88vh;
+        height: auto;
+        padding-top: 110px;
+        padding-bottom: 60px;
     }
 
-    .public-nav.active {
-        display: block;
+    .hero-title {
+        font-size: 2.8rem;
     }
 
-    .public-nav .nav-list {
+    .hero-description {
+        font-size: 1.05rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-trust-bar {
         flex-direction: column;
         align-items: flex-start;
-        gap: 15px;
+        gap: 12px;
+    }
+
+    .feature-grid,
+    .experiences-grid,
+    .tours-grid,
+    .destinations-masonry {
+        grid-template-columns: 1fr;
+    }
+
+    .dest-card-featured {
+        grid-column: span 1;
+        height: 300px;
+    }
+
+    .gallery-strip-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .banner-title {
+        font-size: 2.3rem;
+    }
+
+    .banner-actions {
+        flex-direction: column;
+    }
+
+    .final-cta-title {
+        font-size: 2.2rem;
+    }
+
+    .final-cta-buttons {
+        flex-direction: column;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-bottom-content {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   MOBILE DRAWER NAVIGATION MODAL STYLES
+   ------------------------------------------------------------------------- */
+.mobile-drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(14, 27, 61, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.mobile-drawer-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-drawer-menu {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 300px;
+    height: 100%;
+    background: #ffffff;
+    z-index: 1002;
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+    transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-drawer-menu.active {
+    right: 0;
+}
+
+.drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-light);
+    margin-bottom: 25px;
+}
+
+.drawer-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-heading);
+    cursor: pointer;
+}
+
+.drawer-nav-list li {
+    margin-bottom: 16px;
+}
+
+.drawer-nav-link {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-heading);
+    display: block;
+    padding: 10px 16px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.drawer-nav-link:hover {
+    color: var(--brand-blue);
+    background-color: var(--bg-light, #f8fafc);
+}
+
+.drawer-nav-link.active {
+    color: #ffffff !important;
+    background-color: var(--brand-blue, #0284c7) !important;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+}
+
+.drawer-cta-wrapper {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-light);
+}
+
+.btn-block {
+    width: 100%;
+    text-align: center;
+}
+
+/* =========================================================================
+   TOURS PAGE RESPONSIVE OVERRIDES
+   ========================================================================= */
+@media (max-width: 992px) {
+    .tours-hero-title {
+        font-size: 3.4rem;
+    }
+    .featured-tour-grid {
+        grid-template-columns: 1fr;
+    }
+    .featured-tour-media {
+        min-height: 340px;
+    }
+    .main-tours-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .why-tours-grid,
+    .inspiration-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .tours-hero-section {
+        min-height: 70vh;
+        height: auto;
+        padding-top: 120px;
+        padding-bottom: 60px;
+    }
+    .tours-hero-title {
+        font-size: 2.6rem;
+    }
+    .tours-hero-description {
+        font-size: 1.05rem;
+    }
+    .tours-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .tours-filter-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .main-tours-grid {
+        grid-template-columns: 1fr;
+    }
+    .featured-highlights-grid {
+        grid-template-columns: 1fr;
+    }
+    .featured-tour-content {
+        padding: 30px 20px;
+    }
+    .featured-tour-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .why-tours-grid,
+    .inspiration-grid {
+        grid-template-columns: 1fr;
+    }
+    .custom-cta-title {
+        font-size: 2.3rem;
+    }
+    .custom-cta-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* =========================================================================
+   DESTINATIONS PAGE RESPONSIVE OVERRIDES
+   ========================================================================= */
+@media (max-width: 992px) {
+    .destinations-hero-title {
+        font-size: 3.4rem;
+    }
+    .region-cards-grid,
+    .destinations-collection-grid,
+    .exp-by-place-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .featured-dest-grid {
+        grid-template-columns: 1fr;
+    }
+    .featured-dest-media {
+        min-height: 340px;
+    }
+}
+
+@media (max-width: 768px) {
+    .destinations-hero-section {
+        min-height: 70vh;
+        height: auto;
+        padding-top: 120px;
+        padding-bottom: 60px;
+    }
+    .destinations-hero-title {
+        font-size: 2.6rem;
+    }
+    .destinations-hero-description {
+        font-size: 1.05rem;
+    }
+    .destinations-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .dest-filter-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .region-cards-grid,
+    .destinations-collection-grid,
+    .exp-by-place-grid {
+        grid-template-columns: 1fr;
+    }
+    .featured-dest-highlights {
+        grid-template-columns: 1fr;
+    }
+    .featured-dest-content {
+        padding: 30px 20px;
+    }
+    .featured-dest-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .story-banner-title {
+        font-size: 2.3rem;
+    }
+    .custom-dest-title {
+        font-size: 2.2rem;
+    }
+    .custom-dest-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* =========================================================================
+   EXPERIENCES PAGE RESPONSIVE OVERRIDES
+   ========================================================================= */
+@media (max-width: 992px) {
+    .experiences-hero-title {
+        font-size: 3.4rem;
+    }
+    .exp-cat-masonry-grid,
+    .experiences-collection-grid,
+    .local-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .exp-cat-large {
+        grid-column: span 2;
+    }
+    .featured-exp-grid {
+        grid-template-columns: 1fr;
+    }
+    .featured-exp-media {
+        min-height: 340px;
+    }
+}
+
+@media (max-width: 768px) {
+    .experiences-hero-section {
+        min-height: 70vh;
+        height: auto;
+        padding-top: 120px;
+        padding-bottom: 60px;
+    }
+    .experiences-hero-title {
+        font-size: 2.6rem;
+    }
+    .experiences-hero-description {
+        font-size: 1.05rem;
+    }
+    .experiences-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .exp-filter-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .exp-cat-masonry-grid,
+    .experiences-collection-grid,
+    .local-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    .exp-cat-large {
+        grid-column: span 1;
+        height: 320px;
+    }
+    .featured-exp-highlights {
+        grid-template-columns: 1fr;
+    }
+    .featured-exp-content {
+        padding: 30px 20px;
+    }
+    .featured-exp-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .custom-exp-title {
+        font-size: 2.2rem;
+    }
+    .custom-exp-buttons {
+        flex-direction: column;
+        align-items: stretch;
     }
 }

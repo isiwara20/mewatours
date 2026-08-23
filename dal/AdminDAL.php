@@ -94,4 +94,34 @@ class AdminDAL
             ':id' => $id
         ]);
     }
+
+    /**
+     * Update Admin Profile Name & Email
+     */
+    public function updateProfile(int $id, string $name, string $email): bool
+    {
+        $sql = "UPDATE admins 
+                SET name = :name, email = :email, updated_at = CURRENT_TIMESTAMP 
+                WHERE id = :id";
+
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            ':name' => $name,
+            ':email' => strtolower(trim($email)),
+            ':id' => $id
+        ]);
+    }
+
+    /**
+     * Get password hash for specific admin ID
+     */
+    public function getPasswordHash(int $id): ?string
+    {
+        $sql = "SELECT password_hash FROM admins WHERE id = :id LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        $row = $stmt->fetch();
+        return $row ? $row['password_hash'] : null;
+    }
 }
+
