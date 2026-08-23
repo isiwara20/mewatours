@@ -1,0 +1,285 @@
+/* =========================================================================
+   MEWA TOURS - CONTACT US PAGE STYLESHEET
+   ========================================================================= */
+
+.contact-page-wrapper {
+    padding: 160px 0 90px 0;
+    background-color: #f8fafc;
+}
+
+.contact-header-block {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+}
+
+.contact-eyebrow {
+    display: inline-block;
+    color: #0284c7;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.contact-title {
+    font-family: var(--font-heading, 'Playfair Display', Georgia, serif);
+    font-size: 3rem;
+    color: #0f172a;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.contact-subtitle {
+    font-size: 1.15rem;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* Contact Options Grid */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Left Info & WhatsApp Card */
+.contact-info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.contact-info-card {
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e2e8f0;
+}
+
+.contact-info-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.contact-info-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: #e0f2fe;
+    color: #0284c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.contact-info-label {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.contact-info-val {
+    font-size: 1rem;
+    color: #0f172a;
+    font-weight: 600;
+    word-break: break-word;
+    text-decoration: none;
+}
+
+.contact-info-val:hover {
+    color: #0284c7;
+}
+
+/* Direct WhatsApp Box */
+.whatsapp-action-card {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 1px solid #bbf7d0;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.08);
+}
+
+.wa-card-title {
+    color: #166534;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.wa-card-text {
+    color: #15803d;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    margin-bottom: 22px;
+}
+
+.btn-whatsapp-large {
+    background: #25d366 !important;
+    color: #ffffff !important;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    width: 100%;
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-whatsapp-large:hover {
+    background: #128c7e !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(18, 140, 126, 0.4);
+}
+
+/* Right Form Card */
+.inquiry-form-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.form-card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #0f172a;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: #0284c7;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+.btn-submit-inquiry {
+    background: var(--deep-navy, #0e1b3d) !important;
+    color: #ffffff !important;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-submit-inquiry:hover {
+    background: #0284c7 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3);
+}
+
+/* RESPONSIVE MEDIA QUERIES FOR MOBILE */
+@media (max-width: 992px) {
+    .contact-page-wrapper {
+        padding: 130px 0 60px 0;
+    }
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .inquiry-form-card {
+        padding: 30px 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-page-wrapper {
+        padding: 120px 0 50px 0;
+    }
+    .contact-title {
+        font-size: 2.2rem;
+    }
+    .contact-subtitle {
+        font-size: 1rem;
+    }
+    .form-grid-2col {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .contact-info-card,
+    .whatsapp-action-card,
+    .inquiry-form-card {
+        padding: 24px 18px;
+        border-radius: 12px;
+    }
+}

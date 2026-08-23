@@ -59,6 +59,9 @@ $isContact = ($routePath === '/contact' || $routePath === '/contact.php');
     <?php if (!empty($isAbout)): ?>
         <link rel="stylesheet" href="<?= asset_url('css/about.css') ?>">
     <?php endif; ?>
+    <?php if (!empty($isContact)): ?>
+        <link rel="stylesheet" href="<?= asset_url('css/contact.css') ?>">
+    <?php endif; ?>
     <link rel="stylesheet" href="<?= asset_url('css/responsive.css') ?>">
 </head>
 <body>
