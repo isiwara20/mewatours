@@ -26,7 +26,7 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
                 <div class="social-links">
                     <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" aria-label="TripAdvisor"><i class="fa-brands fa-tripadvisor"></i></a>
+                    <a href="<?= e($generalWaUrl) ?>" target="_blank" rel="noopener noreferrer" class="social-wa" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
             </div>
 

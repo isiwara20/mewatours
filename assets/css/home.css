@@ -1110,6 +1110,10 @@
     background: var(--brand-blue);
 }
 
+.social-links a.social-wa:hover {
+    background: #25d366;
+}
+
 .back-to-top-btn {
     color: #a5b4fc;
     font-weight: 600;
