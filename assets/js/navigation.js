@@ -9,12 +9,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const drawerOverlay = document.getElementById('mobileDrawerOverlay');
     const drawerLinks = document.querySelectorAll('.drawer-nav-link');
 
+    // Ensure body scroll is unlocked when page loads/restores
+    document.body.style.overflow = '';
+
     // 1. Sticky Header Background Transition on Scroll
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 40) {
-            siteHeader.classList.add('scrolled');
-        } else {
-            siteHeader.classList.remove('scrolled');
+        if (siteHeader) {
+            if (window.scrollY > 40) {
+                siteHeader.classList.add('scrolled');
+            } else {
+                siteHeader.classList.remove('scrolled');
+            }
         }
     });
 
@@ -46,8 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeBtn) closeBtn.addEventListener('click', closeMobileMenu);
     if (drawerOverlay) drawerOverlay.addEventListener('click', closeMobileMenu);
 
-    // Close mobile menu on clicking any drawer link
-    drawerLinks.forEach(link => {
+    // Close mobile menu on clicking any link inside the mobile drawer
+    const drawerAllLinks = document.querySelectorAll('#mobileDrawerMenu a');
+    drawerAllLinks.forEach(link => {
         link.addEventListener('click', closeMobileMenu);
     });
 

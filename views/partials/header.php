@@ -103,7 +103,7 @@ $isContact = ($routePath === '/contact' || $routePath === '/contact.php');
     <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
     <div class="mobile-drawer-menu" id="mobileDrawerMenu">
         <div class="drawer-header">
-            <a href="<?= base_url() ?>" class="brand-logo-card">
+            <a href="<?= base_url() ?>" class="brand-logo-card drawer-nav-link">
                 <img src="<?= asset_url('images/branding/logo.png') ?>" alt="Mewa Tours" class="logo-img">
             </a>
             <button class="drawer-close-btn" id="mobileMenuClose" aria-label="Close navigation menu">

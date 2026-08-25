@@ -19,7 +19,7 @@ if (!function_exists('base_url')) {
         }
 
         $cleanPath = ltrim($path, '/');
-        return $cleanPath === '' ? $baseUrl : $baseUrl . '/' . $cleanPath;
+        return $cleanPath === '' ? $baseUrl . '/' : $baseUrl . '/' . $cleanPath;
     }
 }
 

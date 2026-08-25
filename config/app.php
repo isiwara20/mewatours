@@ -19,7 +19,8 @@ return [
         'name' => 'Mewa Tours Sri Lanka',
         'email' => 'mewatours83@gmail.com',
         'phone' => '+94 76 969 5024',
-        'address' => 'Kandy, Sri Lanka',
+        'address' => 'No 442/B Thiyabarabaya Kurunduwatta GAMPOLA',
+        'facebook' => 'https://www.facebook.com/share/1CeW5nqxg8/',
         'operating_hours' => '8:00 AM - 8:00 PM (IST)'
     ],
 

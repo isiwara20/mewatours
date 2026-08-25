@@ -1,4 +1,6 @@
 <?php 
+$config = require ROOT_PATH . '/config/app.php';
+
 render_partial('header', [
     'page_title' => 'Contact Us & Plan Your Trip - Mewa Tours Sri Lanka'
 ]); 
@@ -72,8 +74,18 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
                                 <i class="fa-solid fa-location-dot"></i>
                             </div>
                             <div>
-                                <span class="contact-info-label">Headquarters</span>
-                                <span class="contact-info-val">Kandy, Sri Lanka</span>
+                                <span class="contact-info-label">Headquarters Address</span>
+                                <span class="contact-info-val"><?= e($config['company']['address']) ?></span>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon" style="background: #eff6ff; color: #1877f2;">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </div>
+                            <div>
+                                <span class="contact-info-label">Facebook Page</span>
+                                <a href="<?= e($config['company']['facebook']) ?>" target="_blank" rel="noopener noreferrer" class="contact-info-val" style="color: #1877f2; text-decoration: none;">Follow Mewa Tours on Facebook</a>
                             </div>
                         </div>
 

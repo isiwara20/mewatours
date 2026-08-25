@@ -24,7 +24,7 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
                     Thoughtfully created Sri Lankan journeys with local knowledge, personal service and unforgettable experiences.
                 </p>
                 <div class="social-links">
-                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.facebook.com/share/1CeW5nqxg8/" target="_blank" rel="noopener noreferrer" class="social-fb" aria-label="Facebook Page"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
                     <a href="<?= e($generalWaUrl) ?>" target="_blank" rel="noopener noreferrer" class="social-wa" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
@@ -51,10 +51,11 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
 
             <div class="footer-col contact-col">
                 <h4 class="footer-heading">Contact Us</h4>
-                <p><i class="fa-solid fa-envelope"></i> <?= e($config['company']['email']) ?></p>
-                <p><i class="fa-solid fa-phone"></i> <?= e($config['company']['phone']) ?></p>
-                <p><i class="fa-brands fa-whatsapp"></i> WhatsApp: <?= e($config['company']['phone']) ?></p>
-                <p><i class="fa-solid fa-location-dot"></i> <?= e($config['company']['address']) ?></p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:<?= e($config['company']['email']) ?>"><?= e($config['company']['email']) ?></a></p>
+                <p><i class="fa-solid fa-phone"></i> <a href="tel:<?= e($config['company']['phone']) ?>"><?= e($config['company']['phone']) ?></a></p>
+                <p><i class="fa-brands fa-whatsapp"></i> <a href="<?= e($generalWaUrl) ?>" target="_blank" rel="noopener noreferrer">WhatsApp: <?= e($config['company']['phone']) ?></a></p>
+                <p><i class="fa-brands fa-facebook"></i> <a href="https://www.facebook.com/share/1CeW5nqxg8/" target="_blank" rel="noopener noreferrer">Facebook: Mewa Tours</a></p>
+                <p><i class="fa-solid fa-location-dot"></i> <span><?= e($config['company']['address']) ?></span></p>
             </div>
         </div>
 

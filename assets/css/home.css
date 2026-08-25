@@ -1110,6 +1110,10 @@
     background: var(--brand-blue);
 }
 
+.social-links a.social-fb:hover {
+    background: #1877f2;
+}
+
 .social-links a.social-wa:hover {
     background: #25d366;
 }

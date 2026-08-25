@@ -144,6 +144,43 @@
     color: #38bdf8;
 }
 
+/* Footer Contact Us Column - Crisp White Text */
+.contact-col,
+.contact-col .footer-heading,
+.contact-col p,
+.contact-col p i,
+.contact-col p a,
+.contact-col p span {
+    color: #ffffff !important;
+}
+
+.contact-col p {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.contact-col p i {
+    margin-top: 3px;
+    width: 18px;
+    text-align: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.contact-col p a {
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.contact-col p a:hover {
+    opacity: 0.85;
+    text-decoration: underline;
+}
+
 .footer-bottom {
     background-color: #00162e;
     padding: 20px 0;

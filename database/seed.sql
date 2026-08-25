@@ -67,7 +67,8 @@ INSERT INTO `site_settings` (`setting_key`, `setting_value`) VALUES
 ('whatsapp_number', '94769695024'),
 ('company_email', 'mewatours83@gmail.com'),
 ('company_phone', '+94 76 969 5024'),
-('company_address', 'Kandy, Sri Lanka')
+('company_address', 'No 442/B Thiyabarabaya Kurunduwatta GAMPOLA'),
+('social_facebook', 'https://www.facebook.com/share/1CeW5nqxg8/')
 ON DUPLICATE KEY UPDATE `setting_value` = VALUES(`setting_value`);
 
 -- Sample Tours
