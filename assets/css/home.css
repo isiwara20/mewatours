@@ -38,27 +38,29 @@
     align-items: center;
     justify-content: center;
     background: #ffffff;
-    padding: 8px 20px;
+    padding: 6px 16px;
     border-radius: var(--radius-sm);
-    box-shadow: 0 4px 12px rgba(14, 27, 61, 0.1);
+    box-shadow: 0 4px 14px rgba(14, 27, 61, 0.12);
     border: 1px solid var(--border-light);
     transition: var(--transition);
 }
 
 .brand-logo-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(14, 27, 61, 0.15);
+    box-shadow: 0 6px 20px rgba(14, 27, 61, 0.18);
 }
 
 .logo-img {
-    height: 72px;
+    height: 80px;
+    max-height: 85px;
     width: auto;
     object-fit: contain;
     transition: var(--transition);
 }
 
 .site-header.scrolled .logo-img {
-    height: 62px;
+    height: 68px;
+    max-height: 70px;
 }
 
 .public-nav .nav-list {
@@ -1076,14 +1078,14 @@
 .footer-logo-card {
     display: inline-flex;
     background: #ffffff;
-    padding: 10px 22px;
+    padding: 8px 18px;
     border-radius: var(--radius-sm);
     margin-bottom: 22px;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
 .footer-logo {
-    height: 75px;
+    height: 85px;
     width: auto;
     object-fit: contain;
 }

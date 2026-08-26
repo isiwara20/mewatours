@@ -24,8 +24,10 @@
     height: 80px;
 }
 
-.brand-logo .logo-img {
-    height: 54px;
+.brand-logo .logo-img,
+.brand-logo-card .logo-img {
+    height: 80px;
+    max-height: 85px;
     width: auto;
     object-fit: contain;
 }
@@ -116,7 +118,9 @@
 }
 
 .footer-logo {
-    height: 50px;
+    height: 85px;
+    width: auto;
+    object-fit: contain;
     margin-bottom: 15px;
 }
 
