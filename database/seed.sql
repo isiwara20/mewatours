@@ -1,6 +1,6 @@
 -- =============================================================================
 -- MEWA TOURS - INITIAL SEED DATA
--- Default Admin Account: mewatours83@gmail.com / Mewa@123
+-- Default Admin Account: Initial seed data
 -- =============================================================================
 
 USE `mewa_tours`;

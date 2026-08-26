@@ -36,12 +36,25 @@ class Database
     public static function getConnection(): PDO
     {
         if (self::$instance === null) {
+            $localConfig = [];
+            $localConfigFile = __DIR__ . '/local.php';
+            if (file_exists($localConfigFile)) {
+                $localConfig = require $localConfigFile;
+            }
+
+            $host = getenv('DB_HOST') ?: ($localConfig['db_host'] ?? self::HOST);
+            $port = getenv('DB_PORT') ?: ($localConfig['db_port'] ?? self::PORT);
+            $dbName = getenv('DB_NAME') ?: ($localConfig['db_name'] ?? self::DB_NAME);
+            $user = getenv('DB_USER') ?: ($localConfig['db_user'] ?? self::USER);
+            $pass = getenv('DB_PASS') !== false ? getenv('DB_PASS') : ($localConfig['db_pass'] ?? self::PASS);
+            $charset = getenv('DB_CHARSET') ?: ($localConfig['db_charset'] ?? self::CHARSET);
+
             $dsn = sprintf(
                 'mysql:host=%s;port=%s;dbname=%s;charset=%s',
-                self::HOST,
-                self::PORT,
-                self::DB_NAME,
-                self::CHARSET
+                $host,
+                $port,
+                $dbName,
+                $charset
             );
 
             $options = [
@@ -52,12 +65,12 @@ class Database
             ];
 
             try {
-                self::$instance = new PDO($dsn, self::USER, self::PASS, $options);
+                self::$instance = new PDO($dsn, $user, $pass, $options);
             } catch (PDOException $e) {
                 // If database does not exist yet (Error 1049), auto-create and seed database automatically
                 if ($e->getCode() === 1049 || strpos($e->getMessage(), 'Unknown database') !== false) {
                     self::autoCreateAndSeedDatabase($options);
-                    self::$instance = new PDO($dsn, self::USER, self::PASS, $options);
+                    self::$instance = new PDO($dsn, $user, $pass, $options);
                 } else {
                     error_log('Database Connection Error: ' . $e->getMessage());
                     throw new Exception('Database connection failed. Please ensure MySQL is running in XAMPP control panel.');

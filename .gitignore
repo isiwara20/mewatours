@@ -1,7 +1,10 @@
 # Environment & local overrides
 config/local.php
+config/db.local.php
+config/*.local.php
 .env
-.env.local
+.env.*
+*.env
 
 # Storage logs and temp files
 storage/logs/*.log
