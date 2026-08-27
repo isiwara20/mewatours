@@ -59,6 +59,9 @@ $isContact = ($routePath === '/contact' || $routePath === '/contact.php');
     <?php if (!empty($isAbout)): ?>
         <link rel="stylesheet" href="<?= asset_url('css/about.css') ?>">
     <?php endif; ?>
+    <?php if (!empty($isReviews)): ?>
+        <link rel="stylesheet" href="<?= asset_url('css/reviews.css') ?>">
+    <?php endif; ?>
     <?php if (!empty($isContact)): ?>
         <link rel="stylesheet" href="<?= asset_url('css/contact.css') ?>">
     <?php endif; ?>
@@ -83,6 +86,7 @@ $isContact = ($routePath === '/contact' || $routePath === '/contact.php');
                     <li><a href="<?= base_url('experiences') ?>" class="nav-link <?= $isExperiences ? 'active' : '' ?>">Experiences</a></li>
                     <li><a href="<?= base_url('about') ?>" class="nav-link <?= $isAbout ? 'active' : '' ?>">About Us</a></li>
                     <li><a href="<?= base_url('gallery') ?>" class="nav-link <?= $isGallery ? 'active' : '' ?>">Gallery</a></li>
+                    <li><a href="<?= base_url('reviews') ?>" class="nav-link <?= $isReviews ? 'active' : '' ?>">Reviews</a></li>
                     <li><a href="<?= base_url('contact') ?>" class="nav-link <?= $isContact ? 'active' : '' ?>">Contact</a></li>
                 </ul>
             </nav>
@@ -117,6 +121,7 @@ $isContact = ($routePath === '/contact' || $routePath === '/contact.php');
             <li><a href="<?= base_url('experiences') ?>" class="drawer-nav-link <?= $isExperiences ? 'active' : '' ?>">Experiences</a></li>
             <li><a href="<?= base_url('about') ?>" class="drawer-nav-link <?= $isAbout ? 'active' : '' ?>">About Us</a></li>
             <li><a href="<?= base_url('gallery') ?>" class="drawer-nav-link <?= $isGallery ? 'active' : '' ?>">Gallery</a></li>
+            <li><a href="<?= base_url('reviews') ?>" class="drawer-nav-link <?= $isReviews ? 'active' : '' ?>">Customer Reviews</a></li>
             <li><a href="<?= base_url('contact') ?>" class="drawer-nav-link <?= $isContact ? 'active' : '' ?>">Contact Us</a></li>
         </ul>
         <div class="drawer-cta-wrapper">

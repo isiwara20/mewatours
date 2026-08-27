@@ -45,6 +45,7 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
                 <ul class="footer-links">
                     <li><a href="<?= base_url('about') ?>">About Us</a></li>
                     <li><a href="<?= base_url('gallery') ?>">Photo Gallery</a></li>
+                    <li><a href="<?= base_url('reviews') ?>">Customer Reviews</a></li>
                     <li><a href="<?= base_url('contact') ?>">Contact Us</a></li>
                 </ul>
             </div>

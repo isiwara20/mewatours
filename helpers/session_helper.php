@@ -18,16 +18,26 @@ if (!function_exists('set_flash')) {
     }
 }
 
+if (!function_exists('has_flash')) {
+    /**
+     * Check if a flash notification key exists
+     */
+    function has_flash(string $key): bool
+    {
+        return isset($_SESSION['_flash'][$key]);
+    }
+}
+
 if (!function_exists('get_flash')) {
     /**
      * Retrieve and clear a flash notification message
      */
-    function get_flash(string $key): ?array
+    function get_flash(string $key)
     {
         if (isset($_SESSION['_flash'][$key])) {
             $flash = $_SESSION['_flash'][$key];
             unset($_SESSION['_flash'][$key]);
-            return $flash;
+            return is_array($flash) ? ($flash['message'] ?? '') : $flash;
         }
         return null;
     }
@@ -77,5 +87,15 @@ if (!function_exists('old')) {
             unset($_SESSION['_old_input'][$field]);
         }
         return e($val);
+    }
+}
+
+if (!function_exists('old_input')) {
+    /**
+     * Retrieve stored form field input value (alias for old)
+     */
+    function old_input(string $field, string $default = ''): string
+    {
+        return old($field, $default);
     }
 }

@@ -444,9 +444,8 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
 
 
 <!-- =========================================================================
-     10. SECTION 9 — TRAVELLER STORIES (TESTIMONIALS)
+     10. SECTION 9 — TRAVELLER STORIES (TESTIMONIALS & FEEDBACK)
      ========================================================================= -->
-<!-- Note: Demo sample feedback structured for initial client presentation -->
 <section class="section-padding testimonials-section bg-light">
     <div class="container">
         <div class="section-header text-center" data-reveal>
@@ -456,44 +455,48 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
         </div>
 
         <div class="testimonials-grid">
-            <div class="testimonial-card" data-reveal>
-                <div class="rating-stars">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <?php if (!empty($featured_reviews)): ?>
+                <?php foreach ($featured_reviews as $rev): ?>
+                    <div class="testimonial-card" data-reveal>
+                        <div class="rating-stars">
+                            <?php for ($s = 1; $s <= 5; $s++): ?>
+                                <?php if ($s <= $rev['rating']): ?>
+                                    <i class="fa-solid fa-star"></i>
+                                <?php else: ?>
+                                    <i class="fa-regular fa-star"></i>
+                                <?php endif; ?>
+                            <?php endfor; ?>
+                        </div>
+                        <h4 style="font-weight: 700; color: var(--brand-blue); margin: 10px 0 6px; font-size: 1.05rem;"><?= e($rev['title']) ?></h4>
+                        <p class="review-text">
+                            "<?= e($rev['comment']) ?>"
+                        </p>
+                        <div class="reviewer-meta" style="margin-top: 15px;">
+                            <strong><?= e($rev['customer_name']) ?></strong>
+                            <span><?= e($rev['customer_country'] ?: 'Traveler') ?></span>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="testimonial-card" data-reveal>
+                    <div class="rating-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="review-text">
+                        "Mewa Tours organized an unforgettable trip for our family. The private driver, hotel choices, and Sigiriya visit were seamless. Highly recommended!"
+                    </p>
+                    <div class="reviewer-meta">
+                        <strong>David &amp; Sarah M.</strong>
+                        <span>United Kingdom</span>
+                    </div>
                 </div>
-                <p class="review-text">
-                    "Mewa Tours organized an unforgettable 8-day trip for our family. The private driver, hotel choices, and Sigiriya visit were seamless. Highly recommended!"
-                </p>
-                <div class="reviewer-meta">
-                    <strong>David &amp; Sarah M.</strong>
-                    <span>United Kingdom</span>
-                </div>
-            </div>
+            <?php endif; ?>
+        </div>
 
-            <div class="testimonial-card" data-reveal>
-                <div class="rating-stars">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p class="review-text">
-                    "The Ella train ride and Yala leopard safari were the highlights of our honeymoon. The team was warm, responsive on WhatsApp, and truly local."
-                </p>
-                <div class="reviewer-meta">
-                    <strong>Elena &amp; Mark R.</strong>
-                    <span>Australia</span>
-                </div>
-            </div>
-
-            <div class="testimonial-card" data-reveal>
-                <div class="rating-stars">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p class="review-text">
-                    "Outstanding hospitality from Kandy to Galle. Everything was customized to our schedule and interests. We felt like family throughout."
-                </p>
-                <div class="reviewer-meta">
-                    <strong>Jean-Pierre L.</strong>
-                    <span>France</span>
-                </div>
-            </div>
+        <div class="text-center" style="margin-top: 40px;" data-reveal>
+            <a href="<?= base_url('reviews') ?>" class="btn btn-outline-primary" style="padding: 12px 28px; font-weight: 700;">
+                <i class="fa-solid fa-comments"></i> Read All Traveler Reviews & Share Yours <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
     </div>
 </section>
