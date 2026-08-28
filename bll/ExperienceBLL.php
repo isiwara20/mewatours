@@ -18,7 +18,7 @@ class ExperienceBLL
         $experiences = $this->experienceDAL->getAllExperiences(true);
         $wa = new WhatsAppService();
         foreach ($experiences as &$exp) {
-            $msg = "Hello Mewa Tours,\n\nI am interested in the \"" . $exp['name'] . "\" experience.\nExperience: " . $exp['name'] . "\n\nCould you recommend a tour itinerary that includes this experience? Thank you!";
+            $msg = $wa->buildExperienceInquiryMessage($exp['name']);
             $exp['whatsapp_url'] = $wa->generateInquiryLink($msg);
         }
         return $experiences;
@@ -34,7 +34,7 @@ class ExperienceBLL
         $exp = $this->experienceDAL->getSingleFeaturedExperience();
         if ($exp) {
             $wa = new WhatsAppService();
-            $msg = "Hello Mewa Tours,\n\nI am interested in the \"" . $exp['name'] . "\" experience.\nExperience: " . $exp['name'] . "\n\nCould you recommend a tour itinerary that includes this experience? Thank you!";
+            $msg = $wa->buildExperienceInquiryMessage($exp['name']);
             $exp['whatsapp_url'] = $wa->generateInquiryLink($msg);
         }
         return $exp;

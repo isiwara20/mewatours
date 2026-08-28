@@ -18,7 +18,7 @@ class DestinationBLL
         $destinations = $this->destinationDAL->getAllDestinations(true);
         $wa = new WhatsAppService();
         foreach ($destinations as &$dest) {
-            $msg = "Hello Mewa Tours,\n\nI am interested in exploring " . $dest['name'] . ".\nDestination: " . $dest['name'] . "\n\nPlease send me details and tour recommendations including this destination. Thank you!";
+            $msg = $wa->buildDestinationInquiryMessage($dest['name']);
             $dest['whatsapp_url'] = $wa->generateInquiryLink($msg);
         }
         return $destinations;
@@ -34,7 +34,7 @@ class DestinationBLL
         $dest = $this->destinationDAL->getSingleFeaturedDestination();
         if ($dest) {
             $wa = new WhatsAppService();
-            $msg = "Hello Mewa Tours,\n\nI am interested in exploring " . $dest['name'] . ".\nDestination: " . $dest['name'] . "\n\nPlease send me details and tour recommendations including this destination. Thank you!";
+            $msg = $wa->buildDestinationInquiryMessage($dest['name']);
             $dest['whatsapp_url'] = $wa->generateInquiryLink($msg);
         }
         return $dest;

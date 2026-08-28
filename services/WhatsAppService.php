@@ -47,7 +47,7 @@ class WhatsAppService
     }
 
     /**
-     * Build pre-filled tour inquiry message text
+     * Build beautifully formatted & well-organized tour package inquiry message
      */
     public function buildTourInquiryMessage(
         string $tourTitle,
@@ -56,54 +56,161 @@ class WhatsAppService
         ?string $route = null,
         ?string $name = null,
         ?string $travelDate = null,
-        ?int $travellers = null
+        ?int $travellers = null,
+        ?string $customNotes = null
     ): string {
         $lines = [
-            "Hello Mewa Tours,",
+            "🌴 *MEWA TOURS - SRI LANKA TOUR INQUIRY* 🌴",
+            "----------------------------------------",
+            "👋 *Hello Mewa Tours Team!*",
             "",
-            "I'm interested in the " . $tourTitle . ".",
+            "I am interested in booking / inquiring about this tour package:",
             "",
-            "Duration: " . $duration
+            "📌 *Package:* " . trim($tourTitle),
+            "⏱️ *Duration:* " . trim($duration)
         ];
 
         if (!empty($tourType)) {
-            $lines[] = "Tour Type: " . $tourType;
+            $lines[] = "🏷️ *Tour Style:* " . trim($tourType);
         }
 
         if (!empty($route)) {
-            $lines[] = "";
-            $lines[] = "Route:";
-            $lines[] = $route;
+            $lines[] = "🗺️ *Travel Route:* " . trim($route);
         }
 
         if (!empty($name) || !empty($travelDate) || !empty($travellers)) {
             $lines[] = "";
-            if (!empty($name)) $lines[] = "Name: " . $name;
-            if (!empty($travelDate)) $lines[] = "Travel Date: " . $travelDate;
-            if (!empty($travellers)) $lines[] = "Number of Travellers: " . $travellers;
+            $lines[] = "----------------------------------------";
+            $lines[] = "✈️ *GUEST & TRAVEL DETAILS:*";
+            if (!empty($name)) $lines[] = "👤 *Name:* " . trim($name);
+            if (!empty($travelDate)) $lines[] = "📅 *Travel Date:* " . trim($travelDate);
+            if (!empty($travellers)) $lines[] = "👥 *Travelers:* " . (int)$travellers . " Guests";
+        }
+
+        if (!empty($customNotes)) {
+            $lines[] = "";
+            $lines[] = "💬 *Additional Notes:*";
+            $lines[] = trim($customNotes);
         }
 
         $lines[] = "";
-        $lines[] = "Could you please send me more information about this tour?";
+        $lines[] = "----------------------------------------";
+        $lines[] = "Could you please share availability, price details, and itinerary customization options?";
         $lines[] = "";
-        $lines[] = "Thank you.";
+        $lines[] = "Thank you so much! 🙏";
 
         return implode("\n", $lines);
     }
 
     /**
-     * Build pre-filled general inquiry message text
+     * Build beautifully formatted & well-organized general inquiry message
      */
     public function buildGeneralInquiryMessage(?string $name = null, ?string $customMessage = null): string
     {
         $lines = [
-            "Hello Mewa Tours,",
+            "🌴 *MEWA TOURS - SRI LANKA TRAVEL INQUIRY* 🌴",
+            "----------------------------------------",
+            "👋 *Hello Mewa Tours Team!*",
             "",
-            "I have an inquiry regarding travel in Sri Lanka.",
-            "Name: " . ($name ?? ''),
-            "Message: " . ($customMessage ?? ''),
+            "I am planning a trip to Sri Lanka and would like to get more information about your private tour packages, chauffeur services, and custom travel itineraries."
+        ];
+
+        if (!empty($name) || !empty($customMessage)) {
+            $lines[] = "";
+            $lines[] = "----------------------------------------";
+            if (!empty($name)) $lines[] = "👤 *Name:* " . trim($name);
+            if (!empty($customMessage)) {
+                $lines[] = "💬 *My Inquiry:*";
+                $lines[] = trim($customMessage);
+            }
+        }
+
+        $lines[] = "";
+        $lines[] = "----------------------------------------";
+        $lines[] = "Could you please assist me with recommended travel routes and options?";
+        $lines[] = "";
+        $lines[] = "Thank you! 🙏";
+
+        return implode("\n", $lines);
+    }
+
+    /**
+     * Build pre-filled custom itinerary request message text
+     */
+    public function buildCustomTripInquiryMessage(
+        ?string $name = null,
+        ?string $travelDate = null,
+        ?string $duration = null,
+        ?int $travellers = null,
+        ?string $interests = null
+    ): string {
+        $lines = [
+            "🌴 *MEWA TOURS - TAILOR-MADE JOURNEY REQUEST* 🌴",
+            "----------------------------------------",
+            "👋 *Hello Mewa Tours Team!*",
             "",
-            "Please get back to me. Thank you!"
+            "I would like to create a custom tailor-made tour itinerary in Sri Lanka.",
+            "",
+            "----------------------------------------",
+            "📋 *TRIP DETAILS:*"
+        ];
+
+        if (!empty($name)) $lines[] = "👤 *Name:* " . trim($name);
+        if (!empty($travelDate)) $lines[] = "📅 *Travel Date:* " . trim($travelDate);
+        if (!empty($duration)) $lines[] = "⏱️ *Duration:* " . trim($duration) . " Days";
+        if (!empty($travellers)) $lines[] = "👥 *Travelers:* " . (int)$travellers . " Guests";
+        if (!empty($interests)) {
+            $lines[] = "";
+            $lines[] = "📍 *Interests & Destinations:*";
+            $lines[] = trim($interests);
+        }
+
+        $lines[] = "";
+        $lines[] = "----------------------------------------";
+        $lines[] = "Please help me plan an ideal route and provide a quotation.";
+        $lines[] = "";
+        $lines[] = "Thank you! 🙏";
+
+        return implode("\n", $lines);
+    }
+
+    /**
+     * Build pre-filled destination inquiry message text
+     */
+    public function buildDestinationInquiryMessage(string $destinationName): string
+    {
+        $lines = [
+            "🌴 *MEWA TOURS - DESTINATION INQUIRY* 🌴",
+            "----------------------------------------",
+            "👋 *Hello Mewa Tours Team!*",
+            "",
+            "I am interested in visiting *" . trim($destinationName) . "* during my Sri Lanka trip.",
+            "",
+            "----------------------------------------",
+            "Could you please share tour package recommendations and custom itineraries that include " . trim($destinationName) . "?",
+            "",
+            "Thank you so much! 🙏"
+        ];
+
+        return implode("\n", $lines);
+    }
+
+    /**
+     * Build pre-filled experience inquiry message text
+     */
+    public function buildExperienceInquiryMessage(string $experienceName): string
+    {
+        $lines = [
+            "🌴 *MEWA TOURS - ISLAND EXPERIENCE INQUIRY* 🌴",
+            "----------------------------------------",
+            "👋 *Hello Mewa Tours Team!*",
+            "",
+            "I am interested in experiencing *" . trim($experienceName) . "* in Sri Lanka.",
+            "",
+            "----------------------------------------",
+            "Could you please recommend an itinerary or day trip package that includes this experience?",
+            "",
+            "Thank you so much! 🙏"
         ];
 
         return implode("\n", $lines);
