@@ -49,8 +49,16 @@ $pageTitle = $page_title ?? 'Admin Sign In - Mewa Tours';
             </div>
 
             <div class="form-group">
-                <label for="password"><i class="fa-solid fa-lock"></i> Password</label>
-                <input type="password" id="password" name="password" class="form-control" required placeholder="••••••••••••">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <label for="password" style="margin-bottom: 0;"><i class="fa-solid fa-lock"></i> Password</label>
+                    <a href="<?= base_url('forgot-password') ?>" style="font-size: 0.8rem; color: #4f46e5; font-weight: 600; text-decoration: none;">Forgot Password?</a>
+                </div>
+                <div class="password-input-wrapper">
+                    <input type="password" id="password" name="password" class="form-control" required placeholder="••••••••••••">
+                    <button type="button" class="password-toggle-btn" id="togglePassword" aria-label="Toggle Password Visibility">
+                        <i class="fa-regular fa-eye" id="togglePasswordIcon"></i>
+                    </button>
+                </div>
             </div>
 
             <button type="submit" class="btn btn-auth-submit"><i class="fa-solid fa-right-to-bracket"></i> Sign In to Dashboard</button>
@@ -58,8 +66,28 @@ $pageTitle = $page_title ?? 'Admin Sign In - Mewa Tours';
 
         <div class="auth-footer text-center">
             <a href="<?= base_url() ?>" class="back-home-link"><i class="fa-solid fa-arrow-left"></i> Return to Public Site</a>
+            <div class="auth-security-note">
+                <i class="fa-solid fa-shield-halved"></i> 256-Bit Encrypted Secure Session
+            </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePasswordBtn = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('togglePasswordIcon');
+
+            if (togglePasswordBtn && passwordInput && toggleIcon) {
+                togglePasswordBtn.addEventListener('click', function() {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    toggleIcon.classList.toggle('fa-eye');
+                    toggleIcon.classList.toggle('fa-eye-slash');
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>

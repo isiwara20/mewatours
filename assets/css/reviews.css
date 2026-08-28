@@ -275,6 +275,10 @@
     flex-direction: column;
     justify-content: space-between;
     transition: var(--transition);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow: hidden;
 }
 
 .review-card:hover {
@@ -287,12 +291,14 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 12px;
+    gap: 10px;
 }
 
 .traveler-info {
     display: flex;
     align-items: center;
     gap: 12px;
+    min-width: 0;
 }
 
 .avatar-circle {
@@ -307,12 +313,15 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 10px rgba(0, 64, 128, 0.2);
+    flex-shrink: 0;
 }
 
 .traveler-name {
     font-size: 1rem;
     font-weight: 700;
     color: var(--text-primary);
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .traveler-country {
@@ -321,6 +330,7 @@
     display: flex;
     align-items: center;
     gap: 4px;
+    overflow-wrap: break-word;
 }
 
 .verified-badge {
@@ -333,6 +343,7 @@
     padding: 4px 10px;
     border-radius: 20px;
     font-weight: 600;
+    flex-shrink: 0;
 }
 
 .review-card-stars {
@@ -346,8 +357,11 @@
 .review-card-headline {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--brand-blue);
+    color: var(--brand-blue, #004080);
     margin-bottom: 10px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .review-card-text {
@@ -355,10 +369,14 @@
     color: #475569;
     line-height: 1.6;
     margin-bottom: 18px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .tour-tag-pill {
     display: inline-block;
+    max-width: 100%;
     font-size: 0.8rem;
     font-weight: 600;
     background: #f8fafc;
@@ -367,6 +385,8 @@
     border-radius: var(--radius-sm);
     border: 1px solid #e2e8f0;
     margin-bottom: 12px;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .review-photo-thumbnail {
@@ -379,12 +399,14 @@
 
 .admin-response-quote {
     background: #f1f5f9;
-    border-left: 3px solid var(--brand-blue);
+    border-left: 3px solid var(--brand-blue, #004080);
     padding: 12px 16px;
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     font-size: 0.88rem;
     color: #334155;
     margin-top: 10px;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .admin-response-title {

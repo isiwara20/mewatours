@@ -78,8 +78,8 @@ class ReviewBLL
         $photoPath = null;
         if (!empty($files['review_photo']) && $files['review_photo']['error'] === UPLOAD_ERR_OK) {
             $uploadResult = $this->fileUploadService->uploadImage($files['review_photo'], 'reviews');
-            if ($uploadResult['success']) {
-                $photoPath = $uploadResult['filepath'];
+            if (!empty($uploadResult['success'])) {
+                $photoPath = $uploadResult['filepath'] ?? $uploadResult['relative_path'] ?? null;
             }
         }
 

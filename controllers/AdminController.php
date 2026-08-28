@@ -582,7 +582,7 @@ class AdminController
     public function passwordUpdate(): void
     {
         if (!CsrfService::validateToken($_POST['csrf_token'] ?? null)) {
-            set_flash('error', 'Invalid security token.', 'danger');
+            set_flash('password_error_popup', 'Invalid security token session. Please try again.', 'danger');
             redirect('admin/settings');
         }
 
@@ -594,7 +594,11 @@ class AdminController
             $_POST['confirm_password'] ?? ''
         );
 
-        set_flash($result['success'] ? 'success' : 'error', $result['message'], $result['success'] ? 'success' : 'danger');
+        if ($result['success']) {
+            set_flash('password_changed_popup', $result['message'], 'success');
+        } else {
+            set_flash('password_error_popup', $result['message'], 'danger');
+        }
         redirect('admin/settings');
     }
 }
