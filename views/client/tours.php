@@ -60,6 +60,37 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
      ========================================================================= -->
 <section class="section-padding tours-collection-section bg-light" id="toursCollection">
     <div class="container">
+        <!-- Advanced Multi-Filter & Search Bar -->
+        <div class="tours-advanced-filter-bar" style="background: #ffffff; padding: 18px 20px; border-radius: 12px; border: 1px solid var(--border-light); box-shadow: 0 4px 20px rgba(0,0,0,0.04); margin-bottom: 20px;" data-reveal>
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 15px; align-items: center;" class="form-grid-3col">
+                <!-- Search Input -->
+                <div class="filter-control-group" style="position: relative;">
+                    <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #94a3b8;"></i>
+                    <input type="text" id="toursSearchInput" placeholder="Search by destination or city (e.g. Ella, Sigiriya, Safari)..." style="width: 100%; padding: 10px 14px 10px 40px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.9rem; font-family: inherit;">
+                </div>
+
+                <!-- Duration Filter -->
+                <div class="filter-control-group">
+                    <select id="toursDurationSelect" style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.9rem; background: #ffffff; color: #334155; font-weight: 500; font-family: inherit;">
+                        <option value="all">All Trip Durations</option>
+                        <option value="1-3">1 – 3 Days (Short Getaways)</option>
+                        <option value="4-7">4 – 7 Days (Week Journeys)</option>
+                        <option value="8-12">8 – 12 Days (Grand Explorations)</option>
+                        <option value="13+">13+ Days (Ultimate Holidays)</option>
+                    </select>
+                </div>
+
+                <!-- Sort By Dropdown (Default: Ascending Order) -->
+                <div class="filter-control-group">
+                    <select id="toursSortSelect" style="width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.9rem; background: #ffffff; color: #004080; font-weight: 700; font-family: inherit;">
+                        <option value="asc" selected>Sort: Ascending Order (Default)</option>
+                        <option value="duration-asc">Duration: Shortest First (Ascending)</option>
+                        <option value="duration-desc">Duration: Longest First (Descending)</option>
+                        <option value="title-asc">Title: A to Z (Ascending)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
         
         <!-- Category Filter Tabs -->
         <div class="tours-filter-wrapper" data-reveal>
@@ -139,7 +170,14 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
                 <?php foreach ($tours as $tour): 
                     $catCategorySlug = generate_slug($tour['category_name'] ?? 'general');
                 ?>
-                    <article class="tour-collection-card" data-category="<?= e($catCategorySlug) ?>" data-reveal>
+                    <article class="tour-collection-card" 
+                             data-category="<?= e($catCategorySlug) ?>" 
+                             data-days="<?= (int)($tour['duration_days'] ?? 1) ?>" 
+                             data-order="<?= (int)($tour['display_order'] ?? 0) ?>" 
+                             data-id="<?= (int)($tour['id'] ?? 0) ?>" 
+                             data-title="<?= e(strtolower($tour['title'] ?? '')) ?>"
+                             data-search="<?= e(strtolower(($tour['title'] ?? '') . ' ' . ($tour['route'] ?? '') . ' ' . ($tour['locations'] ?? '') . ' ' . ($tour['short_description'] ?? ''))) ?>"
+                             data-reveal>
                         <div class="tour-card-image-wrap">
                             <?php 
                                 $imgSrc = !empty($tour['featured_image']) 

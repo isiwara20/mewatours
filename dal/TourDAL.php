@@ -50,7 +50,7 @@ class TourDAL
             $sql .= " WHERE t.status = 'ACTIVE'";
         }
 
-        $sql .= " ORDER BY t.display_order ASC, t.created_at DESC";
+        $sql .= " ORDER BY t.display_order ASC, t.duration_days ASC, t.id ASC";
 
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
