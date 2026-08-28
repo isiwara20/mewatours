@@ -73,11 +73,7 @@ $formAction = $isEdit ? base_url('admin/tours/edit/' . $tour['id']) : base_url('
                 <small class="form-hint">Categorizes package under public filter tabs (e.g. Heritage &amp; Culture, Wildlife &amp; Nature, Hill Country, Coastal &amp; Beach).</small>
             </div>
 
-            <div class="form-group">
-                <label for="slug" class="form-label">URL Slug</label>
-                <input type="text" id="slug" name="slug" class="form-control" placeholder="e.g. sri-lanka-cultural-beach-escape" value="<?= old('slug', $tour['slug'] ?? '') ?>">
-                <small class="form-hint">Leave blank to automatically generate from title.</small>
-            </div>
+            <input type="hidden" id="slug" name="slug" value="<?= old('slug', $tour['slug'] ?? '') ?>">
 
             <div class="form-group">
                 <label for="display_order" class="form-label">Display Order</label>

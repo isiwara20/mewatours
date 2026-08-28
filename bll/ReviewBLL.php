@@ -112,4 +112,61 @@ class ReviewBLL
             'message' => 'Unable to save your review at this moment. Please try again later.'
         ];
     }
+
+    /**
+     * Get all customer reviews for Admin Portal
+     */
+    public function getAdminReviews(?string $statusFilter = null): array
+    {
+        return $this->reviewDAL->getAdminReviews($statusFilter);
+    }
+
+    /**
+     * Update review status (APPROVED, PENDING, REJECTED)
+     */
+    public function updateStatus(int $id, string $status): array
+    {
+        $updated = $this->reviewDAL->updateStatus($id, $status);
+        return [
+            'success' => $updated,
+            'message' => $updated ? 'Review status updated to ' . strtoupper($status) : 'Failed to update review status.'
+        ];
+    }
+
+    /**
+     * Toggle featured status for homepage/reviews page
+     */
+    public function toggleFeatured(int $id): array
+    {
+        $toggled = $this->reviewDAL->toggleFeatured($id);
+        return [
+            'success' => $toggled,
+            'message' => $toggled ? 'Review featured badge status updated.' : 'Failed to update featured status.'
+        ];
+    }
+
+    /**
+     * Save official administrator reply to customer review
+     */
+    public function saveAdminReply(int $id, string $reply): array
+    {
+        $saved = $this->reviewDAL->saveAdminReply($id, $reply);
+        return [
+            'success' => $saved,
+            'message' => $saved ? 'Official administrator reply saved successfully.' : 'Failed to save admin reply.'
+        ];
+    }
+
+    /**
+     * Delete customer review
+     */
+    public function deleteReview(int $id): array
+    {
+        $deleted = $this->reviewDAL->deleteReview($id);
+        return [
+            'success' => $deleted,
+            'message' => $deleted ? 'Customer review deleted successfully.' : 'Failed to delete review.'
+        ];
+    }
 }
+

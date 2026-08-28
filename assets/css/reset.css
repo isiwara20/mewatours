@@ -11,6 +11,9 @@ html {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
 }
 
 body {
@@ -18,7 +21,10 @@ body {
     color: var(--text-secondary);
     background-color: var(--bg-white);
     line-height: 1.65;
-    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
+    position: relative;
 }
 
 h1, h2, h3, h4, h5, h6 {

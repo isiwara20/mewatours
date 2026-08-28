@@ -3,6 +3,7 @@ Options -Indexes
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    RewriteBase /mewatours/
 
     # Block direct web access to sensitive core directories
     RewriteRule ^(config|database|storage|bll|dal|controllers|services|views)(/|$) - [F,L]
@@ -13,44 +14,63 @@ Options -Indexes
     RewriteRule ^ - [L]
 
     # Admin Tours sub-routes
-    RewriteRule ^admin/tours/create$ admin/tours.php?action=create [L,QSA]
-    RewriteRule ^admin/tours/edit/([0-9]+)$ admin/tours.php?action=edit&id=$1 [L,QSA]
-    RewriteRule ^admin/tours/delete/([0-9]+)$ admin/tours.php?action=delete&id=$1 [L,QSA]
+    RewriteRule ^admin/tours/create/?$ admin/tours.php?action=create [L,QSA]
+    RewriteRule ^admin/tours/edit/([0-9]+)/?$ admin/tours.php?action=edit&id=$1 [L,QSA]
+    RewriteRule ^admin/tours/delete/([0-9]+)/?$ admin/tours.php?action=delete&id=$1 [L,QSA]
 
     # Admin Destinations sub-routes
-    RewriteRule ^admin/destinations/create$ admin/destinations.php?action=create [L,QSA]
-    RewriteRule ^admin/destinations/edit/([0-9]+)$ admin/destinations.php?action=edit&id=$1 [L,QSA]
-    RewriteRule ^admin/destinations/delete/([0-9]+)$ admin/destinations.php?action=delete&id=$1 [L,QSA]
+    RewriteRule ^admin/destinations/create/?$ admin/destinations.php?action=create [L,QSA]
+    RewriteRule ^admin/destinations/edit/([0-9]+)/?$ admin/destinations.php?action=edit&id=$1 [L,QSA]
+    RewriteRule ^admin/destinations/delete/([0-9]+)/?$ admin/destinations.php?action=delete&id=$1 [L,QSA]
 
     # Admin Experiences sub-routes
-    RewriteRule ^admin/experiences/create$ admin/experiences.php?action=create [L,QSA]
-    RewriteRule ^admin/experiences/edit/([0-9]+)$ admin/experiences.php?action=edit&id=$1 [L,QSA]
-    RewriteRule ^admin/experiences/delete/([0-9]+)$ admin/experiences.php?action=delete&id=$1 [L,QSA]
+    RewriteRule ^admin/experiences/create/?$ admin/experiences.php?action=create [L,QSA]
+    RewriteRule ^admin/experiences/edit/([0-9]+)/?$ admin/experiences.php?action=edit&id=$1 [L,QSA]
+    RewriteRule ^admin/experiences/delete/([0-9]+)/?$ admin/experiences.php?action=delete&id=$1 [L,QSA]
 
     # Admin Gallery sub-routes
-    RewriteRule ^admin/gallery/create$ admin/gallery.php?action=create [L,QSA]
-    RewriteRule ^admin/gallery/edit/([0-9]+)$ admin/gallery.php?action=edit&id=$1 [L,QSA]
-    RewriteRule ^admin/gallery/update/([0-9]+)$ admin/gallery.php?action=update&id=$1 [L,QSA]
-    RewriteRule ^admin/gallery/delete/([0-9]+)$ admin/gallery.php?action=delete&id=$1 [L,QSA]
+    RewriteRule ^admin/gallery/create/?$ admin/gallery.php?action=create [L,QSA]
+    RewriteRule ^admin/gallery/edit/([0-9]+)/?$ admin/gallery.php?action=edit&id=$1 [L,QSA]
+    RewriteRule ^admin/gallery/update/([0-9]+)/?$ admin/gallery.php?action=update&id=$1 [L,QSA]
+    RewriteRule ^admin/gallery/delete/([0-9]+)/?$ admin/gallery.php?action=delete&id=$1 [L,QSA]
 
     # Admin Inquiries sub-routes
-    RewriteRule ^admin/inquiries/show/([0-9]+)$ admin/inquiries.php?action=show&id=$1 [L,QSA]
-    RewriteRule ^admin/inquiries/update_status/([0-9]+)$ admin/inquiries.php?action=update_status&id=$1 [L,QSA]
-    RewriteRule ^admin/inquiries/delete/([0-9]+)$ admin/inquiries.php?action=delete&id=$1 [L,QSA]
+    RewriteRule ^admin/inquiries/show/([0-9]+)/?$ admin/inquiries.php?action=show&id=$1 [L,QSA]
+    RewriteRule ^admin/inquiries/update_status/([0-9]+)/?$ admin/inquiries.php?action=update_status&id=$1 [L,QSA]
+    RewriteRule ^admin/inquiries/delete/([0-9]+)/?$ admin/inquiries.php?action=delete&id=$1 [L,QSA]
 
-    # Admin clean URLs mapping (e.g. /admin/dashboard -> /admin/dashboard.php)
-    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.php -f [OR]
-    RewriteCond %{REQUEST_FILENAME}.php -f
-    RewriteRule ^admin/([a-zA-Z0-9_-]+)$ admin/$1.php [L,QSA]
+    # Admin Reviews sub-routes
+    RewriteRule ^admin/reviews/update_status/?$ admin/reviews.php?action=update_status [L,QSA]
+    RewriteRule ^admin/reviews/toggle_featured/?$ admin/reviews.php?action=toggle_featured [L,QSA]
+    RewriteRule ^admin/reviews/reply/?$ admin/reviews.php?action=reply [L,QSA]
+    RewriteRule ^admin/reviews/delete/?$ admin/reviews.php?action=delete [L,QSA]
 
+    # Admin direct section routing
+    RewriteRule ^admin/dashboard/?$ admin/dashboard.php [L,QSA]
+    RewriteRule ^admin/tours/?$ admin/tours.php [L,QSA]
+    RewriteRule ^admin/destinations/?$ admin/destinations.php [L,QSA]
+    RewriteRule ^admin/experiences/?$ admin/experiences.php [L,QSA]
+    RewriteRule ^admin/gallery/?$ admin/gallery.php [L,QSA]
+    RewriteRule ^admin/inquiries/?$ admin/inquiries.php [L,QSA]
+    RewriteRule ^admin/reviews/?$ admin/reviews.php [L,QSA]
+    RewriteRule ^admin/settings/?$ admin/settings.php [L,QSA]
+    RewriteRule ^admin/([a-zA-Z0-9_-]+)/?$ admin/$1.php [L,QSA]
 
-    # Public Tour Details clean URLs (e.g. /tours/heritage-scenic-explorer -> tour-details.php?slug=heritage-scenic-explorer)
-    RewriteRule ^tours/([a-zA-Z0-9_-]+)$ tour-details.php?slug=$1 [L,QSA]
+    # Public Tour Details clean URLs
+    RewriteRule ^tours/([a-zA-Z0-9_-]+)/?$ tour-details.php?slug=$1 [L,QSA]
 
-    # Public clean URLs mapping (e.g. /login -> login.php, /tours -> tours.php)
-    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.php -f [OR]
-    RewriteCond %{REQUEST_FILENAME}.php -f
-    RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L,QSA]
+    # Public clean URLs mapping
+    RewriteRule ^login/?$ login.php [L,QSA]
+    RewriteRule ^logout/?$ logout.php [L,QSA]
+    RewriteRule ^register/?$ register.php [L,QSA]
+    RewriteRule ^tours/?$ tours.php [L,QSA]
+    RewriteRule ^destinations/?$ destinations.php [L,QSA]
+    RewriteRule ^experiences/?$ experiences.php [L,QSA]
+    RewriteRule ^about/?$ about.php [L,QSA]
+    RewriteRule ^gallery/?$ gallery.php [L,QSA]
+    RewriteRule ^reviews/?$ reviews.php [L,QSA]
+    RewriteRule ^contact/?$ contact.php [L,QSA]
+    RewriteRule ^([a-zA-Z0-9_-]+)/?$ $1.php [L,QSA]
 </IfModule>
 
 # Block access to hidden files (.env, .gitignore, .git, etc.)

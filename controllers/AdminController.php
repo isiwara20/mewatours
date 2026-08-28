@@ -11,6 +11,7 @@ class AdminController
     private ExperienceBLL $experienceBLL;
     private GalleryBLL $galleryBLL;
     private InquiryBLL $inquiryBLL;
+    private ReviewBLL $reviewBLL;
     private SettingBLL $settingBLL;
     private AdminAuthBLL $adminAuthBLL;
     private FileUploadService $fileUploadService;
@@ -25,6 +26,7 @@ class AdminController
         $this->experienceBLL = new ExperienceBLL();
         $this->galleryBLL = new GalleryBLL();
         $this->inquiryBLL = new InquiryBLL();
+        $this->reviewBLL = new ReviewBLL();
         $this->settingBLL = new SettingBLL();
         $this->adminAuthBLL = new AdminAuthBLL();
         $this->fileUploadService = new FileUploadService();
@@ -600,5 +602,73 @@ class AdminController
             set_flash('password_error_popup', $result['message'], 'danger');
         }
         redirect('admin/settings');
+    }
+
+    // =========================================================================
+    // CUSTOMER REVIEWS MANAGEMENT
+    // =========================================================================
+
+    public function reviews(): void
+    {
+        $statusFilter = $_GET['status'] ?? null;
+        $reviews = $this->reviewBLL->getAdminReviews($statusFilter);
+        $stats = $this->reviewBLL->getRatingStatistics();
+
+        render_view('admin/reviews/index', [
+            'page_title' => 'Manage Customer Reviews - Admin Portal',
+            'reviews' => $reviews,
+            'stats' => $stats,
+            'currentFilter' => $statusFilter
+        ]);
+    }
+
+    public function reviewsUpdateStatus(int $id): void
+    {
+        if (!CsrfService::validateToken($_POST['csrf_token'] ?? null)) {
+            set_flash('error', 'Invalid security token.', 'danger');
+            redirect('admin/reviews.php');
+        }
+
+        $status = $_POST['status'] ?? 'APPROVED';
+        $result = $this->reviewBLL->updateStatus($id, $status);
+        set_flash($result['success'] ? 'success' : 'error', $result['message'], $result['success'] ? 'success' : 'danger');
+        redirect('admin/reviews.php');
+    }
+
+    public function reviewsToggleFeatured(int $id): void
+    {
+        if (!CsrfService::validateToken($_POST['csrf_token'] ?? null)) {
+            set_flash('error', 'Invalid security token.', 'danger');
+            redirect('admin/reviews.php');
+        }
+
+        $result = $this->reviewBLL->toggleFeatured($id);
+        set_flash($result['success'] ? 'success' : 'error', $result['message'], $result['success'] ? 'success' : 'danger');
+        redirect('admin/reviews.php');
+    }
+
+    public function reviewsReply(int $id): void
+    {
+        if (!CsrfService::validateToken($_POST['csrf_token'] ?? null)) {
+            set_flash('error', 'Invalid security token.', 'danger');
+            redirect('admin/reviews.php');
+        }
+
+        $reply = $_POST['admin_reply'] ?? '';
+        $result = $this->reviewBLL->saveAdminReply($id, $reply);
+        set_flash($result['success'] ? 'success' : 'error', $result['message'], $result['success'] ? 'success' : 'danger');
+        redirect('admin/reviews.php');
+    }
+
+    public function reviewsDelete(int $id): void
+    {
+        if (!CsrfService::validateToken($_POST['csrf_token'] ?? null)) {
+            set_flash('error', 'Invalid security token.', 'danger');
+            redirect('admin/reviews.php');
+        }
+
+        $result = $this->reviewBLL->deleteReview($id);
+        set_flash($result['success'] ? 'success' : 'error', $result['message'], $result['success'] ? 'success' : 'danger');
+        redirect('admin/reviews.php');
     }
 }

@@ -1,6 +1,6 @@
 <?php render_partial('admin-header', ['page_title' => 'Manage Experiences - Admin Portal']); ?>
 
-<div class="admin-page-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+<div class="admin-page-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px;">
     <div>
         <h2 style="color: #0f172a; margin: 0;"><i class="fa-solid fa-compass" style="color: #8b5cf6;"></i> Experiences Management</h2>
         <p class="text-muted" style="margin: 5px 0 0 0;">Manage travel activities, safari encounters, and Sri Lankan heritage experiences.</p>
@@ -20,8 +20,8 @@
             <a href="<?= base_url('admin/experiences/create') ?>" style="color: #8b5cf6; font-weight: 600;">Add your first experience &rarr;</a>
         </div>
     <?php else: ?>
-        <div style="overflow-x: auto;">
-            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+        <div class="table-responsive" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+            <table class="admin-data-table" style="width: 100%; border-collapse: collapse; text-align: left; min-width: 650px;">
                 <thead>
                     <tr style="border-bottom: 2px solid #e2e8f0; color: #64748b; font-size: 0.85rem; text-transform: uppercase;">
                         <th style="padding: 12px 10px; width: 60px;">ID</th>
@@ -51,13 +51,13 @@
                                 <span style="font-size: 0.8rem; color: #64748b;"><?= e(truncate_text($exp['short_description'] ?? '', 60)) ?></span>
                             </td>
                             <td style="padding: 12px 10px;">
-                                <span style="padding: 3px 8px; background: #f3e8ff; color: #6b21a8; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">
+                                <span style="padding: 3px 8px; background: #f3e8ff; color: #6b21a8; border-radius: 12px; font-size: 0.75rem; font-weight: 600; white-space: nowrap;">
                                     <?= e($exp['category_name'] ?? 'General') ?>
                                 </span>
                             </td>
                             <td style="padding: 12px 10px;">
                                 <?php if (!empty($exp['is_featured'])): ?>
-                                    <span style="padding: 3px 8px; background: #fef3c7; color: #92400e; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">★ Featured</span>
+                                    <span style="padding: 3px 8px; background: #fef3c7; color: #92400e; border-radius: 12px; font-size: 0.75rem; font-weight: 700; white-space: nowrap;">★ Featured</span>
                                 <?php else: ?>
                                     <span style="color: #94a3b8; font-size: 0.8rem;">Standard</span>
                                 <?php endif; ?>
@@ -71,12 +71,12 @@
                             </td>
                             <td style="padding: 12px 10px; text-align: right;">
                                 <div style="display: flex; justify-content: flex-end; gap: 8px;">
-                                    <a href="<?= base_url('admin/experiences/edit/' . $exp['id']) ?>" style="padding: 6px 12px; background: #8b5cf6; color: white; text-decoration: none; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">
+                                    <a href="<?= base_url('admin/experiences/edit/' . $exp['id']) ?>" style="padding: 6px 12px; background: #8b5cf6; color: white; text-decoration: none; border-radius: 4px; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
                                         <i class="fa-solid fa-pen-to-square"></i> Edit
                                     </a>
                                     <form method="POST" action="<?= base_url('admin/experiences/delete/' . $exp['id']) ?>" onsubmit="return confirm('Are you sure you want to delete this experience?');" style="margin: 0; display: inline;">
                                         <input type="hidden" name="csrf_token" value="<?= CsrfService::generateToken() ?>">
-                                        <button type="submit" style="padding: 6px 12px; background: #ef4444; color: white; border: none; border-radius: 4px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">
+                                        <button type="submit" style="padding: 6px 12px; background: #ef4444; color: white; border: none; border-radius: 4px; font-size: 0.8rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
                                             <i class="fa-solid fa-trash"></i> Delete
                                         </button>
                                     </form>

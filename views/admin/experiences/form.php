@@ -13,14 +13,14 @@ render_partial('admin-header', ['page_title' => $pageTitle]);
     <h2 style="color: #0f172a; margin: 0;"><i class="fa-solid fa-compass" style="color: #8b5cf6;"></i> <?= e($pageTitle) ?></h2>
 </div>
 
-<div style="background: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); max-width: 900px;">
+<div class="settings-card" style="max-width: 900px;">
     <form method="POST" action="<?= $formUrl ?>" enctype="multipart/form-data">
         <input type="hidden" name="csrf_token" value="<?= CsrfService::generateToken() ?>">
         <?php if ($isEdit): ?>
             <input type="hidden" name="id" value="<?= $experience['id'] ?>">
         <?php endif; ?>
 
-        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 20px;">
+        <div class="form-grid-2col">
             <div>
                 <label style="display: block; font-weight: 600; color: #1e293b; margin-bottom: 6px;">Experience Name / Title <span style="color: #ef4444;">*</span></label>
                 <input type="text" name="name" required value="<?= e($experience['name'] ?? old('name')) ?>" placeholder="e.g. Walk Among Giants, Ride Through Hill Country" class="form-control" style="width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem;">
@@ -62,15 +62,15 @@ render_partial('admin-header', ['page_title' => $pageTitle]);
                         ? $experience['featured_image'] 
                         : asset_url('images/' . e(ltrim($experience['featured_image'], '/'))); 
                 ?>
-                <div style="margin-bottom: 10px; display: flex; align-items: center; gap: 15px;">
+                <div style="margin-bottom: 10px; display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
                     <img src="<?= $imgSrc ?>" alt="Current Image" style="width: 100px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1;">
-                    <span style="font-size: 0.85rem; color: #64748b;">Current Image Path: <code><?= e($experience['featured_image']) ?></code></span>
+                    <span style="font-size: 0.85rem; color: #64748b; word-break: break-all;">Current Image Path: <code><?= e($experience['featured_image']) ?></code></span>
                 </div>
             <?php endif; ?>
             <input type="file" name="featured_image" accept="image/*" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+        <div class="form-grid-3col">
             <div>
                 <label style="display: block; font-weight: 600; color: #1e293b; margin-bottom: 6px;">Status</label>
                 <select name="status" class="form-control" style="width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem;">
@@ -84,7 +84,7 @@ render_partial('admin-header', ['page_title' => $pageTitle]);
                 <input type="number" name="display_order" value="<?= (int)($experience['display_order'] ?? 0) ?>" class="form-control" style="width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem;">
             </div>
 
-            <div style="display: flex; align-items: center; margin-top: 25px;">
+            <div style="display: flex; align-items: center; padding-top: 10px;">
                 <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600; color: #1e293b;">
                     <input type="checkbox" name="is_featured" value="1" <?= !empty($experience['is_featured']) ? 'checked' : '' ?> style="width: 18px; height: 18px; accent-color: #8b5cf6;">
                     Mark as Featured Experience
@@ -92,11 +92,11 @@ render_partial('admin-header', ['page_title' => $pageTitle]);
             </div>
         </div>
 
-        <div style="display: flex; gap: 12px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
-            <button type="submit" class="btn btn-primary" style="padding: 12px 25px; background: #8b5cf6; color: white; border: none; border-radius: 6px; font-weight: 600; font-size: 0.95rem; cursor: pointer;">
+        <div class="form-actions-bar" style="display: flex; gap: 12px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+            <button type="submit" class="btn btn-primary btn-admin-primary" style="padding: 12px 25px; background: #8b5cf6; color: white; border: none; border-radius: 6px; font-weight: 600; font-size: 0.95rem; cursor: pointer;">
                 <?= $isEdit ? 'Save Changes' : 'Create Experience' ?>
             </button>
-            <a href="<?= base_url('admin/experiences') ?>" style="padding: 12px 25px; background: #e2e8f0; color: #334155; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 0.95rem;">
+            <a href="<?= base_url('admin/experiences') ?>" class="btn btn-secondary btn-admin-secondary" style="padding: 12px 25px; background: #e2e8f0; color: #334155; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 0.95rem; display: inline-flex; align-items: center; justify-content: center;">
                 Cancel
             </a>
         </div>

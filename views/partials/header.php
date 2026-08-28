@@ -6,15 +6,16 @@ $pageTitle = $page_title ?? 'Mewa Tours - Authentic Sri Lankan Travel & Tour Pac
 
 // Accurate route calculation relative to base_url
 $reqPath = strtolower(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH));
+$cleanPath = trim(preg_replace('#^/mewatours#i', '', $reqPath), '/');
 
-$isHome = ($reqPath === '/' || str_ends_with($reqPath, '/index.php') || str_ends_with($reqPath, '/mewatours/'));
-$isTours = (strpos($reqPath, 'tour-details') !== false || strpos($reqPath, 'tours') !== false);
-$isDestinations = (strpos($reqPath, 'destination-details') !== false || strpos($reqPath, 'destinations') !== false);
-$isExperiences = (strpos($reqPath, 'experience-details') !== false || strpos($reqPath, 'experiences') !== false);
-$isAbout = (strpos($reqPath, 'about') !== false);
-$isGallery = (strpos($reqPath, 'gallery') !== false);
-$isReviews = (strpos($reqPath, 'reviews') !== false);
-$isContact = (strpos($reqPath, 'contact') !== false);
+$isHome = ($cleanPath === '' || $cleanPath === 'index.php');
+$isTours = (str_starts_with($cleanPath, 'tours') || str_starts_with($cleanPath, 'tour-details'));
+$isDestinations = (str_starts_with($cleanPath, 'destinations') || str_starts_with($cleanPath, 'destination-details'));
+$isExperiences = (str_starts_with($cleanPath, 'experiences') || str_starts_with($cleanPath, 'experience-details'));
+$isAbout = (str_starts_with($cleanPath, 'about'));
+$isGallery = (str_starts_with($cleanPath, 'gallery'));
+$isReviews = (str_starts_with($cleanPath, 'reviews'));
+$isContact = (str_starts_with($cleanPath, 'contact'));
 ?>
 <!DOCTYPE html>
 <html lang="en">

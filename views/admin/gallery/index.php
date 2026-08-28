@@ -6,13 +6,13 @@
 </div>
 
 <!-- Upload New Photo Card -->
-<div style="background: #ffffff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 30px;">
+<div class="gallery-upload-card">
     <h3 style="margin: 0 0 15px 0; color: #1e293b; font-size: 1.1rem;"><i class="fa-solid fa-cloud-arrow-up" style="color: #f59e0b;"></i> Upload New Gallery Photo</h3>
     
     <form method="POST" action="<?= base_url('admin/gallery?action=store') ?>" enctype="multipart/form-data">
         <input type="hidden" name="csrf_token" value="<?= CsrfService::generateToken() ?>">
 
-        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 20px; margin-bottom: 15px;">
+        <div class="gallery-form-grid-3col">
             <div>
                 <label style="display: block; font-weight: 600; color: #1e293b; margin-bottom: 6px;">Photo Title / Caption</label>
                 <input type="text" name="title" placeholder="e.g. Guided Wild Elephant Safari in Yala" class="form-control" style="width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem;">
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+        <div class="gallery-form-grid-2col">
             <div>
                 <label style="display: block; font-weight: 600; color: #1e293b; margin-bottom: 6px;">Upload Image File</label>
                 <input type="file" name="gallery_image" accept="image/*" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="padding: 10px 22px; background: #f59e0b; color: white; border: none; border-radius: 6px; font-weight: 600; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+        <button type="submit" class="btn btn-primary btn-submit-gallery" style="padding: 10px 22px; background: #f59e0b; color: white; border: none; border-radius: 6px; font-weight: 600; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
             <i class="fa-solid fa-plus"></i> Add Photo to Gallery
         </button>
     </form>
@@ -61,7 +61,7 @@
     <?php if (empty($gallery_items)): ?>
         <p class="text-muted" style="text-align: center; padding: 30px;">No photo gallery items uploaded yet.</p>
     <?php else: ?>
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
+        <div class="gallery-items-grid">
             <?php foreach ($gallery_items as $item): ?>
                 <?php 
                     $imgSrc = (strpos($item['image'], 'http') === 0) 
@@ -119,21 +119,21 @@
 <!-- =========================================================================
      EDIT GALLERY PHOTO MODAL
      ========================================================================= -->
-<div id="editGalleryModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 9999; justify-content: center; align-items: center; padding: 20px;">
-    <div style="background: #ffffff; width: 100%; max-width: 600px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); overflow: hidden;">
+<div id="editGalleryModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(4px); z-index: 9999; justify-content: center; align-items: center; padding: 15px;">
+    <div class="modal-content-card">
         
-        <div style="background: #0f172a; color: white; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center;">
+        <div style="background: #0f172a; color: white; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10;">
             <h3 style="margin: 0; font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
                 <i class="fa-solid fa-pen-to-square" style="color: #f59e0b;"></i> Update Gallery Photo
             </h3>
             <button type="button" id="closeEditModalBtn" style="background: transparent; border: none; color: #94a3b8; font-size: 1.4rem; cursor: pointer; line-height: 1;">&times;</button>
         </div>
 
-        <form method="POST" action="<?= base_url('admin/gallery?action=update') ?>" enctype="multipart/form-data" style="padding: 24px;">
+        <form method="POST" action="<?= base_url('admin/gallery?action=update') ?>" enctype="multipart/form-data" style="padding: 20px;">
             <input type="hidden" name="csrf_token" value="<?= CsrfService::generateToken() ?>">
             <input type="hidden" name="id" id="edit_photo_id" value="">
 
-            <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px; background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0;">
+            <div class="modal-preview-box" style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px; background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0;">
                 <img id="edit_img_preview" src="" alt="Current Image" style="width: 80px; height: 55px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1;">
                 <div>
                     <span style="font-size: 0.8rem; color: #64748b; display: block;">Current Image Path:</span>
@@ -146,7 +146,7 @@
                 <input type="text" name="title" id="edit_title" required class="form-control" style="width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem;">
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+            <div class="gallery-form-grid-2col">
                 <div>
                     <label style="display: block; font-weight: 600; color: #1e293b; margin-bottom: 6px;">Category Tag</label>
                     <select name="category" id="edit_category" class="form-control" style="width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem;">
@@ -176,7 +176,7 @@
                 <input type="text" name="image_url" id="edit_image_url" placeholder="e.g. Gallery/WhatsApp Image 2026-08-18 at 09.19.55.jpeg" class="form-control" style="width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem;">
             </div>
 
-            <div style="display: flex; justify-content: flex-end; gap: 12px; border-top: 1px solid #e2e8f0; padding-top: 16px;">
+            <div class="modal-form-actions" style="display: flex; justify-content: flex-end; gap: 12px; border-top: 1px solid #e2e8f0; padding-top: 16px;">
                 <button type="button" id="cancelEditModalBtn" style="padding: 10px 20px; background: #e2e8f0; color: #334155; border: none; border-radius: 6px; font-weight: 600; font-size: 0.9rem; cursor: pointer;">
                     Cancel
                 </button>

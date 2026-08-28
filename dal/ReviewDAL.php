@@ -158,4 +158,72 @@ class ReviewDAL
             ':is_featured' => !empty($data['is_featured']) ? 1 : 0
         ]);
     }
+
+    /**
+     * Get all reviews for admin portal (with optional status filter)
+     */
+    public function getAdminReviews(?string $statusFilter = null): array
+    {
+        $sql = "SELECT r.*, t.title as tour_title 
+                FROM `reviews` r 
+                LEFT JOIN `tours` t ON r.tour_id = t.id";
+        
+        $params = [];
+        if (!empty($statusFilter) && in_array(strtoupper($statusFilter), ['APPROVED', 'PENDING', 'REJECTED'])) {
+            $sql .= " WHERE r.status = :status";
+            $params[':status'] = strtoupper($statusFilter);
+        } elseif (strtoupper($statusFilter ?? '') === 'FEATURED') {
+            $sql .= " WHERE r.is_featured = 1";
+        }
+
+        $sql .= " ORDER BY r.created_at DESC";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
+    /**
+     * Update review status (APPROVED, PENDING, REJECTED)
+     */
+    public function updateStatus(int $id, string $status): bool
+    {
+        $validStatuses = ['APPROVED', 'PENDING', 'REJECTED'];
+        $cleanStatus = strtoupper($status);
+
+        if (!in_array($cleanStatus, $validStatuses, true)) {
+            return false;
+        }
+
+        $stmt = $this->db->prepare("UPDATE `reviews` SET `status` = :status, `updated_at` = NOW() WHERE `id` = :id");
+        return $stmt->execute([':status' => $cleanStatus, ':id' => $id]);
+    }
+
+    /**
+     * Toggle featured status for a review
+     */
+    public function toggleFeatured(int $id): bool
+    {
+        $stmt = $this->db->prepare("UPDATE `reviews` SET `is_featured` = NOT `is_featured`, `updated_at` = NOW() WHERE `id` = :id");
+        return $stmt->execute([':id' => $id]);
+    }
+
+    /**
+     * Save administrator response reply to a customer review
+     */
+    public function saveAdminReply(int $id, string $reply): bool
+    {
+        $stmt = $this->db->prepare("UPDATE `reviews` SET `admin_reply` = :reply, `updated_at` = NOW() WHERE `id` = :id");
+        return $stmt->execute([':reply' => trim($reply), ':id' => $id]);
+    }
+
+    /**
+     * Delete customer review record
+     */
+    public function deleteReview(int $id): bool
+    {
+        $stmt = $this->db->prepare("DELETE FROM `reviews` WHERE `id` = :id");
+        return $stmt->execute([':id' => $id]);
+    }
 }
+
