@@ -15,6 +15,7 @@ $stats = $statistics ?? [
 ];
 $totalCount = max(1, (int)$stats['total_reviews']);
 ?>
+
 <link rel="stylesheet" href="<?= asset_url('css/reviews.css') ?>">
 
 <!-- Reviews Hero Banner -->

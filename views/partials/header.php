@@ -5,17 +5,16 @@
 $pageTitle = $page_title ?? 'Mewa Tours - Authentic Sri Lankan Travel & Tour Packages';
 
 // Accurate route calculation relative to base_url
-$reqPath = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
-$basePath = parse_url(base_url(), PHP_URL_PATH);
-$routePath = '/' . trim(substr($reqPath, strlen($basePath)), '/');
+$reqPath = strtolower(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH));
 
-$isHome = ($routePath === '/' || $routePath === '' || $routePath === '/index.php');
-$isTours = (strpos($routePath, '/tours') === 0 || $routePath === '/tours.php');
-$isDestinations = (strpos($routePath, '/destinations') === 0 || $routePath === '/destinations.php');
-$isExperiences = (strpos($routePath, '/experiences') === 0 || $routePath === '/experiences.php');
-$isAbout = ($routePath === '/about' || $routePath === '/about.php');
-$isGallery = ($routePath === '/gallery' || $routePath === '/gallery.php');
-$isContact = ($routePath === '/contact' || $routePath === '/contact.php');
+$isHome = ($reqPath === '/' || str_ends_with($reqPath, '/index.php') || str_ends_with($reqPath, '/mewatours/'));
+$isTours = (strpos($reqPath, 'tour-details') !== false || strpos($reqPath, 'tours') !== false);
+$isDestinations = (strpos($reqPath, 'destination-details') !== false || strpos($reqPath, 'destinations') !== false);
+$isExperiences = (strpos($reqPath, 'experience-details') !== false || strpos($reqPath, 'experiences') !== false);
+$isAbout = (strpos($reqPath, 'about') !== false);
+$isGallery = (strpos($reqPath, 'gallery') !== false);
+$isReviews = (strpos($reqPath, 'reviews') !== false);
+$isContact = (strpos($reqPath, 'contact') !== false);
 ?>
 <!DOCTYPE html>
 <html lang="en">
