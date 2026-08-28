@@ -143,13 +143,36 @@
     width: 100%;
     height: 100%;
     z-index: 1;
+    overflow: hidden;
 }
 
-.hero-bg-img {
+.hero-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 1.2s ease-in-out;
+}
+
+.hero-bg-video.ended {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hero-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
     transform: scale(1.03);
     transition: transform 10s ease-out;
 }
@@ -165,7 +188,7 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(180deg, rgba(14, 27, 61, 0.45) 0%, rgba(14, 27, 61, 0.65) 60%, rgba(14, 27, 61, 0.85) 100%);
-    z-index: 2;
+    z-index: 3;
 }
 
 .hero-container {

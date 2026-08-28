@@ -11,8 +11,15 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
      02. HERO SECTION — DAYTIME TEMPLE OF THE SACRED TOOTH RELIC (KANDY)
      ========================================================================= -->
 <section class="hero-section" id="heroSection">
-    <div class="hero-bg-container">
-        <img src="<?= asset_url('images/home/hero-dalada-maligawa.jpg') ?>" alt="Temple of the Sacred Tooth Relic Sri Dalada Maligawa Kandy Sri Lanka" class="hero-bg-img">
+    <div class="hero-bg-container" id="heroBgContainer">
+        <!-- Landing Video (Plays once on page load, then smoothly transitions to current background photo) -->
+        <video id="heroLandingVideo" class="hero-bg-video" autoplay muted playsinline preload="auto">
+            <source src="<?= base_url('assets/video/Landing%20Videos.mp4') ?>" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+
+        <!-- Current Background Photo -->
+        <img src="<?= asset_url('images/home/hero-dalada-maligawa.jpg') ?>" alt="Temple of the Sacred Tooth Relic Sri Dalada Maligawa Kandy Sri Lanka" class="hero-bg-img" id="heroBgImg">
         <div class="hero-overlay"></div>
     </div>
 
@@ -546,5 +553,40 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
         </div>
     </div>
 </section>
+
+<!-- Single-Play Landing Video Transition Script -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('heroLandingVideo');
+    if (!video) return;
+
+    // Ensure video plays exactly ONE time
+    video.loop = false;
+
+    const transitionToImage = () => {
+        if (!video.classList.contains('ended')) {
+            video.classList.add('ended');
+            setTimeout(() => {
+                video.style.display = 'none';
+            }, 1200);
+        }
+    };
+
+    // When video completes playing once:
+    video.addEventListener('ended', transitionToImage);
+
+    // Fallback if video fails to play or load
+    video.addEventListener('error', transitionToImage);
+
+    // Autoplay execution
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+        playPromise.catch(() => {
+            // If browser autoplay policy blocks video, transition to background photo smoothly
+            transitionToImage();
+        });
+    }
+});
+</script>
 
 <?php render_partial('footer'); ?>
