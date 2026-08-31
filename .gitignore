@@ -6,20 +6,6 @@ config/*.local.php
 .env.*
 *.env
 
-# Ignore Database & Config Files
-config/*.php
-config/
-database/*.sql
-database/*.php
-database/
-
-# Storage logs and temp files
-storage/logs/*.log
-storage/temp/*
-!storage/logs/.gitkeep
-!storage/temp/.gitkeep
-!storage/uploads/.gitkeep
-
 # System & IDE files
 .DS_Store
 Thumbs.db

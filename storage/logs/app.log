@@ -1,0 +1,21 @@
+[2026-08-23 16:06:02] [INFO]: Admin login successful {"admin_id":1,"email":"admin@mewatours.com"}
+[2026-08-23 16:07:26] [INFO]: Admin login successful {"admin_id":1,"email":"admin@mewatours.com"}
+[2026-08-23 21:32:54] [INFO]: Admin login successful {"admin_id":1,"email":"admin@mewatours.com"}
+[2026-08-23 21:34:55] [INFO]: File uploaded successfully {"filename":"20260823_213455_95cfdb1913fddcad.png","subfolder":"tours"}
+[2026-08-23 21:36:00] [INFO]: File uploaded successfully {"filename":"20260823_213600_a99607ec36ed3fdd.png","subfolder":"tours"}
+[2026-08-23 21:49:34] [INFO]: File uploaded successfully {"filename":"20260823_214934_a25eb0de012c4244.png","subfolder":"destinations"}
+[2026-08-23 21:58:19] [INFO]: File uploaded successfully {"filename":"20260823_215819_4a46aa5d3b2187c3.png","subfolder":"gallery"}
+[2026-08-23 22:01:18] [INFO]: File uploaded successfully {"filename":"20260823_220118_8a28c5966b72bfbb.jpg","subfolder":"gallery"}
+[2026-08-23 22:18:55] [INFO]: Admin logged out {"admin_id":1}
+[2026-08-23 22:32:44] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
+[2026-08-23 22:33:06] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
+[2026-08-23 22:34:23] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
+[2026-08-23 22:34:51] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
+[2026-08-25 15:10:54] [WARNING]: Admin login failed: invalid password {"email":"mewatours83@gmail.com"}
+[2026-08-25 15:10:58] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
+[2026-08-28 11:56:55] [INFO]: File uploaded successfully {"filename":"20260828_115655_de777b8fa5918897.png","subfolder":"reviews"}
+[2026-08-28 12:02:54] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
+[2026-08-28 12:05:14] [INFO]: Admin logged out {"admin_id":1}
+[2026-08-28 12:05:39] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
+[2026-08-28 12:08:17] [INFO]: Admin logged out {"admin_id":1}
+[2026-08-28 12:08:35] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
