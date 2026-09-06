@@ -13,6 +13,7 @@ class AdminController
     private InquiryBLL $inquiryBLL;
     private ReviewBLL $reviewBLL;
     private SettingBLL $settingBLL;
+    private AboutBLL $aboutBLL;
     private AdminAuthBLL $adminAuthBLL;
     private FileUploadService $fileUploadService;
 
@@ -28,6 +29,7 @@ class AdminController
         $this->inquiryBLL = new InquiryBLL();
         $this->reviewBLL = new ReviewBLL();
         $this->settingBLL = new SettingBLL();
+        $this->aboutBLL = new AboutBLL();
         $this->adminAuthBLL = new AdminAuthBLL();
         $this->fileUploadService = new FileUploadService();
     }
@@ -670,5 +672,31 @@ class AdminController
         $result = $this->reviewBLL->deleteReview($id);
         set_flash($result['success'] ? 'success' : 'error', $result['message'], $result['success'] ? 'success' : 'danger');
         redirect('admin/reviews.php');
+    }
+
+    // =========================================================================
+    // ABOUT US PAGE MANAGEMENT
+    // =========================================================================
+
+    public function about(): void
+    {
+        $aboutData = $this->aboutBLL->getAboutData();
+
+        render_view('admin/about/index', [
+            'page_title' => 'Edit About Us Page - Admin Portal',
+            'about' => $aboutData
+        ]);
+    }
+
+    public function aboutUpdate(): void
+    {
+        if (!CsrfService::validateToken($_POST['csrf_token'] ?? null)) {
+            set_flash('error', 'Invalid security token. Please try submitting again.', 'danger');
+            redirect('admin/about');
+        }
+
+        $result = $this->aboutBLL->updateAboutData($_POST, $_FILES);
+        set_flash($result['success'] ? 'success' : 'error', $result['message'], $result['success'] ? 'success' : 'danger');
+        redirect('admin/about');
     }
 }

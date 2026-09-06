@@ -53,6 +53,7 @@ Options -Indexes
     RewriteRule ^admin/gallery/?$ admin/gallery.php [L,QSA]
     RewriteRule ^admin/inquiries/?$ admin/inquiries.php [L,QSA]
     RewriteRule ^admin/reviews/?$ admin/reviews.php [L,QSA]
+    RewriteRule ^admin/about/?$ admin/about.php [L,QSA]
     RewriteRule ^admin/settings/?$ admin/settings.php [L,QSA]
     RewriteRule ^admin/([a-zA-Z0-9_-]+)/?$ admin/$1.php [L,QSA]
 

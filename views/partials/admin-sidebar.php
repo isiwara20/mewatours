@@ -12,6 +12,7 @@ $isExperiences = (bool)preg_match('#/admin/experiences#i', $path);
 $isGallery = (bool)preg_match('#/admin/gallery#i', $path);
 $isInquiries = (bool)preg_match('#/admin/inquiries#i', $path);
 $isReviews = (bool)preg_match('#/admin/reviews#i', $path);
+$isAbout = (bool)preg_match('#/admin/about#i', $path);
 $isSettings = (bool)preg_match('#/admin/settings#i', $path);
 ?>
 <aside class="admin-sidebar" id="adminSidebar">
@@ -56,6 +57,11 @@ $isSettings = (bool)preg_match('#/admin/settings#i', $path);
             <li>
                 <a href="<?= base_url('admin/reviews.php') ?>" class="<?= $isReviews ? 'active' : '' ?>">
                     <i class="fa-solid fa-star"></i> Customer Reviews
+                </a>
+            </li>
+            <li>
+                <a href="<?= base_url('admin/about') ?>" class="<?= $isAbout ? 'active' : '' ?>">
+                    <i class="fa-solid fa-circle-info"></i> About Us Page
                 </a>
             </li>
             <li>
