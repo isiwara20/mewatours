@@ -143,6 +143,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initial Execution on Page Load
+    // =========================================================================
+    // Auto-select category from URL query param (?category=slug)
+    // Used when navigating from the navbar Tours dropdown category links
+    // =========================================================================
+    const urlParams     = new URLSearchParams(window.location.search);
+    const categoryParam = urlParams.get('category');
+
+    if (categoryParam && categoryParam !== 'all') {
+        // Find matching tab by data-filter attribute
+        const matchingTab = Array.from(filterTabs).find(tab => {
+            const slug = tab.getAttribute('data-filter') || '';
+            return slug === categoryParam ||
+                   // Handle legacy alias: heritage-cultural vs heritage-culture
+                   (categoryParam === 'heritage-culture' && slug === 'heritage-cultural') ||
+                   (categoryParam === 'heritage-cultural' && slug === 'heritage-culture');
+        });
+
+        if (matchingTab) {
+            // Deactivate all, activate matching
+            filterTabs.forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            matchingTab.classList.add('active');
+            matchingTab.setAttribute('aria-selected', 'true');
+            activeCategory = matchingTab.getAttribute('data-filter') || 'all';
+
+            // Smooth scroll to the tours collection section
+            const toursSection = document.getElementById('toursCollection');
+            if (toursSection) {
+                setTimeout(() => {
+                    toursSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 150);
+            }
+        }
+    }
+
+    // Initial Execution on Page Load (always runs; URL param may override activeCategory above)
     applyFiltersAndSort();
 });
+
+

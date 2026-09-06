@@ -122,6 +122,234 @@
 }
 
 /* -------------------------------------------------------------------------
+   01b. TOURS NAV DROPDOWN (Desktop Hover + Mobile Accordion)
+   ------------------------------------------------------------------------- */
+
+/* --- Trigger button — inherit nav-link look exactly --- */
+.nav-tours-trigger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 6px 0;
+    position: relative;
+    transition: var(--transition);
+}
+
+/* Underline pseudo-element mirroring .nav-link::after */
+.nav-tours-trigger::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--brand-blue);
+    transition: var(--transition);
+}
+
+.nav-tours-trigger:hover,
+.nav-tours-trigger[aria-expanded="true"],
+.nav-item-dropdown.tours-active .nav-tours-trigger {
+    color: var(--brand-blue);
+}
+
+.nav-tours-trigger:hover::after,
+.nav-tours-trigger[aria-expanded="true"]::after,
+.nav-item-dropdown.tours-active .nav-tours-trigger::after {
+    width: 100%;
+}
+
+/* Chevron rotate when open */
+.tours-chevron {
+    font-size: 0.72rem;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: 1px;
+}
+
+.nav-tours-trigger[aria-expanded="true"] .tours-chevron {
+    transform: rotate(-180deg);
+}
+
+/* --- Dropdown container --- */
+.nav-item-dropdown {
+    position: relative;
+}
+
+.tours-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    min-width: 230px;
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    box-shadow: 0 20px 50px rgba(14, 27, 61, 0.14), 0 4px 16px rgba(14, 27, 61, 0.06);
+    border: 1px solid var(--border-light);
+    z-index: 1100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Small upward-pointing arrow tip */
+.tours-dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: #ffffff;
+    border-top: 1px solid var(--border-light);
+    border-left: 1px solid var(--border-light);
+    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+}
+
+/* Open state */
+.tours-dropdown-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.tours-dropdown-inner {
+    padding: 8px 6px;
+}
+
+/* Divider line between "All Tours" and categories */
+.tours-dropdown-divider {
+    height: 1px;
+    background: var(--border-light);
+    margin: 6px 8px;
+}
+
+/* Each dropdown link */
+.tours-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease;
+    white-space: nowrap;
+}
+
+.tours-dropdown-item i {
+    width: 16px;
+    text-align: center;
+    color: var(--brand-blue);
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.tours-dropdown-item:hover,
+.tours-dropdown-item:focus {
+    background: var(--brand-blue-soft);
+    color: var(--brand-blue);
+    outline: none;
+}
+
+.tours-dropdown-all {
+    font-weight: 700;
+    color: var(--brand-blue);
+}
+
+.tours-dropdown-all:hover {
+    background: var(--brand-blue-soft);
+}
+
+/* --- Mobile Drawer — Tours submenu accordion --- */
+.drawer-tours-item {
+    border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.drawer-tours-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 14px 0;
+    text-decoration: none;
+}
+
+.drawer-tours-trigger:hover,
+.drawer-tours-trigger[aria-expanded="true"] {
+    color: var(--brand-blue);
+}
+
+.drawer-tours-chevron {
+    font-size: 0.8rem;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.drawer-tours-trigger[aria-expanded="true"] .drawer-tours-chevron {
+    transform: rotate(-180deg);
+}
+
+/* Submenu list — collapsed by default */
+.drawer-tours-submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 6px 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.drawer-tours-submenu.open {
+    max-height: 400px;
+}
+
+.drawer-sub-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease;
+    margin-bottom: 2px;
+}
+
+.drawer-sub-link i {
+    width: 16px;
+    text-align: center;
+    color: var(--brand-blue);
+    font-size: 0.82rem;
+    flex-shrink: 0;
+}
+
+.drawer-sub-link:hover,
+.drawer-sub-link:focus {
+    background: var(--brand-blue-soft);
+    color: var(--brand-blue);
+    outline: none;
+}
+
+/* -------------------------------------------------------------------------
    02. HERO SECTION — DAYTIME TEMPLE OF THE TOOTH
    ------------------------------------------------------------------------- */
 .hero-section {
@@ -365,11 +593,11 @@
 .btn-hero-primary {
     background-color: var(--brand-blue);
     color: #ffffff !important;
-    padding: 16px 36px;
+    padding: 11px 26px;
     border-radius: var(--radius-sm);
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.4);
+    box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
     transition: var(--transition);
 }
 
@@ -383,9 +611,9 @@
     background: rgba(255, 255, 255, 0.95);
     color: var(--brand-blue) !important;
     border: 1px solid #ffffff;
-    padding: 16px 32px;
+    padding: 11px 22px;
     border-radius: var(--radius-sm);
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 700;
     transition: var(--transition);
 }
