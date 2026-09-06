@@ -187,20 +187,138 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(180deg, rgba(14, 27, 61, 0.45) 0%, rgba(14, 27, 61, 0.65) 60%, rgba(14, 27, 61, 0.85) 100%);
+    /* Start nearly transparent so the video shines through clearly */
+    background: linear-gradient(180deg, rgba(14, 27, 61, 0.10) 0%, rgba(14, 27, 61, 0.18) 60%, rgba(14, 27, 61, 0.28) 100%);
     z-index: 3;
+    transition: background 1.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Cinematic darkening — engaged near end of video by JS */
+.hero-overlay.hero-overlay-darkened {
+    background: linear-gradient(180deg, rgba(14, 27, 61, 0.45) 0%, rgba(14, 27, 61, 0.65) 60%, rgba(14, 27, 61, 0.85) 100%);
+}
+
 
 .hero-container {
     position: relative;
-    z-index: 3;
+    z-index: 4; /* Above overlay (z-index: 3) */
     color: var(--text-light);
 }
+
 
 .hero-content {
     max-width: 820px;
 }
 
+/* =========================================================================
+   CINEMATIC HERO REVEAL SYSTEM
+   - All hero child elements start invisible (opacity: 0, translated down)
+   - The .hero-content-visible class triggers staggered CSS animations
+   - JS adds this class when video ends (or on fallback timer)
+   ========================================================================= */
+
+
+/* Hero child elements — initial hidden state (before video ends) */
+/* Note: .scroll-indicator is handled separately below (has translateX(-50%) centering) */
+.hero-eyebrow,
+.hero-title,
+.hero-description,
+.hero-actions,
+.hero-trust-bar {
+    opacity: 0;
+    transform: translateY(28px);
+    /* Pointer-events off until visible */
+    pointer-events: none;
+}
+
+/* Scroll indicator: must keep translateX(-50%) for centering */
+.scroll-indicator {
+    opacity: 0;
+    transform: translateX(-50%) translateY(28px);
+    pointer-events: none;
+}
+
+/* Staggered reveal keyframe for normal hero elements */
+@keyframes heroReveal {
+    0%   { opacity: 0; transform: translateY(28px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Separate keyframe for scroll indicator (preserves centering translateX(-50%)) */
+@keyframes heroRevealScroll {
+    0%   { opacity: 0; transform: translateX(-50%) translateY(28px); }
+    100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* When section receives .hero-content-visible, chain-reveal each element */
+.hero-content-visible .hero-eyebrow {
+    animation: heroReveal 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.0s both;
+    pointer-events: auto;
+}
+
+.hero-content-visible .hero-title {
+    animation: heroReveal 0.80s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.18s both;
+    pointer-events: auto;
+}
+
+.hero-content-visible .hero-description {
+    animation: heroReveal 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.36s both;
+    pointer-events: auto;
+}
+
+.hero-content-visible .hero-actions {
+    animation: heroReveal 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.52s both;
+    pointer-events: auto;
+}
+
+.hero-content-visible .hero-trust-bar {
+    animation: heroReveal 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.68s both;
+    pointer-events: auto;
+}
+
+.hero-content-visible .scroll-indicator {
+    animation: heroRevealScroll 0.70s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.84s both;
+    pointer-events: auto;
+}
+
+/* Reduced-motion: reveal instantly without animation */
+@media (prefers-reduced-motion: reduce) {
+    .hero-eyebrow,
+    .hero-title,
+    .hero-description,
+    .hero-actions,
+    .hero-trust-bar {
+        opacity: 0;
+        transform: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .scroll-indicator {
+        opacity: 0;
+        transform: translateX(-50%);
+        transition: opacity 0.3s ease;
+    }
+
+    .hero-content-visible .hero-eyebrow,
+    .hero-content-visible .hero-title,
+    .hero-content-visible .hero-description,
+    .hero-content-visible .hero-actions,
+    .hero-content-visible .hero-trust-bar {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        transition: opacity 0.3s ease;
+        pointer-events: auto;
+    }
+
+    .hero-content-visible .scroll-indicator {
+        animation: none;
+        opacity: 1;
+        transform: translateX(-50%);
+        transition: opacity 0.3s ease;
+        pointer-events: auto;
+    }
+}
 .hero-eyebrow {
     display: inline-flex;
     align-items: center;
@@ -305,8 +423,8 @@
     position: absolute;
     bottom: 30px;
     left: 50%;
-    transform: translateX(-50%);
-    z-index: 3;
+    /* transform is managed by the cinematic reveal system (combined translateX + translateY) */
+    z-index: 4; /* Above overlay */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -317,6 +435,8 @@
     letter-spacing: 1px;
     transition: var(--transition);
 }
+
+
 
 .scroll-indicator:hover {
     color: #ffffff;

@@ -20,11 +20,11 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
 
         <!-- Current Background Photo -->
         <img src="<?= asset_url('images/home/hero-dalada-maligawa.jpg') ?>" alt="Temple of the Sacred Tooth Relic Sri Dalada Maligawa Kandy Sri Lanka" class="hero-bg-img" id="heroBgImg">
-        <div class="hero-overlay"></div>
+        <div class="hero-overlay" id="heroOverlay"></div>
     </div>
 
     <div class="container hero-container">
-        <div class="hero-content" data-reveal>
+        <div class="hero-content" id="heroContent">
             <span class="hero-eyebrow"><i class="fa-solid fa-compass"></i> DISCOVER SRI LANKA WITH MEWA TOURS</span>
             <h1 class="hero-title">Discover Sri Lanka,<br>Your Way.</h1>
             <p class="hero-description">
@@ -49,7 +49,7 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
         </div>
     </div>
 
-    <a href="#mewaIntro" class="scroll-indicator" aria-label="Scroll to content">
+    <a href="#mewaIntro" class="scroll-indicator" id="heroScrollIndicator" aria-label="Scroll to content">
         <span class="scroll-text">Scroll to Explore</span>
         <i class="fa-solid fa-chevron-down scroll-arrow"></i>
     </a>
