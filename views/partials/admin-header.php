@@ -38,7 +38,7 @@ $currentAdmin = $_SESSION['admin'] ?? ['name' => 'Administrator'];
         <div class="admin-main-wrapper">
             <header class="admin-topbar">
                 <div class="topbar-left">
-                    <button id="adminSidebarToggle" class="sidebar-toggle-btn"><i class="fa-solid fa-bars"></i></button>
+                    <button type="button" id="adminSidebarToggle" class="sidebar-toggle-btn" aria-label="Toggle Navigation Menu"><i class="fa-solid fa-bars"></i></button>
                     <span class="portal-badge">Mewa Tours Admin Portal</span>
                 </div>
                 <div class="topbar-right">

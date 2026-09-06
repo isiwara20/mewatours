@@ -691,3 +691,5 @@ document.addEventListener('DOMContentLoaded', function() {
     setupImagePreview('ctaFileInput', 'ctaImagePreview');
 });
 </script>
+
+<?php render_partial('admin-footer'); ?>

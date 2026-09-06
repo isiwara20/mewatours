@@ -18,9 +18,53 @@
 }
 
 .sidebar-brand {
-    padding: 20px;
-    text-align: center;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-close-btn {
+    display: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #ffffff;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    font-size: 1.15rem;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar-close-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: #38bdf8;
+}
+
+/* Mobile Drawer Backdrop Overlay */
+.admin-sidebar-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 10040;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.admin-sidebar-backdrop.active {
+    display: block;
+    opacity: 1;
 }
 
 .admin-brand-logo {
@@ -69,11 +113,32 @@
 }
 
 .sidebar-toggle-btn {
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    color: #475569;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    font-size: 1.15rem;
+    color: #1e293b;
     cursor: pointer;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
+}
+
+.sidebar-toggle-btn:hover,
+.sidebar-toggle-btn:focus {
+    background: #e0f2fe;
+    color: #0284c7;
+    border-color: #0284c7;
+}
+
+.sidebar-toggle-btn:active {
+    transform: scale(0.95);
 }
 
 .portal-badge {
@@ -651,21 +716,32 @@
         position: relative;
     }
 
+    .sidebar-close-btn {
+        display: inline-flex;
+    }
+
     .admin-sidebar {
         position: fixed;
         top: 0;
         left: 0;
         bottom: 0;
-        width: 270px;
+        height: 100vh;
+        height: 100dvh;
+        width: 280px;
+        max-width: 85vw;
         z-index: 10050;
         transform: translateX(-100%);
         transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
         box-shadow: none;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        display: flex;
+        flex-direction: column;
     }
 
     .admin-sidebar.active {
-        transform: translateX(0);
-        box-shadow: 10px 0 35px rgba(0, 0, 0, 0.4);
+        transform: translateX(0) !important;
+        box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5) !important;
     }
 
     .admin-main-wrapper {
