@@ -81,7 +81,42 @@ $isContact = (str_starts_with($cleanPath, 'contact'));
             <nav class="public-nav" id="mainPublicNav" aria-label="Main Navigation">
                 <ul class="nav-list">
                     <li><a href="<?= base_url() ?>" class="nav-link <?= $isHome ? 'active' : '' ?>">Home</a></li>
-                    <li><a href="<?= base_url('tours') ?>" class="nav-link <?= $isTours ? 'active' : '' ?>">Tours</a></li>
+                    <li class="nav-item-dropdown" id="toursDropdownItem">
+                        <button type="button"
+                                class="nav-link nav-tours-trigger"
+                                id="toursDropdownTrigger"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                aria-controls="toursDropdownMenu">
+                            Tours <i class="fa-solid fa-chevron-down tours-chevron"></i>
+                        </button>
+                        <div class="tours-dropdown-menu" id="toursDropdownMenu" role="menu" aria-label="Tour Categories">
+                            <div class="tours-dropdown-inner">
+                                <a href="<?= base_url('tours') ?>" class="tours-dropdown-item tours-dropdown-all" role="menuitem">
+                                    <i class="fa-solid fa-globe"></i> All Tours
+                                </a>
+                                <div class="tours-dropdown-divider"></div>
+                                <a href="<?= base_url('tours') ?>?category=heritage-culture" class="tours-dropdown-item" role="menuitem" data-category-slug="heritage-culture">
+                                    <i class="fa-solid fa-landmark"></i> Heritage &amp; Culture
+                                </a>
+                                <a href="<?= base_url('tours') ?>?category=wildlife-nature" class="tours-dropdown-item" role="menuitem" data-category-slug="wildlife-nature">
+                                    <i class="fa-solid fa-paw"></i> Wildlife &amp; Nature
+                                </a>
+                                <a href="<?= base_url('tours') ?>?category=hill-country" class="tours-dropdown-item" role="menuitem" data-category-slug="hill-country">
+                                    <i class="fa-solid fa-mountain"></i> Hill Country
+                                </a>
+                                <a href="<?= base_url('tours') ?>?category=coastal-beach" class="tours-dropdown-item" role="menuitem" data-category-slug="coastal-beach">
+                                    <i class="fa-solid fa-umbrella-beach"></i> Coastal &amp; Beach
+                                </a>
+                                <a href="<?= base_url('tours') ?>?category=adventure" class="tours-dropdown-item" role="menuitem" data-category-slug="adventure">
+                                    <i class="fa-solid fa-person-hiking"></i> Adventure
+                                </a>
+                                <a href="<?= base_url('tours') ?>?category=romantic" class="tours-dropdown-item" role="menuitem" data-category-slug="romantic">
+                                    <i class="fa-solid fa-heart"></i> Romantic
+                                </a>
+                            </div>
+                        </div>
+                    </li>
                     <li><a href="<?= base_url('destinations') ?>" class="nav-link <?= $isDestinations ? 'active' : '' ?>">Destinations</a></li>
                     <li><a href="<?= base_url('experiences') ?>" class="nav-link <?= $isExperiences ? 'active' : '' ?>">Experiences</a></li>
                     <li><a href="<?= base_url('about') ?>" class="nav-link <?= $isAbout ? 'active' : '' ?>">About Us</a></li>
@@ -116,7 +151,25 @@ $isContact = (str_starts_with($cleanPath, 'contact'));
         </div>
         <ul class="drawer-nav-list">
             <li><a href="<?= base_url() ?>" class="drawer-nav-link <?= $isHome ? 'active' : '' ?>">Home</a></li>
-            <li><a href="<?= base_url('tours') ?>" class="drawer-nav-link <?= $isTours ? 'active' : '' ?>">Tours</a></li>
+            <li class="drawer-tours-item" id="drawerToursItem">
+                <button type="button"
+                        class="drawer-nav-link drawer-tours-trigger"
+                        id="drawerToursTrigger"
+                        aria-expanded="false"
+                        aria-controls="drawerToursSubmenu">
+                    <span>Tours</span>
+                    <i class="fa-solid fa-chevron-down drawer-tours-chevron"></i>
+                </button>
+                <ul class="drawer-tours-submenu" id="drawerToursSubmenu" aria-hidden="true">
+                    <li><a href="<?= base_url('tours') ?>" class="drawer-sub-link"><i class="fa-solid fa-globe"></i> All Tours</a></li>
+                    <li><a href="<?= base_url('tours') ?>?category=heritage-culture" class="drawer-sub-link"><i class="fa-solid fa-landmark"></i> Heritage &amp; Culture</a></li>
+                    <li><a href="<?= base_url('tours') ?>?category=wildlife-nature" class="drawer-sub-link"><i class="fa-solid fa-paw"></i> Wildlife &amp; Nature</a></li>
+                    <li><a href="<?= base_url('tours') ?>?category=hill-country" class="drawer-sub-link"><i class="fa-solid fa-mountain"></i> Hill Country</a></li>
+                    <li><a href="<?= base_url('tours') ?>?category=coastal-beach" class="drawer-sub-link"><i class="fa-solid fa-umbrella-beach"></i> Coastal &amp; Beach</a></li>
+                    <li><a href="<?= base_url('tours') ?>?category=adventure" class="drawer-sub-link"><i class="fa-solid fa-person-hiking"></i> Adventure</a></li>
+                    <li><a href="<?= base_url('tours') ?>?category=romantic" class="drawer-sub-link"><i class="fa-solid fa-heart"></i> Romantic</a></li>
+                </ul>
+            </li>
             <li><a href="<?= base_url('destinations') ?>" class="drawer-nav-link <?= $isDestinations ? 'active' : '' ?>">Destinations</a></li>
             <li><a href="<?= base_url('experiences') ?>" class="drawer-nav-link <?= $isExperiences ? 'active' : '' ?>">Experiences</a></li>
             <li><a href="<?= base_url('about') ?>" class="drawer-nav-link <?= $isAbout ? 'active' : '' ?>">About Us</a></li>

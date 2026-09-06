@@ -12,13 +12,20 @@ $isExperiences = (bool)preg_match('#/admin/experiences#i', $path);
 $isGallery = (bool)preg_match('#/admin/gallery#i', $path);
 $isInquiries = (bool)preg_match('#/admin/inquiries#i', $path);
 $isReviews = (bool)preg_match('#/admin/reviews#i', $path);
+$isAbout = (bool)preg_match('#/admin/about#i', $path);
 $isSettings = (bool)preg_match('#/admin/settings#i', $path);
 ?>
+<!-- Mobile Drawer Backdrop Overlay -->
+<div class="admin-sidebar-backdrop" id="adminSidebarBackdrop"></div>
+
 <aside class="admin-sidebar" id="adminSidebar">
     <div class="sidebar-brand">
         <a href="<?= base_url('admin/dashboard') ?>">
             <img src="<?= asset_url('images/branding/logo.png') ?>" alt="Mewa Tours Admin" class="admin-brand-logo" onerror="this.src='https://placehold.co/150x45/ffffff/004080?text=MEWA+ADMIN'">
         </a>
+        <button type="button" class="sidebar-close-btn" id="adminSidebarClose" aria-label="Close sidebar">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
     </div>
 
     <nav class="sidebar-menu">
@@ -56,6 +63,11 @@ $isSettings = (bool)preg_match('#/admin/settings#i', $path);
             <li>
                 <a href="<?= base_url('admin/reviews.php') ?>" class="<?= $isReviews ? 'active' : '' ?>">
                     <i class="fa-solid fa-star"></i> Customer Reviews
+                </a>
+            </li>
+            <li>
+                <a href="<?= base_url('admin/about') ?>" class="<?= $isAbout ? 'active' : '' ?>">
+                    <i class="fa-solid fa-circle-info"></i> About Us Page
                 </a>
             </li>
             <li>

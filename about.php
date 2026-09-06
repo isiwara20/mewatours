@@ -6,6 +6,11 @@ declare(strict_types=1);
  */
 require_once __DIR__ . '/config/init.php';
 
+$aboutBLL = new AboutBLL();
+$aboutData = $aboutBLL->getAboutData();
+
 render_view('client/about', [
-    'page_title' => 'About Us - Mewa Tours Sri Lanka'
+    'page_title' => $aboutData['about_meta_title'] ?? 'About Us - Mewan Manju Sri Kandearachchi | Mewa Tours Sri Lanka',
+    'meta_description' => $aboutData['about_meta_description'] ?? null,
+    'about' => $aboutData
 ]);

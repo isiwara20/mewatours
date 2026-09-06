@@ -122,6 +122,234 @@
 }
 
 /* -------------------------------------------------------------------------
+   01b. TOURS NAV DROPDOWN (Desktop Hover + Mobile Accordion)
+   ------------------------------------------------------------------------- */
+
+/* --- Trigger button — inherit nav-link look exactly --- */
+.nav-tours-trigger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 6px 0;
+    position: relative;
+    transition: var(--transition);
+}
+
+/* Underline pseudo-element mirroring .nav-link::after */
+.nav-tours-trigger::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--brand-blue);
+    transition: var(--transition);
+}
+
+.nav-tours-trigger:hover,
+.nav-tours-trigger[aria-expanded="true"],
+.nav-item-dropdown.tours-active .nav-tours-trigger {
+    color: var(--brand-blue);
+}
+
+.nav-tours-trigger:hover::after,
+.nav-tours-trigger[aria-expanded="true"]::after,
+.nav-item-dropdown.tours-active .nav-tours-trigger::after {
+    width: 100%;
+}
+
+/* Chevron rotate when open */
+.tours-chevron {
+    font-size: 0.72rem;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: 1px;
+}
+
+.nav-tours-trigger[aria-expanded="true"] .tours-chevron {
+    transform: rotate(-180deg);
+}
+
+/* --- Dropdown container --- */
+.nav-item-dropdown {
+    position: relative;
+}
+
+.tours-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    min-width: 230px;
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    box-shadow: 0 20px 50px rgba(14, 27, 61, 0.14), 0 4px 16px rgba(14, 27, 61, 0.06);
+    border: 1px solid var(--border-light);
+    z-index: 1100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Small upward-pointing arrow tip */
+.tours-dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: #ffffff;
+    border-top: 1px solid var(--border-light);
+    border-left: 1px solid var(--border-light);
+    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+}
+
+/* Open state */
+.tours-dropdown-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.tours-dropdown-inner {
+    padding: 8px 6px;
+}
+
+/* Divider line between "All Tours" and categories */
+.tours-dropdown-divider {
+    height: 1px;
+    background: var(--border-light);
+    margin: 6px 8px;
+}
+
+/* Each dropdown link */
+.tours-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease;
+    white-space: nowrap;
+}
+
+.tours-dropdown-item i {
+    width: 16px;
+    text-align: center;
+    color: var(--brand-blue);
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.tours-dropdown-item:hover,
+.tours-dropdown-item:focus {
+    background: var(--brand-blue-soft);
+    color: var(--brand-blue);
+    outline: none;
+}
+
+.tours-dropdown-all {
+    font-weight: 700;
+    color: var(--brand-blue);
+}
+
+.tours-dropdown-all:hover {
+    background: var(--brand-blue-soft);
+}
+
+/* --- Mobile Drawer — Tours submenu accordion --- */
+.drawer-tours-item {
+    border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.drawer-tours-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 14px 0;
+    text-decoration: none;
+}
+
+.drawer-tours-trigger:hover,
+.drawer-tours-trigger[aria-expanded="true"] {
+    color: var(--brand-blue);
+}
+
+.drawer-tours-chevron {
+    font-size: 0.8rem;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.drawer-tours-trigger[aria-expanded="true"] .drawer-tours-chevron {
+    transform: rotate(-180deg);
+}
+
+/* Submenu list — collapsed by default */
+.drawer-tours-submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 6px 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.drawer-tours-submenu.open {
+    max-height: 400px;
+}
+
+.drawer-sub-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease;
+    margin-bottom: 2px;
+}
+
+.drawer-sub-link i {
+    width: 16px;
+    text-align: center;
+    color: var(--brand-blue);
+    font-size: 0.82rem;
+    flex-shrink: 0;
+}
+
+.drawer-sub-link:hover,
+.drawer-sub-link:focus {
+    background: var(--brand-blue-soft);
+    color: var(--brand-blue);
+    outline: none;
+}
+
+/* -------------------------------------------------------------------------
    02. HERO SECTION — DAYTIME TEMPLE OF THE TOOTH
    ------------------------------------------------------------------------- */
 .hero-section {
@@ -187,20 +415,138 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(180deg, rgba(14, 27, 61, 0.45) 0%, rgba(14, 27, 61, 0.65) 60%, rgba(14, 27, 61, 0.85) 100%);
+    /* Start nearly transparent so the video shines through clearly */
+    background: linear-gradient(180deg, rgba(14, 27, 61, 0.10) 0%, rgba(14, 27, 61, 0.18) 60%, rgba(14, 27, 61, 0.28) 100%);
     z-index: 3;
+    transition: background 1.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Cinematic darkening — engaged near end of video by JS */
+.hero-overlay.hero-overlay-darkened {
+    background: linear-gradient(180deg, rgba(14, 27, 61, 0.45) 0%, rgba(14, 27, 61, 0.65) 60%, rgba(14, 27, 61, 0.85) 100%);
+}
+
 
 .hero-container {
     position: relative;
-    z-index: 3;
+    z-index: 4; /* Above overlay (z-index: 3) */
     color: var(--text-light);
 }
+
 
 .hero-content {
     max-width: 820px;
 }
 
+/* =========================================================================
+   CINEMATIC HERO REVEAL SYSTEM
+   - All hero child elements start invisible (opacity: 0, translated down)
+   - The .hero-content-visible class triggers staggered CSS animations
+   - JS adds this class when video ends (or on fallback timer)
+   ========================================================================= */
+
+
+/* Hero child elements — initial hidden state (before video ends) */
+/* Note: .scroll-indicator is handled separately below (has translateX(-50%) centering) */
+.hero-eyebrow,
+.hero-title,
+.hero-description,
+.hero-actions,
+.hero-trust-bar {
+    opacity: 0;
+    transform: translateY(28px);
+    /* Pointer-events off until visible */
+    pointer-events: none;
+}
+
+/* Scroll indicator: must keep translateX(-50%) for centering */
+.scroll-indicator {
+    opacity: 0;
+    transform: translateX(-50%) translateY(28px);
+    pointer-events: none;
+}
+
+/* Staggered reveal keyframe for normal hero elements */
+@keyframes heroReveal {
+    0%   { opacity: 0; transform: translateY(28px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Separate keyframe for scroll indicator (preserves centering translateX(-50%)) */
+@keyframes heroRevealScroll {
+    0%   { opacity: 0; transform: translateX(-50%) translateY(28px); }
+    100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* When section receives .hero-content-visible, chain-reveal each element */
+.hero-content-visible .hero-eyebrow {
+    animation: heroReveal 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.0s both;
+    pointer-events: auto;
+}
+
+.hero-content-visible .hero-title {
+    animation: heroReveal 0.80s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.18s both;
+    pointer-events: auto;
+}
+
+.hero-content-visible .hero-description {
+    animation: heroReveal 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.36s both;
+    pointer-events: auto;
+}
+
+.hero-content-visible .hero-actions {
+    animation: heroReveal 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.52s both;
+    pointer-events: auto;
+}
+
+.hero-content-visible .hero-trust-bar {
+    animation: heroReveal 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.68s both;
+    pointer-events: auto;
+}
+
+.hero-content-visible .scroll-indicator {
+    animation: heroRevealScroll 0.70s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.84s both;
+    pointer-events: auto;
+}
+
+/* Reduced-motion: reveal instantly without animation */
+@media (prefers-reduced-motion: reduce) {
+    .hero-eyebrow,
+    .hero-title,
+    .hero-description,
+    .hero-actions,
+    .hero-trust-bar {
+        opacity: 0;
+        transform: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .scroll-indicator {
+        opacity: 0;
+        transform: translateX(-50%);
+        transition: opacity 0.3s ease;
+    }
+
+    .hero-content-visible .hero-eyebrow,
+    .hero-content-visible .hero-title,
+    .hero-content-visible .hero-description,
+    .hero-content-visible .hero-actions,
+    .hero-content-visible .hero-trust-bar {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        transition: opacity 0.3s ease;
+        pointer-events: auto;
+    }
+
+    .hero-content-visible .scroll-indicator {
+        animation: none;
+        opacity: 1;
+        transform: translateX(-50%);
+        transition: opacity 0.3s ease;
+        pointer-events: auto;
+    }
+}
 .hero-eyebrow {
     display: inline-flex;
     align-items: center;
@@ -247,11 +593,11 @@
 .btn-hero-primary {
     background-color: var(--brand-blue);
     color: #ffffff !important;
-    padding: 16px 36px;
+    padding: 11px 26px;
     border-radius: var(--radius-sm);
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.4);
+    box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
     transition: var(--transition);
 }
 
@@ -265,9 +611,9 @@
     background: rgba(255, 255, 255, 0.95);
     color: var(--brand-blue) !important;
     border: 1px solid #ffffff;
-    padding: 16px 32px;
+    padding: 11px 22px;
     border-radius: var(--radius-sm);
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 700;
     transition: var(--transition);
 }
@@ -305,8 +651,8 @@
     position: absolute;
     bottom: 30px;
     left: 50%;
-    transform: translateX(-50%);
-    z-index: 3;
+    /* transform is managed by the cinematic reveal system (combined translateX + translateY) */
+    z-index: 4; /* Above overlay */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -317,6 +663,8 @@
     letter-spacing: 1px;
     transition: var(--transition);
 }
+
+
 
 .scroll-indicator:hover {
     color: #ffffff;

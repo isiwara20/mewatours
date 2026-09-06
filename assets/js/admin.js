@@ -2,24 +2,75 @@
  * Mewa Tours - Admin Portal Interaction & Dynamic Form Management
  */
 document.addEventListener('DOMContentLoaded', () => {
-    // Sidebar toggle for admin responsive layout
+    // Robust Sidebar toggle for desktop collapse and mobile drawer
     const sidebarToggle = document.getElementById('adminSidebarToggle');
     const sidebar = document.getElementById('adminSidebar');
+    const sidebarClose = document.getElementById('adminSidebarClose');
+    const sidebarBackdrop = document.getElementById('adminSidebarBackdrop');
 
-    if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener('click', (e) => {
+    function openMobileSidebar() {
+        if (sidebar) sidebar.classList.add('active');
+        if (sidebarBackdrop) sidebarBackdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileSidebar() {
+        if (sidebar) sidebar.classList.remove('active');
+        if (sidebarBackdrop) sidebarBackdrop.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function toggleSidebar(e) {
+        if (e) {
+            e.preventDefault();
             e.stopPropagation();
-            sidebar.classList.toggle('active');
-            sidebar.classList.toggle('collapsed');
-        });
-
-        // Close mobile sidebar when clicking outside on small screens
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth <= 992 && sidebar.classList.contains('active')) {
-                if (!sidebar.contains(e.target) && e.target !== sidebarToggle && !sidebarToggle.contains(e.target)) {
-                    sidebar.classList.remove('active');
-                }
+        }
+        if (window.innerWidth <= 992) {
+            if (sidebar && sidebar.classList.contains('active')) {
+                closeMobileSidebar();
+            } else {
+                openMobileSidebar();
             }
+        } else {
+            if (sidebar) sidebar.classList.toggle('collapsed');
+        }
+    }
+
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', toggleSidebar);
+    }
+
+    if (sidebarClose) {
+        sidebarClose.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeMobileSidebar();
+        });
+    }
+
+    if (sidebarBackdrop) {
+        sidebarBackdrop.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeMobileSidebar();
+        });
+    }
+
+    // Close when pressing Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sidebar && sidebar.classList.contains('active')) {
+            closeMobileSidebar();
+        }
+    });
+
+    // Close mobile sidebar when clicking a menu link on mobile
+    if (sidebar) {
+        const menuLinks = sidebar.querySelectorAll('.sidebar-menu a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 992) {
+                    closeMobileSidebar();
+                }
+            });
         });
     }
 
