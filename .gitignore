@@ -5,6 +5,7 @@ config/*.local.php
 .env
 .env.*
 *.env
+app.log
 
 # System & IDE files
 .DS_Store
