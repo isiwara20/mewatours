@@ -24,6 +24,7 @@ $heroImgSrc = !empty($tour['featured_image'])
 
 <!-- Custom Tour Details CSS -->
 <link rel="stylesheet" href="<?= asset_url('css/tour-details.css') ?>">
+<link rel="stylesheet" href="<?= asset_url('css/tours.css') ?>">
 
 <!-- =========================================================================
      01. HERO SECTION
@@ -301,18 +302,19 @@ $heroImgSrc = !empty($tour['featured_image'])
                 <article class="tour-collection-card" data-category="<?= e($relCategorySlug) ?>" data-reveal>
                     <div class="tour-card-image-wrap">
                         <img src="<?= e($relImgSrc) ?>" alt="<?= e($relTour['title']) ?>" class="tour-card-img" onerror="this.src='https://images.unsplash.com/photo-1544979590-37e9b47eb705?auto=format&fit=crop&w=800&q=80'">
-                        
-                        <div class="card-badges-top">
-                            <span class="card-badge-duration"><i class="fa-solid fa-clock"></i> <?= e($relTour['formatted_duration']) ?></span>
-                            <?php if (!empty($relTour['tour_type'])): ?>
-                                <span class="card-badge-type"><?= e(strtoupper($relTour['tour_type'])) ?></span>
-                            <?php endif; ?>
-                        </div>
                     </div>
 
                     <div class="tour-card-body">
                         <span class="card-cat-label"><?= e($relTour['category_name'] ?? 'Tour Package') ?></span>
                         <h3 class="card-tour-title"><?= e($relTour['title']) ?></h3>
+
+                        <!-- Duration & Tour Style Badges (Tour Details) -->
+                        <div class="card-badges-row">
+                            <span class="card-badge-duration"><i class="fa-solid fa-clock"></i> <?= e($relTour['formatted_duration']) ?></span>
+                            <?php if (!empty($relTour['tour_type'])): ?>
+                                <span class="card-badge-type"><i class="fa-solid fa-compass"></i> <?= e(strtoupper($relTour['tour_type'])) ?></span>
+                            <?php endif; ?>
+                        </div>
 
                         <?php if (!empty($relTour['route'])): ?>
                             <div class="card-route-box" title="<?= e($relTour['route']) ?>">

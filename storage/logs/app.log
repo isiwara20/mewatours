@@ -19,3 +19,5 @@
 [2026-08-28 12:05:39] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
 [2026-08-28 12:08:17] [INFO]: Admin logged out {"admin_id":1}
 [2026-08-28 12:08:35] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
+[2026-09-06 16:02:47] [WARNING]: Admin login failed: invalid password {"email":"mewatours83@gmail.com"}
+[2026-09-06 16:02:53] [WARNING]: Admin login failed: invalid password {"email":"mewatours83@gmail.com"}
