@@ -154,7 +154,7 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
 
             <!-- Experience 2: Culture -->
             <div class="experience-card" data-reveal>
-                <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80" alt="Sri Lankan Ancient Culture & Temples" class="experience-img">
+                <img src="<?= asset_url('images/home/hero-dalada-maligawa.jpg') ?>" alt="Ancient Kingdoms & Sacred Temples" class="experience-img">
                 <div class="experience-gradient"></div>
                 <div class="experience-content">
                     <span class="exp-tag"><i class="fa-solid fa-landmark"></i> Culture</span>
@@ -165,7 +165,7 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
 
             <!-- Experience 3: Beaches -->
             <div class="experience-card" data-reveal>
-                <img src="https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=800&q=80" alt="Sri Lanka Tropical Beaches" class="experience-img">
+                <img src="<?= asset_url('images/experiences/sri-lanka-beach.jpg') ?>" alt="Sri Lankan Golden Palms & Coastal Beach" class="experience-img">
                 <div class="experience-gradient"></div>
                 <div class="experience-content">
                     <span class="exp-tag"><i class="fa-solid fa-umbrella-beach"></i> Beaches</span>
@@ -187,7 +187,7 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
 
             <!-- Experience 5: Adventure -->
             <div class="experience-card" data-reveal>
-                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Highland Trekking Adventure" class="experience-img">
+                <img src="<?= asset_url('images/experiences/sri-lanka-waterfall.jpg') ?>" alt="Sri Lankan Highland Trekking & Waterfall" class="experience-img">
                 <div class="experience-gradient"></div>
                 <div class="experience-content">
                     <span class="exp-tag"><i class="fa-solid fa-person-hiking"></i> Adventure</span>

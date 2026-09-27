@@ -108,7 +108,7 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
 
             <!-- Tropical Beaches -->
             <div class="exp-cat-card" data-reveal>
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Tropical Beaches">
+                <img src="<?= asset_url('images/experiences/sri-lanka-beach.jpg') ?>" alt="Tropical Beaches">
                 <div class="exp-cat-overlay"></div>
                 <div class="exp-cat-content">
                     <span class="exp-cat-tag">COASTLINE</span>
@@ -120,7 +120,7 @@ $generalWaUrl = $whatsapp->generateInquiryLink($whatsapp->buildGeneralInquiryMes
 
             <!-- Adventure -->
             <div class="exp-cat-card" data-reveal>
-                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Adventure">
+                <img src="<?= asset_url('images/experiences/sri-lanka-waterfall.jpg') ?>" alt="Adventure & Waterfalls">
                 <div class="exp-cat-overlay"></div>
                 <div class="exp-cat-content">
                     <span class="exp-cat-tag">OUTDOORS</span>
