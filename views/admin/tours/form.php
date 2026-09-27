@@ -8,7 +8,7 @@ $formAction = $isEdit ? base_url('admin/tours/edit/' . $tour['id']) : base_url('
 <div class="admin-page-header">
     <div class="header-content">
         <h2><i class="fa-solid fa-route"></i> <?= e($formTitle) ?></h2>
-        <p class="text-muted"><?= $isEdit ? 'Update details, travel route, day-by-day itinerary, inclusions, and highlights for this tour.' : 'Fill in the information below to add a new tour package to Mewa Tours.' ?></p>
+        <p class="text-muted"><?= $isEdit ? 'Update details, travel route, day-by-day itinerary, inclusions, exclusions, and highlights for this tour.' : 'Fill in the information below to add a new tour package to Mewa Tours.' ?></p>
     </div>
     <div class="header-actions">
         <a href="<?= base_url('admin/tours') ?>" class="btn btn-admin-secondary">
@@ -230,10 +230,39 @@ $formAction = $isEdit ? base_url('admin/tours/edit/' . $tour['id']) : base_url('
         </div>
     </div>
 
-    <!-- 07. HIGHLIGHTS -->
+    <!-- 07. EXCLUSIONS -->
     <div class="admin-card form-section-card">
         <div class="form-section-header">
-            <h3><i class="fa-solid fa-star"></i> 07 Tour Highlights</h3>
+            <h3><i class="fa-solid fa-circle-xmark" style="color: #ef4444;"></i> 07 What's Excluded</h3>
+            <p>Add key items NOT included in this tour package (e.g. International flights, Entry visa, Personal expenses, Travel insurance, Gratuities).</p>
+        </div>
+        
+        <div id="exclusionsList" class="dynamic-inputs-wrapper">
+            <?php 
+                $existingExclusions = !empty($tour['exclusions']) ? array_column($tour['exclusions'], 'exclusion') : ['International flights & visa fees', 'Personal expenses & souvenirs', 'Optional activities & entry fees not specified', 'Gratuities & driver tips'];
+                foreach ($existingExclusions as $idx => $excVal):
+            ?>
+                <div class="dynamic-input-row">
+                    <div class="input-drag-handle"><i class="fa-solid fa-bars"></i></div>
+                    <input type="text" name="exclusions[]" class="form-control" placeholder="e.g. International flights & visa fees" value="<?= e($excVal) ?>">
+                    <button type="button" class="btn-remove-row" onclick="removeDynamicRow(this)" title="Remove Exclusion">
+                        <i class="fa-solid fa-minus-circle"></i> Remove
+                    </button>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <div class="dynamic-add-action">
+            <button type="button" class="btn btn-admin-outline" id="addExclusionBtn">
+                <i class="fa-solid fa-plus-circle"></i> Add Exclusion
+            </button>
+        </div>
+    </div>
+
+    <!-- 08. HIGHLIGHTS -->
+    <div class="admin-card form-section-card">
+        <div class="form-section-header">
+            <h3><i class="fa-solid fa-star"></i> 08 Tour Highlights</h3>
             <p>Add key attractions, cities, or safari experiences included in this journey.</p>
         </div>
 
@@ -259,34 +288,45 @@ $formAction = $isEdit ? base_url('admin/tours/edit/' . $tour['id']) : base_url('
         </div>
     </div>
 
-    <!-- 08. MEDIA -->
+    <!-- 09. MEDIA -->
     <div class="admin-card form-section-card">
         <div class="form-section-header">
-            <h3><i class="fa-solid fa-image"></i> 08 Featured Media</h3>
+            <h3><i class="fa-solid fa-image"></i> 09 Featured Media</h3>
             <p>Upload a high-resolution cover image for public tour cards and hero headers.</p>
         </div>
 
         <div class="form-group">
-            <label for="featured_image" class="form-label">Featured Tour Image</label>
-            <input type="file" id="featured_image" name="featured_image" class="form-control" accept="image/jpeg,image/png,image/webp">
-            <small class="form-hint">Allowed formats: JPG, PNG, WebP (Max 5MB). Recommended ratio: 16:10 or 4:3.</small>
+            <label for="featured_image" class="form-label">Upload New Cover Image</label>
+            <input type="file" id="featured_image" name="featured_image" class="form-control" accept="image/jpeg,image/png,image/webp" onchange="previewSelectedImage(this, 'tourImgPreview')">
+            <small class="form-hint">Upload a JPG, PNG, or WebP image file (Max 10MB).</small>
 
-            <?php if ($isEdit && !empty($tour['featured_image'])): ?>
-                <div class="current-media-preview mt-3">
-                    <span class="d-block text-muted mb-2">Current Featured Image:</span>
-                    <?php 
-                        $imgSrc = (strpos($tour['featured_image'], 'http') === 0) ? $tour['featured_image'] : asset_url('images/' . e($tour['featured_image']));
-                    ?>
-                    <img src="<?= e($imgSrc) ?>" alt="Current Tour Image" class="form-preview-img">
-                </div>
-            <?php endif; ?>
+            <div style="margin-top: 12px;">
+                <label for="featured_image_url" class="form-label" style="font-size: 0.85rem; color: #64748b;">Or Enter Image URL / Existing Asset Path:</label>
+                <input type="text" id="featured_image_url" name="featured_image_url" class="form-control" placeholder="e.g. https://... or tours/hero-tours-ella.jpg" value="<?= old('featured_image_url', (strpos($tour['featured_image'] ?? '', 'http') === 0 ? $tour['featured_image'] : '')) ?>">
+                <small class="form-hint">Leave blank if uploading an image file above.</small>
+            </div>
+
+            <!-- Live and Current Image Preview -->
+            <div class="current-media-preview mt-3" id="tourPreviewContainer" style="<?= empty($tour['featured_image']) ? 'display: none;' : '' ?>">
+                <span class="d-block text-muted mb-2 font-weight-bold" id="tourPreviewLabel">Active / Current Image:</span>
+                <?php 
+                    $cleanTourImg = preg_replace('#^(uploads/)?images/uploads/#i', 'uploads/', $tour['featured_image'] ?? '');
+                    $tourImgSrc = !empty($cleanTourImg) 
+                        ? ((strpos($cleanTourImg, 'http') === 0) ? $cleanTourImg : asset_url('images/' . e($cleanTourImg)))
+                        : '';
+                ?>
+                <img id="tourImgPreview" src="<?= e($tourImgSrc) ?>" alt="Tour Cover Image" class="form-preview-img" style="max-height: 160px; border-radius: 8px; border: 1px solid #cbd5e1; object-fit: cover; display: block;">
+                <?php if (!empty($cleanTourImg)): ?>
+                    <small class="text-muted mt-1 d-block">Stored path: <code><?= e($cleanTourImg) ?></code></small>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 
-    <!-- 09. BOOKING AVAILABILITY -->
+    <!-- 10. BOOKING AVAILABILITY -->
     <div class="admin-card form-section-card">
         <div class="form-section-header">
-            <h3><i class="fa-solid fa-calendar-check"></i> 09 Booking Availability</h3>
+            <h3><i class="fa-solid fa-calendar-check"></i> 10 Booking Availability</h3>
             <p>Set public booking status (Available to Book / Available on Request / Unavailable).</p>
         </div>
 
@@ -301,10 +341,10 @@ $formAction = $isEdit ? base_url('admin/tours/edit/' . $tour['id']) : base_url('
         </div>
     </div>
 
-    <!-- 10. PUBLISHING -->
+    <!-- 11. PUBLISHING -->
     <div class="admin-card form-section-card">
         <div class="form-section-header">
-            <h3><i class="fa-solid fa-sliders"></i> 10 Status &amp; Visibility</h3>
+            <h3><i class="fa-solid fa-sliders"></i> 11 Status &amp; Visibility</h3>
             <p>Control whether this tour package is published live or featured.</p>
         </div>
 
@@ -376,6 +416,28 @@ document.getElementById('category_id')?.addEventListener('change', function() {
         });
     }
 });
+
+function previewSelectedImage(input, previewImgId) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.getElementById(previewImgId);
+            const container = document.getElementById('tourPreviewContainer');
+            const label = document.getElementById('tourPreviewLabel');
+            if (preview) {
+                preview.src = e.target.result;
+            }
+            if (container) {
+                container.style.display = 'block';
+            }
+            if (label) {
+                label.textContent = 'Selected Image Preview (will be uploaded on save):';
+                label.style.color = '#0284c7';
+            }
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 </script>
 
 <?php render_partial('admin-footer'); ?>

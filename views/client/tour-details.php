@@ -184,6 +184,33 @@ $heroImgSrc = !empty($tour['featured_image'])
 
 
 <!-- =========================================================================
+     05b. WHAT'S EXCLUDED SECTION
+     ========================================================================= -->
+<?php if (!empty($tour['exclusions'])): ?>
+<section class="section-padding exclusions-section bg-light">
+    <div class="container">
+        <div class="section-header text-center" data-reveal>
+            <span class="section-eyebrow" style="color: #ef4444;">WHAT'S EXCLUDED</span>
+            <h2 class="section-title">Clear &amp; Transparent Inclusions</h2>
+            <p class="section-subtitle">Items and personal expenses not covered in the standard package price.</p>
+        </div>
+
+        <div class="exclusions-grid-container" data-reveal>
+            <?php foreach ($tour['exclusions'] as $exc): 
+                $excText = is_array($exc) ? ($exc['exclusion'] ?? '') : $exc;
+            ?>
+                <div class="exclusion-card-item">
+                    <div class="exc-icon-box"><i class="fa-solid fa-xmark"></i></div>
+                    <span class="exc-text-val"><?= e($excText) ?></span>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+
+<!-- =========================================================================
      06. TOUR HIGHLIGHTS SECTION
      ========================================================================= -->
 <?php if (!empty($tour['highlights'])): ?>

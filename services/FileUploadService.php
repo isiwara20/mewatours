@@ -80,7 +80,7 @@ class FileUploadService
 
         $this->logger->info('File uploaded successfully', ['filename' => $newFilename, 'subfolder' => $subfolder]);
 
-        $assetPath = 'images/uploads/' . trim($subfolder, '/\\') . '/' . $newFilename;
+        $assetPath = 'uploads/' . trim($subfolder, '/\\') . '/' . $newFilename;
 
         return [
             'success' => true,

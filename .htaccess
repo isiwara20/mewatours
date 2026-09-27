@@ -57,8 +57,10 @@ Options -Indexes
     RewriteRule ^admin/settings/?$ admin/settings.php [L,QSA]
     RewriteRule ^admin/([a-zA-Z0-9_-]+)/?$ admin/$1.php [L,QSA]
 
-    # Public Tour Details clean URLs
+    # Public Tour, Destination & Experience Details clean URLs
     RewriteRule ^tours/([a-zA-Z0-9_-]+)/?$ tour-details.php?slug=$1 [L,QSA]
+    RewriteRule ^destinations/([a-zA-Z0-9_-]+)/?$ destination-details.php?slug=$1 [L,QSA]
+    RewriteRule ^experiences/([a-zA-Z0-9_-]+)/?$ experience-details.php?slug=$1 [L,QSA]
 
     # Public clean URLs mapping
     RewriteRule ^login/?$ login.php [L,QSA]

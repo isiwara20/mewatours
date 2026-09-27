@@ -195,6 +195,20 @@ class TourDAL
     }
 
     /**
+     * Get exclusions for a single tour
+     */
+    public function getTourExclusions(int $tourId): array
+    {
+        $sql = "SELECT * FROM tour_exclusions 
+                WHERE tour_id = :tour_id 
+                ORDER BY display_order ASC, id ASC";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':tour_id' => $tourId]);
+        return $stmt->fetchAll();
+    }
+
+    /**
      * Get highlights for a single tour
      */
     public function getTourHighlights(int $tourId): array
@@ -219,6 +233,32 @@ class TourDAL
 
         $placeholders = implode(',', array_fill(0, count($tourIds), '?'));
         $sql = "SELECT * FROM tour_inclusions 
+                WHERE tour_id IN ($placeholders) 
+                ORDER BY display_order ASC, id ASC";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(array_values($tourIds));
+        $rows = $stmt->fetchAll();
+
+        $result = [];
+        foreach ($rows as $row) {
+            $result[$row['tour_id']][] = $row;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Eager-load exclusions for multiple tour IDs
+     */
+    public function getExclusionsForTourIds(array $tourIds): array
+    {
+        if (empty($tourIds)) {
+            return [];
+        }
+
+        $placeholders = implode(',', array_fill(0, count($tourIds), '?'));
+        $sql = "SELECT * FROM tour_exclusions 
                 WHERE tour_id IN ($placeholders) 
                 ORDER BY display_order ASC, id ASC";
 
@@ -321,6 +361,38 @@ class TourDAL
                 $insStmt->execute([
                     ':tour_id' => $tourId,
                     ':inclusion' => $cleanItem,
+                    ':display_order' => $order++
+                ]);
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Replace tour exclusions inside transaction
+     */
+    public function replaceTourExclusions(int $tourId, array $exclusions): bool
+    {
+        $delStmt = $this->db->prepare("DELETE FROM tour_exclusions WHERE tour_id = :tour_id");
+        $delStmt->execute([':tour_id' => $tourId]);
+
+        if (empty($exclusions)) {
+            return true;
+        }
+
+        $insStmt = $this->db->prepare("
+            INSERT INTO tour_exclusions (tour_id, exclusion, display_order) 
+            VALUES (:tour_id, :exclusion, :display_order)
+        ");
+
+        $order = 1;
+        foreach ($exclusions as $item) {
+            $cleanItem = trim((string)$item);
+            if (!empty($cleanItem)) {
+                $insStmt->execute([
+                    ':tour_id' => $tourId,
+                    ':exclusion' => $cleanItem,
                     ':display_order' => $order++
                 ]);
             }

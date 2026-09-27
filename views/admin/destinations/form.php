@@ -42,21 +42,37 @@ render_partial('admin-header', ['page_title' => $pageTitle]);
             <textarea name="description" rows="5" placeholder="Full descriptive details of this destination..." class="form-control" style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem; font-family: inherit;"><?= e($destination['description'] ?? old('description')) ?></textarea>
         </div>
 
-        <div style="margin-bottom: 20px;">
+        <div style="margin-bottom: 25px;">
             <label style="display: block; font-weight: 600; color: #1e293b; margin-bottom: 6px;">Featured Cover Image</label>
-            <?php if ($isEdit && !empty($destination['featured_image'])): ?>
+            
+            <!-- Current / Live Image Preview Card -->
+            <div id="destPreviewContainer" style="margin-bottom: 12px; <?= empty($destination['featured_image']) ? 'display: none;' : '' ?>">
+                <span style="font-size: 0.85rem; color: #64748b; font-weight: 600; display: block; margin-bottom: 6px;" id="destPreviewLabel">Current Cover Image:</span>
                 <?php 
-                    $imgSrc = (strpos($destination['featured_image'], 'http') === 0) 
-                        ? $destination['featured_image'] 
-                        : asset_url('images/' . e(ltrim($destination['featured_image'], '/'))); 
+                    $cleanDestImg = preg_replace('#^(uploads/)?images/uploads/#i', 'uploads/', $destination['featured_image'] ?? '');
+                    $destImgSrc = !empty($cleanDestImg) 
+                        ? ((strpos($cleanDestImg, 'http') === 0) ? $cleanDestImg : asset_url('images/' . e(ltrim($cleanDestImg, '/')))) 
+                        : '';
                 ?>
-                <div style="margin-bottom: 10px; display: flex; align-items: center; gap: 15px;">
-                    <img src="<?= $imgSrc ?>" alt="Current Image" style="width: 100px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1;">
-                    <span style="font-size: 0.85rem; color: #64748b;">Current Image Path: <code><?= e($destination['featured_image']) ?></code></span>
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <img id="destImgPreview" src="<?= e($destImgSrc) ?>" alt="Destination Image" style="width: 140px; height: 90px; object-fit: cover; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block;">
+                    <div>
+                        <span style="font-size: 0.82rem; color: #64748b; display: block;">Active Path / Source:</span>
+                        <code style="font-size: 0.82rem; background: #f1f5f9; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-top: 3px;"><?= e($cleanDestImg) ?></code>
+                    </div>
                 </div>
-            <?php endif; ?>
-            <input type="file" name="featured_image" accept="image/*" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
-            <small style="color: #64748b; margin-top: 4px; display: block;">Supports JPG, PNG, WEBP formats.</small>
+            </div>
+
+            <!-- Upload File Input -->
+            <input type="file" name="featured_image" accept="image/jpeg,image/png,image/webp" class="form-control" onchange="previewDestImage(this)" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem;">
+            <small style="color: #64748b; margin-top: 4px; display: block;">Upload a new image file (JPG, PNG, WebP up to 10MB).</small>
+
+            <!-- Optional Image URL or Asset Path -->
+            <div style="margin-top: 12px;">
+                <label style="font-size: 0.85rem; color: #64748b; font-weight: 600; display: block; margin-bottom: 4px;">Or Enter Image URL / Existing Asset Path:</label>
+                <input type="text" name="featured_image_url" value="<?= e(strpos($destination['featured_image'] ?? '', 'http') === 0 ? $destination['featured_image'] : '') ?>" placeholder="e.g. https://... or home/hero-dalada-maligawa.jpg" class="form-control" style="width: 100%; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem;">
+                <small style="color: #64748b; display: block; margin-top: 3px;">Leave empty if uploading an image file above.</small>
+            </div>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 30px;">
@@ -91,5 +107,29 @@ render_partial('admin-header', ['page_title' => $pageTitle]);
         </div>
     </form>
 </div>
+
+<script>
+function previewDestImage(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.getElementById('destImgPreview');
+            const container = document.getElementById('destPreviewContainer');
+            const label = document.getElementById('destPreviewLabel');
+            if (preview) {
+                preview.src = e.target.result;
+            }
+            if (container) {
+                container.style.display = 'block';
+            }
+            if (label) {
+                label.textContent = 'Selected Image Preview (will be uploaded on save):';
+                label.style.color = '#0284c7';
+            }
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
 
 <?php render_partial('admin-footer'); ?>

@@ -38,9 +38,14 @@ class ExperienceController
             return;
         }
 
+        $allExperiences = $this->experienceBLL->getActiveExperiences();
+        $relatedExperiences = array_filter($allExperiences, fn($e) => (int)$e['id'] !== (int)$experience['id']);
+        $relatedExperiences = array_slice($relatedExperiences, 0, 3);
+
         render_view('client/experience-details', [
-            'page_title' => $experience['name'] . ' - Mewa Tours',
-            'experience' => $experience
+            'page_title' => $experience['name'] . ' | Mewa Tours Sri Lanka',
+            'experience' => $experience,
+            'related_experiences' => $relatedExperiences
         ]);
     }
 }

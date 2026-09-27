@@ -80,6 +80,7 @@ class TourBLL
         if ($tour) {
             $tId = (int)$tour['id'];
             $tour['inclusions'] = $this->tourDAL->getTourInclusions($tId);
+            $tour['exclusions'] = $this->tourDAL->getTourExclusions($tId);
             $tour['highlights'] = $this->tourDAL->getTourHighlights($tId);
             $tour['formatted_duration'] = format_duration((int)$tour['duration_days'], (int)$tour['duration_nights']);
             
@@ -103,11 +104,13 @@ class TourBLL
 
         $tourIds = array_column($tours, 'id');
         $inclusionsMap = $this->tourDAL->getInclusionsForTourIds($tourIds);
+        $exclusionsMap = $this->tourDAL->getExclusionsForTourIds($tourIds);
         $highlightsMap = $this->tourDAL->getHighlightsForTourIds($tourIds);
 
         foreach ($tours as &$tour) {
             $tId = (int)$tour['id'];
             $tour['inclusions'] = $inclusionsMap[$tId] ?? [];
+            $tour['exclusions'] = $exclusionsMap[$tId] ?? [];
             $tour['highlights'] = $highlightsMap[$tId] ?? [];
             $tour['formatted_duration'] = format_duration((int)$tour['duration_days'], (int)$tour['duration_nights']);
             
@@ -132,6 +135,7 @@ class TourBLL
             $tId = (int)$tour['id'];
             $tour['itinerary'] = $this->tourDAL->getTourItineraryDays($tId);
             $tour['inclusions'] = $this->tourDAL->getTourInclusions($tId);
+            $tour['exclusions'] = $this->tourDAL->getTourExclusions($tId);
             $tour['highlights'] = $this->tourDAL->getTourHighlights($tId);
             $tour['gallery_images'] = $this->tourDAL->getTourImages($tId);
             $tour['formatted_duration'] = format_duration((int)$tour['duration_days'], (int)$tour['duration_nights']);
@@ -189,6 +193,7 @@ class TourBLL
             $tId = (int)$tour['id'];
             $tour['itinerary'] = $this->tourDAL->getTourItineraryDays($tId);
             $tour['inclusions'] = $this->tourDAL->getTourInclusions($tId);
+            $tour['exclusions'] = $this->tourDAL->getTourExclusions($tId);
             $tour['highlights'] = $this->tourDAL->getTourHighlights($tId);
             $tour['formatted_duration'] = format_duration((int)$tour['duration_days'], (int)$tour['duration_nights']);
         }
@@ -203,8 +208,13 @@ class TourBLL
         array $itineraryDays = [], 
         array $inclusions = [], 
         array $highlights = [], 
-        ?int $id = null
+        ?int $id = null,
+        array $exclusions = []
     ): array {
+        if (empty($exclusions) && !empty($input['exclusions']) && is_array($input['exclusions'])) {
+            $exclusions = $input['exclusions'];
+        }
+
         $title = sanitize_string($input['title'] ?? '');
         if (empty($title)) {
             return ['success' => false, 'message' => 'Tour title is required.'];
@@ -218,8 +228,9 @@ class TourBLL
         $durationDays = max(1, (int)($input['duration_days'] ?? 1));
         $durationNights = max(0, (int)($input['duration_nights'] ?? 0));
 
-        // Clean inclusions & highlights
+        // Clean inclusions, exclusions & highlights
         $cleanInclusions = array_values(array_filter(array_map('trim', $inclusions), fn($val) => $val !== ''));
+        $cleanExclusions = array_values(array_filter(array_map('trim', $exclusions), fn($val) => $val !== ''));
         $cleanHighlights = array_values(array_filter(array_map('trim', $highlights), fn($val) => $val !== ''));
 
         // Clean and normalize itinerary days
@@ -265,6 +276,13 @@ class TourBLL
             'display_order' => (int)($input['display_order'] ?? 0)
         ];
 
+        // Normalize image path if present
+        if (!empty($data['featured_image'])) {
+            $data['featured_image'] = preg_replace('#^(uploads/)?images/uploads/#i', 'uploads/', $data['featured_image']);
+            $data['featured_image'] = preg_replace('#^uploads/uploads/#i', 'uploads/', $data['featured_image']);
+            $data['featured_image'] = ltrim($data['featured_image'], '/');
+        }
+
         try {
             $this->tourDAL->beginTransaction();
 
@@ -285,6 +303,7 @@ class TourBLL
             // Save child tables atomically
             $this->tourDAL->replaceTourItineraryDays($tourId, $cleanItinerary);
             $this->tourDAL->replaceTourInclusions($tourId, $cleanInclusions);
+            $this->tourDAL->replaceTourExclusions($tourId, $cleanExclusions);
             $this->tourDAL->replaceTourHighlights($tourId, $cleanHighlights);
 
             $this->tourDAL->commit();

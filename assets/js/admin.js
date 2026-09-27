@@ -87,6 +87,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Dynamic Exclusions Management
+    const addExclusionBtn = document.getElementById('addExclusionBtn');
+    const exclusionsList = document.getElementById('exclusionsList');
+
+    if (addExclusionBtn && exclusionsList) {
+        addExclusionBtn.addEventListener('click', () => {
+            const row = createDynamicRow('exclusions[]', 'e.g. International Flights');
+            exclusionsList.appendChild(row);
+            const input = row.querySelector('input');
+            if (input) input.focus();
+        });
+    }
+
     // Dynamic Highlights Management
     const addHighlightBtn = document.getElementById('addHighlightBtn');
     const highlightsList = document.getElementById('highlightsList');

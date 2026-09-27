@@ -52,7 +52,13 @@ class DestinationBLL
 
     public function getDestinationDetailsBySlug(string $slug): ?array
     {
-        return $this->destinationDAL->findBySlug($slug);
+        $dest = $this->destinationDAL->findBySlug($slug);
+        if ($dest) {
+            $wa = new WhatsAppService();
+            $msg = $wa->buildDestinationInquiryMessage($dest['name']);
+            $dest['whatsapp_url'] = $wa->generateInquiryLink($msg);
+        }
+        return $dest;
     }
 
     public function saveDestination(array $input, ?int $id = null): array
@@ -74,6 +80,13 @@ class DestinationBLL
             'is_featured' => isset($input['is_featured']) && ($input['is_featured'] == '1' || $input['is_featured'] == 'on') ? 1 : 0,
             'display_order' => (int)($input['display_order'] ?? 0)
         ];
+
+        // Normalize image path if present
+        if (!empty($data['featured_image'])) {
+            $data['featured_image'] = preg_replace('#^(uploads/)?images/uploads/#i', 'uploads/', $data['featured_image']);
+            $data['featured_image'] = preg_replace('#^uploads/uploads/#i', 'uploads/', $data['featured_image']);
+            $data['featured_image'] = ltrim($data['featured_image'], '/');
+        }
 
         if ($id === null) {
             $newId = $this->destinationDAL->createDestination($data);

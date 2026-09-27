@@ -413,6 +413,64 @@
 }
 
 /* -------------------------------------------------------------------------
+   05b. WHAT'S EXCLUDED SECTION
+   ------------------------------------------------------------------------- */
+.exclusions-section {
+    padding: 85px 0;
+}
+
+.exclusions-grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 920px;
+    margin: 45px auto 0;
+}
+
+.exclusion-card-item {
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.exclusion-card-item:hover {
+    box-shadow: var(--shadow-md);
+    border-color: #fca5a5;
+    transform: translateY(-2px);
+}
+
+.exc-icon-box {
+    width: 40px;
+    height: 40px;
+    background: #fee2e2;
+    color: #dc2626;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.exc-text-val {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+    .exclusions-grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* -------------------------------------------------------------------------
    06. TOUR HIGHLIGHTS SECTION
    ------------------------------------------------------------------------- */
 .highlights-section {

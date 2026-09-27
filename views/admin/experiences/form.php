@@ -54,20 +54,30 @@ render_partial('admin-header', ['page_title' => $pageTitle]);
             <textarea name="description" rows="5" placeholder="Full description of the activity and what travelers will experience..." class="form-control" style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem; font-family: inherit;"><?= e($experience['description'] ?? old('description')) ?></textarea>
         </div>
 
-        <div style="margin-bottom: 20px;">
-            <label style="display: block; font-weight: 600; color: #1e293b; margin-bottom: 6px;">Featured Image</label>
+        <div style="margin-bottom: 25px;">
+            <label style="display: block; font-weight: 600; color: #1e293b; margin-bottom: 6px;">Featured Cover Image</label>
             <?php if ($isEdit && !empty($experience['featured_image'])): ?>
                 <?php 
-                    $imgSrc = (strpos($experience['featured_image'], 'http') === 0) 
-                        ? $experience['featured_image'] 
-                        : asset_url('images/' . e(ltrim($experience['featured_image'], '/'))); 
+                    $cleanExpImg = preg_replace('#^(uploads/)?images/uploads/#i', 'uploads/', $experience['featured_image']);
+                    $imgSrc = (strpos($cleanExpImg, 'http') === 0) 
+                        ? $cleanExpImg 
+                        : asset_url('images/' . e(ltrim($cleanExpImg, '/'))); 
                 ?>
-                <div style="margin-bottom: 10px; display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
-                    <img src="<?= $imgSrc ?>" alt="Current Image" style="width: 100px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1;">
-                    <span style="font-size: 0.85rem; color: #64748b; word-break: break-all;">Current Image Path: <code><?= e($experience['featured_image']) ?></code></span>
+                <div style="margin-bottom: 12px; display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                    <img id="expImgPreview" src="<?= $imgSrc ?>" alt="Current Image" style="width: 130px; height: 80px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1;">
+                    <div>
+                        <span style="font-size: 0.82rem; color: #64748b; display: block;">Current Source:</span>
+                        <code style="font-size: 0.82rem; background: #f1f5f9; padding: 3px 8px; border-radius: 4px;"><?= e($cleanExpImg) ?></code>
+                    </div>
                 </div>
             <?php endif; ?>
-            <input type="file" name="featured_image" accept="image/*" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+            <input type="file" name="featured_image" accept="image/jpeg,image/png,image/webp" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+            <small style="color: #64748b; margin-top: 4px; display: block;">Upload a new image file (JPG, PNG, WebP up to 10MB).</small>
+
+            <div style="margin-top: 10px;">
+                <label style="font-size: 0.85rem; color: #64748b; font-weight: 600; display: block; margin-bottom: 4px;">Or Enter Image URL / Existing Asset Path:</label>
+                <input type="text" name="featured_image_url" value="<?= e(strpos($experience['featured_image'] ?? '', 'http') === 0 ? $experience['featured_image'] : '') ?>" placeholder="e.g. https://... or experiences/hero-experiences-safari.jpg" class="form-control" style="width: 100%; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem;">
+            </div>
         </div>
 
         <div class="form-grid-3col">

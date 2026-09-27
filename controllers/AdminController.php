@@ -95,20 +95,23 @@ class AdminController
         $input = $_POST;
         $itineraryDays = $_POST['itinerary'] ?? [];
         $inclusions = $_POST['inclusions'] ?? [];
+        $exclusions = $_POST['exclusions'] ?? [];
         $highlights = $_POST['highlights'] ?? [];
 
         if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === UPLOAD_ERR_OK) {
             $uploadResult = $this->fileUploadService->uploadImage($_FILES['featured_image'], 'tours');
             if ($uploadResult['success']) {
-                $input['featured_image'] = 'uploads/' . $uploadResult['relative_path'];
+                $input['featured_image'] = $uploadResult['relative_path'];
             } else {
                 set_flash('error', 'Image Upload Error: ' . $uploadResult['error'], 'danger');
                 set_old_input($_POST);
                 redirect('admin/tours/create');
             }
+        } elseif (!empty($_POST['featured_image_url'])) {
+            $input['featured_image'] = sanitize_string($_POST['featured_image_url']);
         }
 
-        $result = $this->tourBLL->saveTour($input, $itineraryDays, $inclusions, $highlights, null);
+        $result = $this->tourBLL->saveTour($input, $itineraryDays, $inclusions, $highlights, null, $exclusions);
 
         if ($result['success']) {
             set_flash('success', $result['message'], 'success');
@@ -147,20 +150,23 @@ class AdminController
         $input = $_POST;
         $itineraryDays = $_POST['itinerary'] ?? [];
         $inclusions = $_POST['inclusions'] ?? [];
+        $exclusions = $_POST['exclusions'] ?? [];
         $highlights = $_POST['highlights'] ?? [];
 
         if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === UPLOAD_ERR_OK) {
             $uploadResult = $this->fileUploadService->uploadImage($_FILES['featured_image'], 'tours');
             if ($uploadResult['success']) {
-                $input['featured_image'] = 'uploads/' . $uploadResult['relative_path'];
+                $input['featured_image'] = $uploadResult['relative_path'];
             } else {
                 set_flash('error', 'Image Upload Error: ' . $uploadResult['error'], 'danger');
                 set_old_input($_POST);
                 redirect('admin/tours/edit/' . $id);
             }
+        } elseif (!empty($_POST['featured_image_url'])) {
+            $input['featured_image'] = sanitize_string($_POST['featured_image_url']);
         }
 
-        $result = $this->tourBLL->saveTour($input, $itineraryDays, $inclusions, $highlights, $id);
+        $result = $this->tourBLL->saveTour($input, $itineraryDays, $inclusions, $highlights, $id, $exclusions);
 
         if ($result['success']) {
             set_flash('success', $result['message'], 'success');
@@ -217,12 +223,14 @@ class AdminController
         if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === UPLOAD_ERR_OK) {
             $uploadResult = $this->fileUploadService->uploadImage($_FILES['featured_image'], 'destinations');
             if ($uploadResult['success']) {
-                $input['featured_image'] = 'uploads/' . $uploadResult['relative_path'];
+                $input['featured_image'] = $uploadResult['relative_path'];
             } else {
                 set_flash('error', 'Image Upload Error: ' . $uploadResult['error'], 'danger');
                 set_old_input($_POST);
                 redirect('admin/destinations/create');
             }
+        } elseif (!empty($_POST['featured_image_url'])) {
+            $input['featured_image'] = sanitize_string($_POST['featured_image_url']);
         }
 
         $result = $this->destinationBLL->saveDestination($input, null);
@@ -262,12 +270,14 @@ class AdminController
         if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === UPLOAD_ERR_OK) {
             $uploadResult = $this->fileUploadService->uploadImage($_FILES['featured_image'], 'destinations');
             if ($uploadResult['success']) {
-                $input['featured_image'] = 'uploads/' . $uploadResult['relative_path'];
+                $input['featured_image'] = $uploadResult['relative_path'];
             } else {
                 set_flash('error', 'Image Upload Error: ' . $uploadResult['error'], 'danger');
                 set_old_input($_POST);
                 redirect('admin/destinations/edit/' . $id);
             }
+        } elseif (!empty($_POST['featured_image_url'])) {
+            $input['featured_image'] = sanitize_string($_POST['featured_image_url']);
         }
 
         $result = $this->destinationBLL->saveDestination($input, $id);
@@ -328,12 +338,14 @@ class AdminController
         if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === UPLOAD_ERR_OK) {
             $uploadResult = $this->fileUploadService->uploadImage($_FILES['featured_image'], 'experiences');
             if ($uploadResult['success']) {
-                $input['featured_image'] = 'uploads/' . $uploadResult['relative_path'];
+                $input['featured_image'] = $uploadResult['relative_path'];
             } else {
                 set_flash('error', 'Image Upload Error: ' . $uploadResult['error'], 'danger');
                 set_old_input($_POST);
                 redirect('admin/experiences/create');
             }
+        } elseif (!empty($_POST['featured_image_url'])) {
+            $input['featured_image'] = sanitize_string($_POST['featured_image_url']);
         }
 
         $result = $this->experienceBLL->saveExperience($input, null);
@@ -375,12 +387,14 @@ class AdminController
         if (isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === UPLOAD_ERR_OK) {
             $uploadResult = $this->fileUploadService->uploadImage($_FILES['featured_image'], 'experiences');
             if ($uploadResult['success']) {
-                $input['featured_image'] = 'uploads/' . $uploadResult['relative_path'];
+                $input['featured_image'] = $uploadResult['relative_path'];
             } else {
                 set_flash('error', 'Image Upload Error: ' . $uploadResult['error'], 'danger');
                 set_old_input($_POST);
                 redirect('admin/experiences/edit/' . $id);
             }
+        } elseif (!empty($_POST['featured_image_url'])) {
+            $input['featured_image'] = sanitize_string($_POST['featured_image_url']);
         }
 
         $result = $this->experienceBLL->saveExperience($input, $id);
@@ -430,7 +444,7 @@ class AdminController
         if (isset($_FILES['gallery_image']) && $_FILES['gallery_image']['error'] === UPLOAD_ERR_OK) {
             $uploadResult = $this->fileUploadService->uploadImage($_FILES['gallery_image'], 'gallery');
             if ($uploadResult['success']) {
-                $input['image'] = 'uploads/' . $uploadResult['relative_path'];
+                $input['image'] = $uploadResult['relative_path'];
             } else {
                 set_flash('error', 'Image Upload Error: ' . $uploadResult['error'], 'danger');
                 redirect('admin/gallery');
@@ -458,7 +472,7 @@ class AdminController
         if (isset($_FILES['gallery_image']) && $_FILES['gallery_image']['error'] === UPLOAD_ERR_OK) {
             $uploadResult = $this->fileUploadService->uploadImage($_FILES['gallery_image'], 'gallery');
             if ($uploadResult['success']) {
-                $input['image'] = 'uploads/' . $uploadResult['relative_path'];
+                $input['image'] = $uploadResult['relative_path'];
             } else {
                 set_flash('error', 'Image Upload Error: ' . $uploadResult['error'], 'danger');
                 redirect('admin/gallery');

@@ -30,6 +30,9 @@ if (!function_exists('asset_url')) {
     function asset_url(string $path = ''): string
     {
         $cleanPath = ltrim($path, '/');
+        // Clean any accidental duplicate prefix nesting
+        $cleanPath = preg_replace('#^images/(uploads/)?images/uploads/#i', 'images/uploads/', $cleanPath);
+        $cleanPath = preg_replace('#^images/uploads/uploads/#i', 'images/uploads/', $cleanPath);
         $url = base_url('assets/' . $cleanPath);
         $filePath = ROOT_PATH . '/assets/' . $cleanPath;
         if (file_exists($filePath)) {

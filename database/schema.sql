@@ -103,6 +103,20 @@ CREATE TABLE `tour_inclusions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- -----------------------------------------------------------------------------
+-- 4b. TOUR EXCLUSIONS TABLE
+-- -----------------------------------------------------------------------------
+DROP TABLE IF EXISTS `tour_exclusions`;
+CREATE TABLE `tour_exclusions` (
+  `id` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `tour_id` BIGINT UNSIGNED NOT NULL,
+  `exclusion` VARCHAR(255) NOT NULL,
+  `display_order` INT NOT NULL DEFAULT 0,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX `idx_tour_exc_tour_id` (`tour_id`),
+  CONSTRAINT `fk_tour_exclusions_tour` FOREIGN KEY (`tour_id`) REFERENCES `tours` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- -----------------------------------------------------------------------------
 -- 5. TOUR HIGHLIGHTS TABLE
 -- -----------------------------------------------------------------------------
 DROP TABLE IF EXISTS `tour_highlights`;

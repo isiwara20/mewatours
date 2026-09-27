@@ -94,6 +94,22 @@ INSERT INTO `tour_inclusions` (`id`, `tour_id`, `inclusion`, `display_order`) VA
 (12, 3, 'Madu River Safari & Water Sports', 4)
 ON DUPLICATE KEY UPDATE `inclusion` = VALUES(`inclusion`);
 
+-- Sample Tour Exclusions
+INSERT INTO `tour_exclusions` (`id`, `tour_id`, `exclusion`, `display_order`) VALUES
+(1, 1, 'International Flights & Sri Lanka Visa', 1),
+(2, 1, 'Personal Expenses & Souvenir Shopping', 2),
+(3, 1, 'Alcoholic Beverages & Soft Drinks', 3),
+(4, 1, 'Tips & Gratuities for Driver/Guide', 4),
+(5, 2, 'International Airfare & Visa Fees', 1),
+(6, 2, 'Travel & Medical Insurance', 2),
+(7, 2, 'Personal Equipment & Gear', 3),
+(8, 2, 'Driver & Guide Gratuities', 4),
+(9, 3, 'International Flight Tickets', 1),
+(10, 3, 'Personal Expenses & Shopping', 2),
+(11, 3, 'Optional Water Sports Not Listed', 3),
+(12, 3, 'Alcoholic Drinks & Late Check-out Fees', 4)
+ON DUPLICATE KEY UPDATE `exclusion` = VALUES(`exclusion`);
+
 -- Sample Tour Highlights
 INSERT INTO `tour_highlights` (`id`, `tour_id`, `highlight`, `display_order`) VALUES
 (1, 1, 'Sigiriya', 1),

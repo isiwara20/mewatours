@@ -24,3 +24,15 @@
 [2026-09-06 16:06:16] [WARNING]: Admin login failed: invalid password {"email":"mewatours83@gmail.com"}
 [2026-09-06 16:10:36] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
 [2026-09-06 16:26:44] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
+[2026-09-22 18:33:27] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
+[2026-09-26 14:43:05] [WARNING]: Admin login failed: invalid password {"email":"mewatours83@gmail.com"}
+[2026-09-26 14:43:11] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
+[2026-09-26 14:48:32] [INFO]: File uploaded successfully {"filename":"20260926_144832_bc209428ba77e6cf.jpg","subfolder":"tours"}
+[2026-09-26 14:55:34] [INFO]: File uploaded successfully {"filename":"20260926_145534_66ea131b3322d518.jpg","subfolder":"destinations"}
+[2026-09-26 17:01:30] [WARNING]: Admin login failed: invalid password {"email":"mewatours83@gmail.com"}
+[2026-09-26 17:01:35] [WARNING]: Admin login failed: invalid password {"email":"mewatours83@gmail.com"}
+[2026-09-26 17:01:46] [WARNING]: Admin login failed: invalid password {"email":"mewatours83@gmail.com"}
+[2026-09-26 17:01:51] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
+[2026-09-26 17:02:16] [INFO]: File uploaded successfully {"filename":"20260926_170216_8cafe3cf5e1a2664.png","subfolder":"tours"}
+[2026-09-27 11:25:47] [INFO]: Admin login successful {"admin_id":1,"email":"mewatours83@gmail.com"}
+[2026-09-27 11:50:59] [INFO]: File uploaded successfully {"filename":"20260927_115059_4e296600d2fe6143.jpg","subfolder":"tours"}

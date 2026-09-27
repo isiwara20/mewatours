@@ -36,9 +36,14 @@ class DestinationController
             return;
         }
 
+        $allDestinations = $this->destinationBLL->getActiveDestinations();
+        $relatedDestinations = array_filter($allDestinations, fn($d) => (int)$d['id'] !== (int)$destination['id']);
+        $relatedDestinations = array_slice($relatedDestinations, 0, 3);
+
         render_view('client/destination-details', [
-            'page_title' => $destination['name'] . ' - Mewa Tours',
-            'destination' => $destination
+            'page_title' => $destination['name'] . ' | Mewa Tours Sri Lanka',
+            'destination' => $destination,
+            'related_destinations' => $relatedDestinations
         ]);
     }
 }
